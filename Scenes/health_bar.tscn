@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b6khf4rcvcuul"]
+
+[node name="HealthBar" type="ProgressBar"]
+modulate = Color(0.247059, 0.717647, 0.0235294, 1)
+offset_left = -85.0
+offset_top = -14.0
+offset_right = 85.0
+offset_bottom = 13.0
+value = 92.0
+rounded = true
+show_percentage = false

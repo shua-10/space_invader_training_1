@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0ks1pscuauow"]
+
+[ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_1pewh"]
+[ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_geu7d"]
+normal = Vector2(0, 1)
+distance = 50.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pjy6a"]
+distance = -131.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xoixv"]
+size = Vector2(1165, 135)
+
+[sub_resource type="Curve2D" id="Curve2D_23pkm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -349.09, -654, 0, 0, 0, 0, 194.418, -658, 0, 0, 0, 0, 752.559, -657)
+}
+point_count = 3
+
+[node name="Level 1" type="Node2D"]
+script = ExtResource("1_ecmsp")
+
+[node name="player" parent="." instance=ExtResource("1_1pewh")]
+position = Vector2(224, 50)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(237, -207)
+
+[node name="Front Block" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Front Block"]
+position = Vector2(225, -111)
+shape = SubResource("WorldBoundaryShape2D_geu7d")
+
+[node name="Back Block" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Back Block"]
+position = Vector2(0, 1)
+shape = SubResource("WorldBoundaryShape2D_pjy6a")
+
+[node name="HurtZone" type="Area2D" parent="."]
+position = Vector2(-333, 174)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone"]
+position = Vector2(572.5, 57.5)
+shape = SubResource("RectangleShape2D_xoixv")
+
+[node name="SpawnPath" type="Path2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(34.9914, 0)
+scale = Vector2(0.956747, 1)
+curve = SubResource("Curve2D_23pkm")
+
+[node name="spawnpathfollow" type="PathFollow2D" parent="SpawnPath"]
+unique_name_in_owner = true
+position = Vector2(-349.09, -654)
+rotation = -0.00735946
+
+[node name="Enemy_Spawn_Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="body_entered" from="HurtZone" to="." method="_on_hurt_zone_body_entered"]
+[connection signal="timeout" from="Enemy_Spawn_Timer" to="." method="_on_enemy_spawn_timer_timeout"]

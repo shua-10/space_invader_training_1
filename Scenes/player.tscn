@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://2oimpfhfwi4"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_sc038"]
+[ext_resource type="Texture2D" uid="uid://ckjmljkquug8w" path="res://Assets/Sprite-0001.png" id="2_jamiq"]
+[ext_resource type="Texture2D" uid="uid://bd7kpchjg10st" path="res://Assets/Sprite-0002-Sheet.png" id="3_uv8m1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfy83"]
+atlas = ExtResource("3_uv8m1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfbc1"]
+atlas = ExtResource("3_uv8m1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8jul"]
+atlas = ExtResource("3_uv8m1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cruen"]
+atlas = ExtResource("3_uv8m1")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p725h"]
+atlas = ExtResource("3_uv8m1")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xns8o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bfy83")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfbc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8jul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cruen")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p725h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sbkyt"]
+radius = 138.058
+
+[node name="player" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_sc038")
+
+[node name="Shoot_Cooldown" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+
+[node name="ShootPoint_Left" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-94, -84)
+
+[node name="ShootPoint_Right" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(96, -82)
+
+[node name="Sprite-0001" type="Sprite2D" parent="."]
+scale = Vector2(7, 7)
+texture = ExtResource("2_jamiq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite-0001"]
+position = Vector2(-0.2, 27.8)
+sprite_frames = SubResource("SpriteFrames_xns8o")
+autoplay = "default"
+frame_progress = 0.306231
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sbkyt")
+
+[connection signal="timeout" from="Shoot_Cooldown" to="." method="_on_shoot_cooldown_timeout"]
