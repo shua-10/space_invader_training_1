@@ -3,6 +3,9 @@ extends CharacterBody2D
 @export var SPEED = 600
 var shoot_ready = true
 
+func _ready() -> void:
+	$Ship/AnimatedSprite2D.play("idle")
+
 func _physics_process(delta: float) -> void:
 	
 	var direction = Input.get_vector("move_left","move_right","move_up","move_down")
@@ -16,7 +19,7 @@ func _process(delta: float) -> void:
 		shoot()
 		%Shoot_Cooldown.start()
 		shoot_ready = false
-		
+		$Ship/AnimatedSprite2D.play("shooting")
 		
 
 func shoot():
