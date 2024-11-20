@@ -3,7 +3,7 @@ extends Area2D
 @export var SPEED = 1200
 
 func _physics_process(delta: float) -> void:
-	var direction = Vector2.UP.rotated(rotation)
+	var direction = Vector2.RIGHT.rotated(rotation)
 	position += direction * SPEED * delta
 	
 

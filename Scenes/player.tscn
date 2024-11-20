@@ -157,17 +157,18 @@ wait_time = 0.5
 
 [node name="ShootPoint_Left" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-58, -70)
+position = Vector2(60, -40)
 
 [node name="ShootPoint_Right" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(60, -70)
+position = Vector2(56, 80)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sbkyt")
 
 [node name="Ship" type="Sprite2D" parent="."]
 position = Vector2(-14, 6)
+rotation = 1.5708
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ship"]
 position = Vector2(14, -6)

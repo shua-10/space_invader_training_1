@@ -1,6 +1,7 @@
 extends Node
 
-
+var rng = RandomNumberGenerator.new()
+var x_movement_rng = rng.randf_range(0,100)
 
 var game_over = false
 

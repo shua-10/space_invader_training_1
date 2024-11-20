@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0ks1pscuauow"]
+[gd_scene load_steps=10 format=3 uid="uid://d0ks1pscuauow"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_1pewh"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
+[ext_resource type="PackedScene" uid="uid://c6orhuhnnxuvd" path="res://Scenes/fast_enemy.tscn" id="3_vqlb3"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_geu7d"]
 normal = Vector2(0, 1)
@@ -11,13 +12,21 @@ distance = 50.0
 distance = -131.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xoixv"]
-size = Vector2(1165, 135)
+size = Vector2(2080, 135)
 
 [sub_resource type="Curve2D" id="Curve2D_23pkm"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -349.09, -654, 0, 0, 0, 0, 194.418, -658, 0, 0, 0, 0, 752.559, -657)
+"points": PackedVector2Array(0, 0, 0, 0, -813.163, -1024, 0, 0, 0, 0, 215.322, -1030, 0, 0, 0, 0, 1217.68, -1039)
 }
 point_count = 3
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_36jsl"]
+normal = Vector2(1, 0)
+distance = 98.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_umdmk"]
+normal = Vector2(-0.999974, 0.00724619)
+distance = 125.018
 
 [node name="Level 1" type="Node2D"]
 script = ExtResource("1_ecmsp")
@@ -35,6 +44,7 @@ position = Vector2(225, -111)
 shape = SubResource("WorldBoundaryShape2D_geu7d")
 
 [node name="Back Block" type="StaticBody2D" parent="."]
+position = Vector2(-12, 232)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Back Block"]
 position = Vector2(0, 1)
@@ -46,7 +56,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone"]
-position = Vector2(572.5, 57.5)
+position = Vector2(592, 358)
 shape = SubResource("RectangleShape2D_xoixv")
 
 [node name="SpawnPath" type="Path2D" parent="."]
@@ -57,12 +67,31 @@ curve = SubResource("Curve2D_23pkm")
 
 [node name="spawnpathfollow" type="PathFollow2D" parent="SpawnPath"]
 unique_name_in_owner = true
-position = Vector2(-349.09, -654)
-rotation = -0.00735946
+position = Vector2(-813.163, -1024)
+rotation = -0.00583376
 
 [node name="Enemy_Spawn_Timer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
+[node name="fast_enemy" parent="." instance=ExtResource("3_vqlb3")]
+position = Vector2(783, -639)
+
+[node name="Left_Border" type="StaticBody2D" parent="."]
+position = Vector2(-175, -617)
+collision_layer = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left_Border"]
+position = Vector2(-711, 268)
+shape = SubResource("WorldBoundaryShape2D_36jsl")
+
+[node name="Right_Border" type="StaticBody2D" parent="."]
+position = Vector2(-35, -374)
+collision_layer = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right_Border"]
+position = Vector2(1418, 5)
+shape = SubResource("WorldBoundaryShape2D_umdmk")
 
 [connection signal="body_entered" from="HurtZone" to="." method="_on_hurt_zone_body_entered"]
 [connection signal="timeout" from="Enemy_Spawn_Timer" to="." method="_on_enemy_spawn_timer_timeout"]
