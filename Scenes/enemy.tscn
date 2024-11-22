@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://doj3y6efkg167"]
+[gd_scene load_steps=15 format=3 uid="uid://doj3y6efkg167"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_m2lxd"]
 [ext_resource type="Texture2D" uid="uid://dc7kj7f4xq7xv" path="res://Assets/enemy ship.png" id="2_v3rml"]
 [ext_resource type="PackedScene" uid="uid://b6khf4rcvcuul" path="res://Scenes/health_bar.tscn" id="3_2hyh2"]
+[ext_resource type="Script" path="res://health.gd" id="4_ir252"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tmfyt"]
 atlas = ExtResource("2_v3rml")
@@ -103,5 +104,9 @@ offset_right = 49.0
 offset_bottom = -34.0
 max_value = 3.0
 value = 3.0
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_ir252")
+max_health = 1
 
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]

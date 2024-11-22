@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_1pewh"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
-[ext_resource type="PackedScene" uid="uid://c6orhuhnnxuvd" path="res://Scenes/fast_enemy.tscn" id="3_vqlb3"]
+[ext_resource type="Texture2D" uid="uid://dka45hm27chmq" path="res://Assets/starbackground.png" id="3_k1kkc"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_geu7d"]
 normal = Vector2(0, 1)
@@ -30,6 +30,15 @@ distance = 125.018
 
 [node name="Level 1" type="Node2D"]
 script = ExtResource("1_ecmsp")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+follow_viewport_enabled = true
+
+[node name="Starbackground" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(266.375, -231.625)
+scale = Vector2(3.23633, 3.87569)
+texture = ExtResource("3_k1kkc")
 
 [node name="player" parent="." instance=ExtResource("1_1pewh")]
 position = Vector2(224, 50)
@@ -73,9 +82,6 @@ rotation = -0.00583376
 [node name="Enemy_Spawn_Timer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
-
-[node name="fast_enemy" parent="." instance=ExtResource("3_vqlb3")]
-position = Vector2(783, -639)
 
 [node name="Left_Border" type="StaticBody2D" parent="."]
 position = Vector2(-175, -617)

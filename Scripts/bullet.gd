@@ -1,6 +1,7 @@
 extends Area2D
 
-@export var SPEED = 1200
+@export var SPEED = 1800
+
 
 func _physics_process(delta: float) -> void:
 	var direction = Vector2.RIGHT.rotated(rotation)
