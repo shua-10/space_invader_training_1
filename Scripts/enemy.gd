@@ -4,6 +4,8 @@ extends CharacterBody2D
 var enemy_alive = true
 @export var health = 3
 @export var RANGE = 100
+@export var attack_damage = 1
+var enemy = self
 
 
 func _physics_process(delta: float) -> void:
@@ -24,8 +26,21 @@ func _process(delta: float) -> void:
 	pass
 	
 	 
-func take_damage():
-	health -= 1
-	%HealthBar.value = health
-	if health == 0:
-		queue_free()
+
+
+func _on_hit_box_component_area_entered(area: Area2D) -> void:
+	if area is HitBoxComponent:
+		var hitbox: HitBoxComponent = area
+		var attack = AttackComponent.new()
+		attack.attack_damage = attack_damage
+		hitbox.take_damage(attack)
+		
+
+
+func _on_health_component_death() -> void:
+	var explosion = preload("res://Scenes/enemy_explosion.tscn").instantiate()
+	explosion.global_position = enemy.global_position
+	explosion.emitting = true
+	get_parent().add_child(explosion)
+	enemy.queue_free()
+	

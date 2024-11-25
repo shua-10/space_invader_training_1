@@ -1,25 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://cucjghc650l8d"]
+[gd_scene load_steps=7 format=3 uid="uid://cucjghc650l8d"]
 
 [ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_i0tp0"]
-[ext_resource type="Texture2D" uid="uid://wjym1cbt680s" path="res://icon.svg" id="2_wxm1w"]
-
+[ext_resource type="Texture2D" uid="uid://ccsobkngcvc3" path="res://Assets/blasterbullet.png" id="2_jc3h1"]
+[ext_resource type="Script" path="res://Components/Component Scripts/attack_component.gd" id="3_xp35r"]
+[ext_resource type="Script" path="res://Components/hitbox_component.gd" id="4_hyuhe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6n84d"]
 radius = 6.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r0xml"]
+radius = 4.0
+
 [node name="bullet" type="Area2D"]
-scale = Vector2(0.5, 0.5)
-collision_layer = 0
+scale = Vector2(2, 2)
+collision_layer = 10
 collision_mask = 2
 script = ExtResource("1_i0tp0")
 
 [node name="Icon" type="Sprite2D" parent="."]
-modulate = Color(3.85046e-07, 0.980027, 0.507645, 1)
 position = Vector2(4.76837e-07, 2.38419e-07)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_wxm1w")
+rotation = 1.5708
+texture = ExtResource("2_jc3h1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6n84d")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="AttackComponent" type="Node2D" parent="."]
+script = ExtResource("3_xp35r")
+
+[node name="HitBoxComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("4_hyuhe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_r0xml")
+
+[connection signal="area_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_area_entered"]

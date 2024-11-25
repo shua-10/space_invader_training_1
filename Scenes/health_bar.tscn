@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://b6khf4rcvcuul"]
+[gd_scene load_steps=2 format=3 uid="uid://b6khf4rcvcuul"]
+
+[ext_resource type="Script" path="res://Scenes/health_bar.gd" id="1_l850t"]
 
 [node name="HealthBar" type="ProgressBar"]
 modulate = Color(0.247059, 0.717647, 0.0235294, 1)
@@ -9,3 +11,4 @@ offset_bottom = 13.0
 value = 92.0
 rounded = true
 show_percentage = false
+script = ExtResource("1_l850t")

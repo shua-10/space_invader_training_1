@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckpwcyy68tuhu"]
+
+[ext_resource type="Script" path="res://Components/hitbox_component.gd" id="1_fow6v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u8dyf"]
+radius = 34.3657
+
+[node name="HitBoxComponent" type="Area2D" node_paths=PackedStringArray("health_component")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_fow6v")
+health_component = NodePath("")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color(0.984314, 0, 0.137255, 1)
+position = Vector2(-2, 1)
+shape = SubResource("CircleShape2D_u8dyf")

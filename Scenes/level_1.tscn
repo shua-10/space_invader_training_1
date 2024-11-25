@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0ks1pscuauow"]
+[gd_scene load_steps=11 format=3 uid="uid://d0ks1pscuauow"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_1pewh"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
 [ext_resource type="Texture2D" uid="uid://dka45hm27chmq" path="res://Assets/starbackground.png" id="3_k1kkc"]
+[ext_resource type="PackedScene" uid="uid://ccw7ya3gcmicu" path="res://Scenes/stars_background.tscn" id="4_r7hcx"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_geu7d"]
 normal = Vector2(0, 1)
@@ -16,7 +17,7 @@ size = Vector2(2080, 135)
 
 [sub_resource type="Curve2D" id="Curve2D_23pkm"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -813.163, -1024, 0, 0, 0, 0, 215.322, -1030, 0, 0, 0, 0, 1217.68, -1039)
+"points": PackedVector2Array(0, 0, 0, 0, -680.422, -1030, 0, 0, 0, 0, 215.322, -1030, 0, 0, 0, 0, 1157.05, -1028)
 }
 point_count = 3
 
@@ -76,8 +77,7 @@ curve = SubResource("Curve2D_23pkm")
 
 [node name="spawnpathfollow" type="PathFollow2D" parent="SpawnPath"]
 unique_name_in_owner = true
-position = Vector2(-813.163, -1024)
-rotation = -0.00583376
+position = Vector2(-680.422, -1030)
 
 [node name="Enemy_Spawn_Timer" type="Timer" parent="."]
 wait_time = 2.0
@@ -98,6 +98,12 @@ collision_layer = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right_Border"]
 position = Vector2(1418, 5)
 shape = SubResource("WorldBoundaryShape2D_umdmk")
+
+[node name="StarsBackground" parent="." instance=ExtResource("4_r7hcx")]
+position = Vector2(249, -930)
+amount = 4
+lifetime = 3.0
+emission_rect_extents = Vector2(1050, 1)
 
 [connection signal="body_entered" from="HurtZone" to="." method="_on_hurt_zone_body_entered"]
 [connection signal="timeout" from="Enemy_Spawn_Timer" to="." method="_on_enemy_spawn_timer_timeout"]
