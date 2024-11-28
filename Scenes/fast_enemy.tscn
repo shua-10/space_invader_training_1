@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://c6orhuhnnxuvd"]
+[gd_scene load_steps=16 format=3 uid="uid://c6orhuhnnxuvd"]
 
 [ext_resource type="Texture2D" uid="uid://dc7kj7f4xq7xv" path="res://Assets/enemy ship.png" id="1_le160"]
 [ext_resource type="PackedScene" uid="uid://b6khf4rcvcuul" path="res://Scenes/health_bar.tscn" id="2_h27av"]
+[ext_resource type="Script" path="res://Components/hitbox_component.gd" id="3_tjetx"]
+[ext_resource type="Script" path="res://Components/health_component.gd" id="4_s5036"]
 
 [sub_resource type="GDScript" id="GDScript_fnqhu"]
 script/source = "extends CharacterBody2D
@@ -15,6 +17,8 @@ var enemy_alive = true
 var x_movement_change = true
 var x_direction = 1
 @onready var x_movement_rng = 10
+var enemy = self
+
 func _ready() -> void:
 	pass
 	
@@ -49,18 +53,22 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	pass
 	
-	 
-func take_damage():
-	health -= 1
-	%HealthBar.value = health
-	if health == 0:
-		queue_free()
 
 
 func _on_x_movement_timer_timeout() -> void:
 	x_movement_change = true
 	x_movement_rng = int(randf_range(0,100))
 	print(x_movement_rng)
+
+
+
+func _on_health_component_death() -> void:
+	var explosion = preload(\"res://Scenes/enemy_explosion.tscn\").instantiate()
+	explosion.global_position = enemy.global_position
+	explosion.emitting = true
+	get_parent().add_child(explosion)
+	enemy.queue_free()
+	
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tmfyt"]
@@ -123,12 +131,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_phuxj"]
 radius = 34.2345
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dmfqy"]
-radius = 34.0588
+[sub_resource type="CircleShape2D" id="CircleShape2D_i1ls2"]
+radius = 33.541
 
 [node name="fast_enemy" type="CharacterBody2D"]
 position = Vector2(400, 153)
-collision_layer = 2
+collision_layer = 10
 collision_mask = 2
 script = SubResource("GDScript_fnqhu")
 
@@ -144,18 +152,7 @@ frame_progress = 0.299674
 position = Vector2(-2, 1)
 shape = SubResource("CircleShape2D_phuxj")
 
-[node name="HurtBox" type="Area2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(-2, -6)
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-modulate = Color(1, 0.14902, 0, 1)
-position = Vector2(0, 7)
-shape = SubResource("CircleShape2D_dmfqy")
-
-[node name="HealthBar" parent="." instance=ExtResource("2_h27av")]
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_h27av")]
 unique_name_in_owner = true
 offset_left = -48.0
 offset_top = -47.0
@@ -163,6 +160,7 @@ offset_right = 49.0
 offset_bottom = -34.0
 max_value = 3.0
 value = 3.0
+health_component = NodePath("../HealthComponent")
 
 [node name="X_movement_timer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -173,10 +171,21 @@ unique_name_in_owner = true
 target_position = Vector2(78, 0)
 collision_mask = 4
 
+[node name="HitBoxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("3_tjetx")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(-1, 1)
+shape = SubResource("CircleShape2D_i1ls2")
+
 [node name="RayCast2D_Left" type="RayCast2D" parent="."]
 unique_name_in_owner = true
 target_position = Vector2(-89, 0)
 collision_mask = 4
 
-[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("4_s5036")
+
 [connection signal="timeout" from="X_movement_timer" to="." method="_on_x_movement_timer_timeout"]
+[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]

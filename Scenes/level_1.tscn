@@ -1,13 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0ks1pscuauow"]
+[gd_scene load_steps=10 format=3 uid="uid://d0ks1pscuauow"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_1pewh"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
 [ext_resource type="Texture2D" uid="uid://dka45hm27chmq" path="res://Assets/starbackground.png" id="3_k1kkc"]
 [ext_resource type="PackedScene" uid="uid://ccw7ya3gcmicu" path="res://Scenes/stars_background.tscn" id="4_r7hcx"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_geu7d"]
-normal = Vector2(0, 1)
-distance = 50.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pjy6a"]
 distance = -131.0
@@ -46,12 +42,6 @@ position = Vector2(224, 50)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(237, -207)
-
-[node name="Front Block" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Front Block"]
-position = Vector2(225, -111)
-shape = SubResource("WorldBoundaryShape2D_geu7d")
 
 [node name="Back Block" type="StaticBody2D" parent="."]
 position = Vector2(-12, 232)

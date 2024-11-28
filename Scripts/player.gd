@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var SPEED = 600
 var shoot_ready = true
 var smooth_mouse_position: Vector2
-
+var missle_ready = true
 func _ready() -> void:
 	$Ship/AnimatedSprite2D.play("idle")
 
@@ -21,13 +21,17 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("shoot") == true and shoot_ready == true:
-		shoot()
+		shoot_bullet()
 		%Shoot_Cooldown.start()
 		shoot_ready = false
 		$Ship/AnimatedSprite2D.play("shooting")
 
-	
-func shoot():
+	if Input.is_action_pressed("deploy_missle") == true and missle_ready == true:
+		shoot_missle()
+		%Missle_Cooldown.start()
+		missle_ready = false
+
+func shoot_bullet():
 	const NEW_BULLET = preload("res://Scenes/bullet.tscn")
 	var bullet_left = NEW_BULLET.instantiate()
 	var bullet_right = NEW_BULLET.instantiate()
@@ -40,5 +44,18 @@ func shoot():
 	bullet_right.global_rotation = %ShootPoint_Right.global_rotation
 	get_parent().add_child(bullet_right)
 
+func shoot_missle():
+	const NEW_MISSLE = preload("res://Scenes/missle.tscn")
+	var missle = NEW_MISSLE.instantiate()
+	
+	missle.global_position = %MisslePoint.global_position
+	missle.global_rotation = %MisslePoint.global_rotation
+	
+	get_parent().add_child(missle)
+	
 func _on_shoot_cooldown_timeout() -> void:
 	shoot_ready = true
+
+
+func _on_missle_cooldown_timeout() -> void:
+	missle_ready = true

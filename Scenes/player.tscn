@@ -179,7 +179,9 @@ rotation = 1.5708
 position = Vector2(14, -6)
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_22822")
-animation = &"idle"
+animation = &"shooting"
+frame = 8
+frame_progress = 1.0
 speed_scale = 2.0
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Ship/AnimatedSprite2D"]
@@ -187,7 +189,7 @@ position = Vector2(0, 20.6667)
 scale = Vector2(0.666667, 0.666667)
 sprite_frames = SubResource("SpriteFrames_4g2hf")
 autoplay = "default"
-frame_progress = 0.111032
+frame_progress = 0.197475
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-18, 20)
@@ -196,4 +198,13 @@ shape = SubResource("CircleShape2D_sbkyt")
 [node name="AttackComponent" type="Node" parent="."]
 script = SubResource("GDScript_2u275")
 
+[node name="MisslePoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-194, 20)
+
+[node name="Missle_Cooldown" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true
+
 [connection signal="timeout" from="Shoot_Cooldown" to="." method="_on_shoot_cooldown_timeout"]
+[connection signal="timeout" from="Missle_Cooldown" to="." method="_on_missle_cooldown_timeout"]
