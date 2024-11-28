@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://hxeowa5g8ffu"]
+
+[ext_resource type="Script" path="res://missle.gd" id="1_fu2su"]
+[ext_resource type="Texture2D" uid="uid://wjym1cbt680s" path="res://icon.svg" id="2_y31e8"]
+[ext_resource type="Script" path="res://Components/Component Scripts/attack_component.gd" id="3_rnao6"]
+[ext_resource type="Script" path="res://Components/hitbox_component.gd" id="4_tb140"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8d63h"]
+radius = 69.0072
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_muhys"]
+radius = 930.57
+
+[node name="Missle" type="Area2D"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_fu2su")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(1, -3)
+texture = ExtResource("2_y31e8")
+
+[node name="AttackComponent" type="Node2D" parent="."]
+script = ExtResource("3_rnao6")
+
+[node name="HitBoxComponent" type="Area2D" parent="."]
+position = Vector2(77, 0)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("4_tb140")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(-77, 0)
+shape = SubResource("CircleShape2D_8d63h")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_muhys")

@@ -3,5 +3,6 @@
 [node name="StarsBackground" type="CPUParticles2D"]
 emission_shape = 3
 emission_rect_extents = Vector2(2100, 1)
-scale_amount_min = 10.0
-scale_amount_max = 10.0
+gravity = Vector2(900, 980)
+scale_amount_min = 5.0
+scale_amount_max = 5.0

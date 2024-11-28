@@ -4,9 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://36aihs664wo6" path="res://Assets/ship.png" id="2_yvdfa"]
 [ext_resource type="Texture2D" uid="uid://dopbl1miegue" path="res://Assets/flame_ship.png" id="3_fhpj5"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_sbkyt"]
-radius = 138.058
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_wmjeq"]
 atlas = ExtResource("2_yvdfa")
 region = Rect2(0, 0, 32, 32)
@@ -147,6 +144,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_sbkyt"]
+radius = 70.0286
+
 [sub_resource type="GDScript" id="GDScript_2u275"]
 script/source = "extends Node
 
@@ -171,9 +171,6 @@ position = Vector2(60, -40)
 unique_name_in_owner = true
 position = Vector2(56, 80)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_sbkyt")
-
 [node name="Ship" type="Sprite2D" parent="."]
 position = Vector2(-14, 6)
 rotation = 1.5708
@@ -191,6 +188,10 @@ scale = Vector2(0.666667, 0.666667)
 sprite_frames = SubResource("SpriteFrames_4g2hf")
 autoplay = "default"
 frame_progress = 0.111032
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-18, 20)
+shape = SubResource("CircleShape2D_sbkyt")
 
 [node name="AttackComponent" type="Node" parent="."]
 script = SubResource("GDScript_2u275")

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Enemy
 
 @export var SPEED = 150
 var enemy_alive = true
