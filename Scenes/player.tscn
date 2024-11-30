@@ -1,8 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://2oimpfhfwi4"]
+[gd_scene load_steps=28 format=3 uid="uid://2oimpfhfwi4"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_sc038"]
 [ext_resource type="Texture2D" uid="uid://36aihs664wo6" path="res://Assets/ship.png" id="2_yvdfa"]
 [ext_resource type="Texture2D" uid="uid://dopbl1miegue" path="res://Assets/flame_ship.png" id="3_fhpj5"]
+[ext_resource type="Script" path="res://Components/health_component.gd" id="4_lkvgc"]
+[ext_resource type="Script" path="res://Components/hitbox_component.gd" id="5_62x0m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wmjeq"]
 atlas = ExtResource("2_yvdfa")
@@ -155,6 +157,9 @@ class_name Attack
 @export var attack_damage = 1
 "
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_idb2b"]
+radius = 68.0
+
 [node name="player" type="CharacterBody2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_sc038")
@@ -206,5 +211,20 @@ position = Vector2(-194, 20)
 unique_name_in_owner = true
 autostart = true
 
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("4_lkvgc")
+
+[node name="HitBoxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("5_62x0m")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+modulate = Color(1, 0.400917, 0.805997, 1)
+position = Vector2(-18, 20)
+shape = SubResource("CircleShape2D_idb2b")
+
 [connection signal="timeout" from="Shoot_Cooldown" to="." method="_on_shoot_cooldown_timeout"]
 [connection signal="timeout" from="Missle_Cooldown" to="." method="_on_missle_cooldown_timeout"]
+[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]

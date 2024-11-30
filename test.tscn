@@ -1,32 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://ct2yapw6f430j"]
+[gd_scene load_steps=3 format=3 uid="uid://ct2yapw6f430j"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_4qe87"]
-[ext_resource type="PackedScene" uid="uid://doj3y6efkg167" path="res://Scenes/enemy.tscn" id="2_cmov0"]
-[ext_resource type="PackedScene" uid="uid://hxeowa5g8ffu" path="res://Scenes/missle.tscn" id="3_e5dv0"]
-[ext_resource type="PackedScene" uid="uid://c6orhuhnnxuvd" path="res://Scenes/fast_enemy.tscn" id="4_viwaj"]
+[ext_resource type="PackedScene" uid="uid://y7e1vlks2rig" path="res://Scenes/laser_enemy.tscn" id="2_x16f3"]
 
 [node name="Test" type="Node2D"]
 
+[node name="laser_enemy" parent="." instance=ExtResource("2_x16f3")]
+position = Vector2(405, 42)
+rotation = 1.5708
+scale = Vector2(10, 10)
+
 [node name="player" parent="." instance=ExtResource("1_4qe87")]
 position = Vector2(212, 280)
-
-[node name="enemy" parent="." instance=ExtResource("2_cmov0")]
-position = Vector2(215, -118)
-
-[node name="enemy2" parent="." instance=ExtResource("2_cmov0")]
-position = Vector2(93, -107)
-
-[node name="enemy3" parent="." instance=ExtResource("2_cmov0")]
-position = Vector2(307, -78)
-
-[node name="enemy4" parent="." instance=ExtResource("2_cmov0")]
-position = Vector2(176, -35)
-
-[node name="Missle" parent="." instance=ExtResource("3_e5dv0")]
-position = Vector2(174, 698)
-
-[node name="fast_enemy" parent="." instance=ExtResource("4_viwaj")]
-position = Vector2(294, -262)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(204, 290)

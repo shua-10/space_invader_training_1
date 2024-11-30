@@ -59,3 +59,7 @@ func _on_shoot_cooldown_timeout() -> void:
 
 func _on_missle_cooldown_timeout() -> void:
 	missle_ready = true
+
+
+func _on_health_component_death() -> void:
+	self.queue_free()
