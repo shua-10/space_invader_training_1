@@ -11,12 +11,10 @@ func _physics_process(delta: float) -> void:
 	
 	var direction = Input.get_vector("move_left","move_right","move_up","move_down")
 	
-	smooth_mouse_position = lerp(smooth_mouse_position, get_global_mouse_position(), 0.5)
-	
+	smooth_mouse_position = lerp(smooth_mouse_position, get_global_mouse_position(), 0.3)
 	look_at(smooth_mouse_position)
 	
 	velocity = direction * SPEED
-	
 	move_and_slide()
 
 func _process(delta: float) -> void:

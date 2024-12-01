@@ -35,7 +35,27 @@ func spawn_enemy():
 	add_child(new_enemy)
 	
 
-
+func left_spawn_meteor():
+	var new_meteor = preload("res://Scenes/meteor.tscn").instantiate()
+	
+	
+	%Left_Meteor_Path.progress_ratio = randf()
+	new_meteor.position = %Left_Meteor_Path.global_position
+	new_meteor.vector_initial = Vector2(250,50)
+	add_child(new_meteor)
+	
+	
+func right_spawn_meteor():
+	var right_new_meteor = preload("res://Scenes/meteor.tscn").instantiate()
+	
+	
+	%Right_Meteor_Path.progress_ratio = randf()
+	right_new_meteor.global_position = %Right_Meteor_Path.global_position
+	right_new_meteor.vector_initial = Vector2(-250,50)
+	add_child(right_new_meteor)
+	
+	
+	
 func _on_enemy_spawn_timer_timeout() -> void:
 	if level_complete == false:
 		spawn_enemy()
@@ -43,5 +63,28 @@ func _on_enemy_spawn_timer_timeout() -> void:
 		
 	if level_complete == true:
 		print("level complete")
-		$Enemy_Spawn_Timer.stop()
+		%Enemy_Spawn_Timer.stop()
 	
+
+
+func _on_left_meteor_timer_timeout() -> void:
+	if level_complete == false:
+		left_spawn_meteor()
+		
+		
+
+func _on_right_meteor_timer_timeout() -> void:
+	if level_complete == false:
+		right_spawn_meteor()
+		print("started")
+
+
+
+
+
+func _on_despawn_left_body_entered(body: Node2D) -> void:
+	body.queue_free()
+
+
+func _on_despawn_right_body_entered(body: Node2D) -> void:
+	body.queue_free()

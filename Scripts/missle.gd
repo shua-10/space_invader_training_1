@@ -11,6 +11,7 @@ func _physics_process(delta: float) -> void:
 	var direction = Vector2.RIGHT.rotated(rotation)
 	var launch_dir = Vector2.LEFT.rotated(rotation)
 	
+	
 	var enemy_in_range = get_overlapping_bodies()
 	if enemy_in_range.size() > 0:
 		var target_enemy = enemy_in_range.front()
