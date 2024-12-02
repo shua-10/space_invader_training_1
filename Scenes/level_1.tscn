@@ -1,9 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0ks1pscuauow"]
+[gd_scene load_steps=17 format=3 uid="uid://d0ks1pscuauow"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_1pewh"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
 [ext_resource type="Texture2D" uid="uid://dka45hm27chmq" path="res://Assets/starbackground.png" id="3_k1kkc"]
 [ext_resource type="PackedScene" uid="uid://ccw7ya3gcmicu" path="res://Scenes/stars_background.tscn" id="4_r7hcx"]
+[ext_resource type="Script" path="res://Scenes/spawnpathfollow.gd" id="5_plo4q"]
+[ext_resource type="PackedScene" uid="uid://csnb0yr1ed8ub" path="res://Scenes/carrier_ship.tscn" id="6_pqlxq"]
+[ext_resource type="PackedScene" uid="uid://doj3y6efkg167" path="res://Scenes/enemy.tscn" id="7_74fy7"]
+[ext_resource type="PackedScene" uid="uid://c6orhuhnnxuvd" path="res://Scenes/fast_enemy.tscn" id="8_8dnvt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xoixv"]
 size = Vector2(2080, 135)
@@ -42,6 +46,9 @@ size = Vector2(133, 3144.25)
 
 [node name="Level 1" type="Node2D"]
 script = ExtResource("1_ecmsp")
+spawnable_enemies = Array[PackedScene]([ExtResource("7_74fy7"), ExtResource("6_pqlxq"), ExtResource("8_8dnvt")])
+min_timer = 2.0
+max_timer = 3.0
 
 [node name="StarsBackground" parent="." instance=ExtResource("4_r7hcx")]
 position = Vector2(249, -930)
@@ -109,6 +116,7 @@ curve = SubResource("Curve2D_23pkm")
 [node name="spawnpathfollow" type="PathFollow2D" parent="Spawn_Paths/SpawnPath"]
 unique_name_in_owner = true
 position = Vector2(-680.422, -1030)
+script = ExtResource("5_plo4q")
 
 [node name="Left_Meteor_Spawn" type="Path2D" parent="Spawn_Paths"]
 curve = SubResource("Curve2D_7s10p")
@@ -135,10 +143,12 @@ wait_time = 2.0
 autostart = true
 
 [node name="Left_Meteor_Timer" type="Timer" parent="Timers"]
-autostart = true
+unique_name_in_owner = true
+wait_time = 2.0
 
 [node name="Right_Meteor_Timer" type="Timer" parent="Timers"]
-autostart = true
+unique_name_in_owner = true
+wait_time = 2.0
 
 [node name="Despawn_Areas" type="Node" parent="."]
 

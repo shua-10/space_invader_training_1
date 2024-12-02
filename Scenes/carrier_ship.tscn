@@ -12,7 +12,7 @@ radius = 64.4981
 [sub_resource type="CircleShape2D" id="CircleShape2D_4aysy"]
 radius = 67.1863
 
-[node name="carrier_ship" type="CharacterBody2D"]
+[node name="carrier_ship" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_4e48x")
 
 [node name="Icon" type="Sprite2D" parent="."]

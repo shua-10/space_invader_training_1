@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="1_l850t"]
 
-
 [node name="HealthBar" type="ProgressBar"]
 modulate = Color(0.247059, 0.717647, 0.0235294, 1)
 offset_left = -85.0

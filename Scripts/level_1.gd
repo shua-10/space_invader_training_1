@@ -4,7 +4,9 @@ var health = 5
 var level_complete = false
 var enemy_spawn_limit = 3
 var enemies_spawned = 0
-
+@export var spawnable_enemies: Array[PackedScene]
+@export var min_timer:float
+@export var max_timer:float
 
 func _on_hurt_zone_body_entered(body: Node2D) -> void:
 	health -= 1
@@ -17,23 +19,39 @@ func _on_hurt_zone_body_entered(body: Node2D) -> void:
 	
 
 func _ready() -> void:
-	pass
+	%Left_Meteor_Timer.wait_time = Global.rng.randf_range(min_timer, max_timer)
+	%Right_Meteor_Timer.wait_time = Global.rng.randf_range(min_timer, max_timer)
+	%Enemy_Spawn_Timer.wait_time = Global.rng.randf_range(min_timer, max_timer)
+
+
 func _process(delta: float) -> void:
-	if enemies_spawned == enemy_spawn_limit:
-		level_complete = true
-		
-	
+	pass
 
 func spawn_enemy():
 	var new_enemy = preload("res://Scenes/enemy.tscn").instantiate()
-	var enemy_spawn_limit = 3
-	var enemies_spawned = 1
-	
 	
 	%spawnpathfollow.progress_ratio = randf()
 	new_enemy.global_position = %spawnpathfollow.global_position
 	add_child(new_enemy)
+	Wave.regular_enemy_count += 1
+
+func spawn_fast_enemy():
+	var new_enemy = preload("res://Scenes/fast_enemy.tscn").instantiate()
 	
+	%spawnpathfollow.progress_ratio = randf()
+	new_enemy.global_position = %spawnpathfollow.global_position
+	add_child(new_enemy)
+	Wave.fast_enemy_count += 1
+
+
+func spawn_carrier_enemy():
+	var new_enemy = preload("res://Scenes/carrier_ship.tscn").instantiate()
+	
+	%spawnpathfollow.progress_ratio = randf()
+	new_enemy.global_position = %spawnpathfollow.global_position
+	add_child(new_enemy)
+	Wave.carrier_enemy_count += 1
+
 
 func left_spawn_meteor():
 	var new_meteor = preload("res://Scenes/meteor.tscn").instantiate()
@@ -58,8 +76,7 @@ func right_spawn_meteor():
 	
 func _on_enemy_spawn_timer_timeout() -> void:
 	if level_complete == false:
-		spawn_enemy()
-		enemies_spawned += 1
+		var enemy_picker = Global.rng.randf_range(1,100)
 		
 	if level_complete == true:
 		print("level complete")

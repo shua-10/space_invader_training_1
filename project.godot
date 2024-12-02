@@ -18,12 +18,17 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://Scripts/Global.gd"
+Wave="*res://wave_manager.gd"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/mode=2
+
+[global_group]
+
+enemy="Group for all enemies"
 
 [input]
 
