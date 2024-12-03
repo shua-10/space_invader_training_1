@@ -1,5 +1,5 @@
 extends Area2D
-
+class_name Missle
 
 @export var SPEED = 500
 @export var LAUNCH_SPEED = 20

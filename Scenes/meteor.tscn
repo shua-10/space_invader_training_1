@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bfnvpun2ynsqj"]
 
-[ext_resource type="Script" path="res://meteor.gd" id="1_h2l1b"]
+[ext_resource type="Script" path="res://Scripts/meteor.gd" id="1_h2l1b"]
 [ext_resource type="Texture2D" uid="uid://wjym1cbt680s" path="res://icon.svg" id="2_e7utt"]
 [ext_resource type="Script" path="res://Components/Component Scripts/attack_component.gd" id="3_uep4s"]
 [ext_resource type="Script" path="res://Components/health_component.gd" id="4_2qguh"]

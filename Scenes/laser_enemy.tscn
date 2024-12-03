@@ -1,10 +1,11 @@
 [gd_scene load_steps=22 format=3 uid="uid://y7e1vlks2rig"]
 
-[ext_resource type="Script" path="res://laser_enemy.gd" id="1_dp5v8"]
+[ext_resource type="Script" path="res://Scripts/laser_enemy.gd" id="1_dp5v8"]
 [ext_resource type="Script" path="res://Components/Component Scripts/attack_component.gd" id="2_fgv36"]
 [ext_resource type="Texture2D" uid="uid://1rutfw84fh3s" path="res://Assets/laser_idle-Sheet.png" id="2_jogqq"]
 [ext_resource type="Script" path="res://Components/hitbox_component.gd" id="3_6t75s"]
 [ext_resource type="Texture2D" uid="uid://c4k2o7of1vp1m" path="res://Assets/laser-Sheet.png" id="3_ckqk2"]
+
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3l2v6"]
 atlas = ExtResource("2_jogqq")
