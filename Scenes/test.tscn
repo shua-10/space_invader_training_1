@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct2yapw6f430j"]
+[gd_scene load_steps=4 format=3 uid="uid://ct2yapw6f430j"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_mugei"]
 [ext_resource type="PackedScene" uid="uid://doj3y6efkg167" path="res://Scenes/enemy.tscn" id="2_obf1q"]
+[ext_resource type="PackedScene" uid="uid://cfm3erghy3ouy" path="res://upgrade_test.tscn" id="3_b33x1"]
 
 [node name="Test" type="Node2D"]
 
@@ -12,7 +13,10 @@ position = Vector2(212, 280)
 position = Vector2(204, 290)
 
 [node name="enemy" parent="." instance=ExtResource("2_obf1q")]
-position = Vector2(163, -21)
+position = Vector2(118, -433)
 
 [node name="enemy2" parent="." instance=ExtResource("2_obf1q")]
-position = Vector2(293, 95)
+position = Vector2(425, -426)
+
+[node name="upgrade_test" parent="." instance=ExtResource("3_b33x1")]
+position = Vector2(409, 270)

@@ -1,11 +1,14 @@
 extends CharacterBody2D
-
+class_name Player
 @export var SPEED = 600
 var shoot_ready = true
 var smooth_mouse_position: Vector2
 var missle_ready = true
+var bullet_upgrades:Array[BulletUpgrades]
+
 func _ready() -> void:
 	$Ship/AnimatedSprite2D.play("idle")
+
 
 func _physics_process(delta: float) -> void:
 	
@@ -33,14 +36,23 @@ func shoot_bullet():
 	const NEW_BULLET = preload("res://Scenes/bullet.tscn")
 	var bullet_left = NEW_BULLET.instantiate()
 	var bullet_right = NEW_BULLET.instantiate()
-	
+	for upgrades in bullet_upgrades:
+		upgrades.apply_upgrades(bullet_left)
+
 	bullet_left.global_position = %ShootPoint_Left.global_position
 	bullet_left.global_rotation = %ShootPoint_Left.global_rotation
 	get_parent().add_child(bullet_left)
 	
+	for upgrades in bullet_upgrades:
+		upgrades.apply_upgrades(bullet_right)
 	bullet_right.global_position = %ShootPoint_Right.global_position
 	bullet_right.global_rotation = %ShootPoint_Right.global_rotation
 	get_parent().add_child(bullet_right)
+	
+	
+	
+	
+
 
 func shoot_missle():
 	const NEW_MISSLE = preload("res://Scenes/missle.tscn")

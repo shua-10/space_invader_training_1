@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfm3erghy3ouy"]
+
+[ext_resource type="Script" path="res://upgrade_test.gd" id="1_nlfv4"]
+[ext_resource type="Texture2D" uid="uid://wjym1cbt680s" path="res://icon.svg" id="2_5qnpy"]
+[ext_resource type="Resource" uid="uid://b5euut1ohly5p" path="res://Upgrades/bullet_damage_upgrades.tres" id="2_p2h4b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mhqdn"]
+radius = 63.0079
+
+[node name="upgrade_test" type="Area2D"]
+script = ExtResource("1_nlfv4")
+upgrade = ExtResource("2_p2h4b")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(1, 9)
+texture = ExtResource("2_5qnpy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mhqdn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
