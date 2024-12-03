@@ -29,8 +29,10 @@ func _process(delta: float) -> void:
 	pass
 
 func level_change():
-	%Level_change_timer.start()
-	
+	if Wave.current_wave < 3:
+		%Level_change_timer.start()
+	else:
+		return
 		
 func spawn_enemy():
 	var new_enemy = preload("res://Scenes/enemy.tscn").instantiate()
@@ -122,11 +124,11 @@ func _on_despawn_right_body_entered(body: Node2D) -> void:
 
 func _on_wave_manager_enemy_picked() -> void:
 	spawn_enemy()
-	print("signal recieved", Wave.regular_enemy_count)
+	print("regular enemy", "   " , Wave.regular_enemy_count)
 
 func _on_wave_manager_fast_enemy_picked() -> void:
 	spawn_fast_enemy()
-	print("signal recieved", Wave.fast_enemy_count)
+	print("fast enemy", "   "  ,  Wave.fast_enemy_count)
 
 
 func _on_wave_manager_carrier_picked() -> void:

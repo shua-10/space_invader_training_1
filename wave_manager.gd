@@ -29,21 +29,14 @@ func new_wave():
 
 func enemy_picker():
 	var enemy_picker_rng = Global.rng.randf_range(0.1, 1)
-	if regular_enemy_count == regular_enemy_limit:
-		remove_user_signal("enemy_picked")
-	if fast_enemy_count == fast_enemy_limit:
-		remove_user_signal("fast_enemy_picked")
-	if carrier_enemy_count == carrier_enemy_limit:
-		remove_user_signal("carrier_enemy_picked")
 		
-	if regular_enemy_prob > enemy_picker_rng:
-		emit_signal("enemy_picked")
-	if fast_enemy_prob > enemy_picker_rng:
-		emit_signal("fast_enemy_picked")
 	if carrier_enemy_prob > enemy_picker_rng:
 		emit_signal("carrier_picked")
+	elif fast_enemy_prob > enemy_picker_rng:
+		emit_signal("fast_enemy_picked")
+	elif regular_enemy_prob > enemy_picker_rng:
+		emit_signal("enemy_picked")
 	
-	print("picker rng",   enemy_picker_rng)
 
 func wave_change():
 	print("wave",   current_wave)
@@ -55,6 +48,6 @@ func wave_change():
 	if current_wave == 2:
 		regular_enemy_prob = 0.8
 		fast_enemy_prob = 0.2
-		regular_enemy_limit = 10
-		fast_enemy_limit = 2
+		regular_enemy_limit = 5
+		fast_enemy_limit = 3
 	
