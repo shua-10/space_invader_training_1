@@ -1,13 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://d0ks1pscuauow"]
+[gd_scene load_steps=15 format=3 uid="uid://d0ks1pscuauow"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_1pewh"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
 [ext_resource type="Texture2D" uid="uid://dka45hm27chmq" path="res://Assets/starbackground.png" id="3_k1kkc"]
 [ext_resource type="PackedScene" uid="uid://ccw7ya3gcmicu" path="res://Scenes/stars_background.tscn" id="4_r7hcx"]
 [ext_resource type="Script" path="res://Scenes/spawnpathfollow.gd" id="5_plo4q"]
-[ext_resource type="PackedScene" uid="uid://csnb0yr1ed8ub" path="res://Scenes/carrier_ship.tscn" id="6_pqlxq"]
-[ext_resource type="PackedScene" uid="uid://doj3y6efkg167" path="res://Scenes/enemy.tscn" id="7_74fy7"]
-[ext_resource type="PackedScene" uid="uid://c6orhuhnnxuvd" path="res://Scenes/fast_enemy.tscn" id="8_8dnvt"]
+[ext_resource type="Script" path="res://wave_manager.gd" id="6_jyr2o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xoixv"]
 size = Vector2(2080, 135)
@@ -44,11 +42,12 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tln2b"]
 size = Vector2(133, 3144.25)
 
-[node name="Level 1" type="Node2D"]
+[node name="Level 1" type="Node2D" node_paths=PackedStringArray("timers", "Wave")]
 script = ExtResource("1_ecmsp")
-spawnable_enemies = Array[PackedScene]([ExtResource("7_74fy7"), ExtResource("6_pqlxq"), ExtResource("8_8dnvt")])
-min_timer = 2.0
-max_timer = 3.0
+min_timer = 1.0
+max_timer = 2.0
+timers = [NodePath("Timers/Enemy_Spawn_Timer"), NodePath("Timers/Left_Meteor_Timer"), NodePath("Timers/Right_Meteor_Timer")]
+Wave = NodePath("WaveManager")
 
 [node name="StarsBackground" parent="." instance=ExtResource("4_r7hcx")]
 position = Vector2(249, -930)
@@ -140,7 +139,6 @@ rotation = -1.54836
 [node name="Enemy_Spawn_Timer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
 wait_time = 2.0
-autostart = true
 
 [node name="Left_Meteor_Timer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
@@ -190,6 +188,17 @@ collision_mask = 64
 position = Vector2(-1359.5, -262.5)
 shape = SubResource("RectangleShape2D_tln2b")
 
+[node name="WaveManager" type="Node" parent="."]
+script = ExtResource("6_jyr2o")
+regular_enemy_limit = 10.0
+regular_enemy_count = 1.0
+fast_enemy_count = 1.0
+carrier_enemy_count = 1.0
+
+[node name="Level_change_timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+
 [connection signal="body_entered" from="HurtZone" to="." method="_on_hurt_zone_body_entered"]
 [connection signal="timeout" from="Timers/Enemy_Spawn_Timer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="Timers/Left_Meteor_Timer" to="." method="_on_left_meteor_timer_timeout"]
@@ -198,3 +207,7 @@ shape = SubResource("RectangleShape2D_tln2b")
 [connection signal="body_entered" from="Despawn_Areas/Despawn_Up" to="." method="_on_despawn_left_body_entered"]
 [connection signal="body_entered" from="Despawn_Areas/Despawn_Down" to="." method="_on_despawn_left_body_entered"]
 [connection signal="body_entered" from="Despawn_Areas/Despawn_Right" to="." method="_on_despawn_right_body_entered"]
+[connection signal="carrier_picked" from="WaveManager" to="." method="_on_wave_manager_carrier_picked"]
+[connection signal="enemy_picked" from="WaveManager" to="." method="_on_wave_manager_enemy_picked"]
+[connection signal="fast_enemy_picked" from="WaveManager" to="." method="_on_wave_manager_fast_enemy_picked"]
+[connection signal="timeout" from="Level_change_timer" to="." method="_on_level_change_timer_timeout"]

@@ -58,7 +58,7 @@ func _process(delta: float) -> void:
 func _on_x_movement_timer_timeout() -> void:
 	x_movement_change = true
 	x_movement_rng = int(randf_range(0,100))
-	print(x_movement_rng)
+	
 
 
 
@@ -172,6 +172,8 @@ target_position = Vector2(78, 0)
 collision_mask = 4
 
 [node name="HitBoxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("3_tjetx")
 health_component = NodePath("../HealthComponent")
 
