@@ -100,9 +100,6 @@ health_component = NodePath("../HealthComponent")
 [node name="AttackComponent" type="Node2D" parent="."]
 script = ExtResource("4_y4u6x")
 
-[node name="HealthComponent" type="Node2D" parent="."]
-script = ExtResource("5_bhoph")
-
 [node name="HitBoxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
 collision_layer = 4
 collision_mask = 2
@@ -114,5 +111,8 @@ modulate = Color(0.984314, 0, 0.137255, 1)
 position = Vector2(-2, 1)
 shape = SubResource("CircleShape2D_u8dyf")
 
-[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("5_bhoph")
+
 [connection signal="area_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_area_entered"]
+[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]

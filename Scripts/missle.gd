@@ -39,8 +39,10 @@ func _on_hit_box_component_area_entered(area: Area2D) -> void:
 		# use for allows us to break apart arrays and apply functions individually. with set up 
 		# unfortuanley have to count out in which spot hitboxcomponent is.... may be a better way
 		for areas in AOE_in_range:
-			var hitbox_component = areas.get_child(5)
-			hitbox_component.take_damage(attack)
+			var area_children = areas.get_children()
+			for hitbox_find in area_children:
+				if hitbox_find is HitBoxComponent:
+					hitbox_find.take_damage(attack)
 		self.queue_free()
 		explosion.global_position = self.global_position
 		explosion.emitting = true
