@@ -1,3 +1,6 @@
-[gd_resource type="Resource" format=3 uid="uid://b5euut1ohly5p"]
+[gd_resource type="Resource" script_class="BulletDamageUpgrade" load_steps=2 format=3 uid="uid://b5euut1ohly5p"]
+
+[ext_resource type="Script" path="res://Upgrades/bullet_damage_upgrade.gd" id="1_s6m71"]
 
 [resource]
+script = ExtResource("1_s6m71")

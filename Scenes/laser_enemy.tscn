@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://Components/hitbox_component.gd" id="3_6t75s"]
 [ext_resource type="Texture2D" uid="uid://c4k2o7of1vp1m" path="res://Assets/laser-Sheet.png" id="3_ckqk2"]
 
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_3l2v6"]
 atlas = ExtResource("2_jogqq")
 region = Rect2(0, 0, 64, 64)

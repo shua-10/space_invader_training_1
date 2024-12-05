@@ -1,12 +1,17 @@
-[gd_scene format=3 uid="uid://cxh6cdgyrnk1g"]
+[gd_scene load_steps=2 format=3 uid="uid://cxh6cdgyrnk1g"]
 
-[node name="Control" type="Control"]
+[ext_resource type="Script" path="res://upgrade_selector.gd" id="1_q6qg0"]
+
+[node name="UpgradeSelector" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(5, 5)
+script = ExtResource("1_q6qg0")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
@@ -15,27 +20,32 @@ offset_bottom = 251.0
 
 [node name="VSplitContainer" type="VSplitContainer" parent="Panel"]
 layout_mode = 2
-offset_top = 69.0
 offset_right = 270.0
 offset_bottom = 246.0
+
+[node name="Label" type="Label" parent="Panel/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.3
+text = "Pick your Upgrade"
+horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VSplitContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="Panel/VSplitContainer/HBoxContainer"]
+[node name="bullet_damage_button" type="Button" parent="Panel/VSplitContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button2" type="Button" parent="Panel/VSplitContainer/HBoxContainer"]
+[node name="missle_damage_button" type="Button" parent="Panel/VSplitContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button3" type="Button" parent="Panel/VSplitContainer/HBoxContainer"]
+[node name="burst_override_button" type="Button" parent="Panel/VSplitContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Panel"]
-layout_mode = 0
-offset_right = 267.0
-offset_bottom = 66.0
+[connection signal="pressed" from="Panel/VSplitContainer/HBoxContainer/bullet_damage_button" to="." method="_on_bullet_damage_button_pressed"]
+[connection signal="pressed" from="Panel/VSplitContainer/HBoxContainer/missle_damage_button" to="." method="_on_missle_damage_button_pressed"]
+[connection signal="pressed" from="Panel/VSplitContainer/HBoxContainer/burst_override_button" to="." method="_on_burst_override_button_pressed"]

@@ -4,8 +4,11 @@
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
 [ext_resource type="Texture2D" uid="uid://dka45hm27chmq" path="res://Assets/starbackground.png" id="3_k1kkc"]
 [ext_resource type="PackedScene" uid="uid://ccw7ya3gcmicu" path="res://Scenes/stars_background.tscn" id="4_r7hcx"]
-[ext_resource type="Script" path="res://Scenes/spawnpathfollow.gd" id="5_plo4q"]
+[ext_resource type="PackedScene" uid="uid://b8j8gku0rklyg" path="res://spawn_path.tscn" id="5_4ynun"]
 [ext_resource type="Script" path="res://Scripts/wave_manager.gd" id="6_jyr2o"]
+[ext_resource type="PackedScene" uid="uid://cxh6cdgyrnk1g" path="res://upgrade_selector.tscn" id="7_0unsy"]
+[ext_resource type="Resource" uid="uid://b5euut1ohly5p" path="res://Upgrades/bullet_damage_upgrades.tres" id="8_v1ak3"]
+[ext_resource type="Resource" uid="uid://bf82p4xkwt8xl" path="res://Upgrades/missle_damage_upgrades.tres" id="9_m20uq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xoixv"]
 size = Vector2(2080, 135)
@@ -21,32 +24,11 @@ distance = -34.0
 normal = Vector2(-0.999974, 0.00724619)
 distance = 125.018
 
-[sub_resource type="Curve2D" id="Curve2D_23pkm"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -680.422, -1030, 0, 0, 0, 0, 215.322, -1030, 0, 0, 0, 0, 1157.05, -1028)
-}
-point_count = 3
-
-[sub_resource type="Curve2D" id="Curve2D_7s10p"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -1221, -865, 0, 0, 0, 0, -1200, 406)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_nh42t"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -1047, 464, 0, 0, 0, 0, -1017, -873)
-}
-point_count = 2
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tln2b"]
 size = Vector2(133, 3144.25)
 
-[node name="Level 1" type="Node2D" node_paths=PackedStringArray("timers", "Wave")]
+[node name="Level 1" type="Node2D" node_paths=PackedStringArray("Wave")]
 script = ExtResource("1_ecmsp")
-min_timer = 1.0
-max_timer = 2.0
-timers = [NodePath("Timers/Enemy_Spawn_Timer"), NodePath("Timers/Left_Meteor_Timer"), NodePath("Timers/Right_Meteor_Timer")]
 Wave = NodePath("WaveManager")
 
 [node name="StarsBackground" parent="." instance=ExtResource("4_r7hcx")]
@@ -104,41 +86,18 @@ collision_layer = 5
 position = Vector2(1418, 5)
 shape = SubResource("WorldBoundaryShape2D_umdmk")
 
-[node name="Spawn_Paths" type="Node" parent="."]
-
-[node name="SpawnPath" type="Path2D" parent="Spawn_Paths"]
-unique_name_in_owner = true
-position = Vector2(34.9914, 0)
-scale = Vector2(0.956747, 1)
-curve = SubResource("Curve2D_23pkm")
-
-[node name="spawnpathfollow" type="PathFollow2D" parent="Spawn_Paths/SpawnPath"]
-unique_name_in_owner = true
-position = Vector2(-680.422, -1030)
-script = ExtResource("5_plo4q")
-
-[node name="Left_Meteor_Spawn" type="Path2D" parent="Spawn_Paths"]
-curve = SubResource("Curve2D_7s10p")
-
-[node name="Left_Meteor_Path" type="PathFollow2D" parent="Spawn_Paths/Left_Meteor_Spawn"]
-unique_name_in_owner = true
-position = Vector2(-1221, -865)
-rotation = 1.55428
-
-[node name="Right_Meteor_Spawn" type="Path2D" parent="Spawn_Paths"]
-position = Vector2(2172, -42)
-curve = SubResource("Curve2D_nh42t")
-
-[node name="Right_Meteor_Path" type="PathFollow2D" parent="Spawn_Paths/Right_Meteor_Spawn"]
-unique_name_in_owner = true
-position = Vector2(-1047, 464)
-rotation = -1.54836
+[node name="EnemySpawnPath" parent="." node_paths=PackedStringArray("spawn_timer", "wave_manager") instance=ExtResource("5_4ynun")]
+position = Vector2(235, -976)
+spawn_timer = NodePath("../Timers/Enemy_Spawn_Timer")
+timer_min = 1.0
+timer_max = 2.0
+wave_manager = NodePath("../WaveManager")
 
 [node name="Timers" type="Node" parent="."]
 
 [node name="Enemy_Spawn_Timer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
-wait_time = 2.0
+autostart = true
 
 [node name="Left_Meteor_Timer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
@@ -199,15 +158,26 @@ carrier_enemy_count = 1.0
 unique_name_in_owner = true
 wait_time = 5.0
 
+[node name="UpgradeSelector" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_0unsy")]
+unique_name_in_owner = true
+offset_left = -507.0
+offset_top = -844.0
+offset_right = -507.0
+offset_bottom = -844.0
+player = NodePath("../player")
+bullet_damage_upgrade = ExtResource("8_v1ak3")
+missle_damage_upgrade = ExtResource("9_m20uq")
+
 [connection signal="body_entered" from="HurtZone" to="." method="_on_hurt_zone_body_entered"]
-[connection signal="timeout" from="Timers/Enemy_Spawn_Timer" to="." method="_on_enemy_spawn_timer_timeout"]
-[connection signal="timeout" from="Timers/Left_Meteor_Timer" to="." method="_on_left_meteor_timer_timeout"]
-[connection signal="timeout" from="Timers/Right_Meteor_Timer" to="." method="_on_right_meteor_timer_timeout"]
+[connection signal="carrier_spawned" from="EnemySpawnPath" to="." method="_on_enemy_spawn_path_carrier_spawned"]
+[connection signal="enemy_spawned" from="EnemySpawnPath" to="." method="_on_enemy_spawn_path_enemy_spawned"]
+[connection signal="fast_enemy_spawned" from="EnemySpawnPath" to="." method="_on_enemy_spawn_path_fast_enemy_spawned"]
+[connection signal="timeout" from="Timers/Enemy_Spawn_Timer" to="EnemySpawnPath" method="_on_enemy_spawn_timer_timeout"]
 [connection signal="body_entered" from="Despawn_Areas/Despawn_Left" to="." method="_on_despawn_left_body_entered"]
 [connection signal="body_entered" from="Despawn_Areas/Despawn_Up" to="." method="_on_despawn_left_body_entered"]
 [connection signal="body_entered" from="Despawn_Areas/Despawn_Down" to="." method="_on_despawn_left_body_entered"]
 [connection signal="body_entered" from="Despawn_Areas/Despawn_Right" to="." method="_on_despawn_right_body_entered"]
-[connection signal="carrier_picked" from="WaveManager" to="." method="_on_wave_manager_carrier_picked"]
-[connection signal="enemy_picked" from="WaveManager" to="." method="_on_wave_manager_enemy_picked"]
-[connection signal="fast_enemy_picked" from="WaveManager" to="." method="_on_wave_manager_fast_enemy_picked"]
+[connection signal="carrier_picked" from="WaveManager" to="EnemySpawnPath" method="_on_wave_manager_carrier_picked"]
+[connection signal="enemy_picked" from="WaveManager" to="EnemySpawnPath" method="_on_wave_manager_enemy_picked"]
+[connection signal="fast_enemy_picked" from="WaveManager" to="EnemySpawnPath" method="_on_wave_manager_fast_enemy_picked"]
 [connection signal="timeout" from="Level_change_timer" to="." method="_on_level_change_timer_timeout"]

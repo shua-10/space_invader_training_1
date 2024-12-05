@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8j8gku0rklyg"]
+
+[ext_resource type="Script" path="res://spawn_path.gd" id="1_nv6s5"]
+
+[sub_resource type="Curve2D" id="Curve2D_23pkm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -984.586, 27, 0, 0, 0, 0, 1015.94, 20)
+}
+point_count = 2
+
+[node name="SpawnPath" type="Path2D"]
+position = Vector2(330, 109)
+scale = Vector2(0.956747, 1)
+curve = SubResource("Curve2D_23pkm")
+script = ExtResource("1_nv6s5")
+
+[node name="spawnpathfollow" type="PathFollow2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-951.14, -233)
+rotation = -0.00409739

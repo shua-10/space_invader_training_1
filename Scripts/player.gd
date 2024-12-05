@@ -4,7 +4,7 @@ class_name Player
 var shoot_ready = true
 var smooth_mouse_position: Vector2
 var missle_ready = true
-var bullet_upgrades:Array[BulletUpgrades]
+var bullet_upgrades:Array[BulletUpgrades] = []
 
 func _ready() -> void:
 	$Ship/AnimatedSprite2D.play("idle")
@@ -36,6 +36,7 @@ func shoot_bullet():
 	const NEW_BULLET = preload("res://Scenes/bullet.tscn")
 	var bullet_left = NEW_BULLET.instantiate()
 	var bullet_right = NEW_BULLET.instantiate()
+	
 	for upgrades in bullet_upgrades:
 		upgrades.apply_upgrades(bullet_left)
 

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx2dp1plntqgc"]
+
+[ext_resource type="Script" path="res://meteor_spawn.gd" id="1_vvjjl"]
+
+[sub_resource type="Curve2D" id="Curve2D_7s10p"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1221, -865, 0, 0, 0, 0, -1200, 406)
+}
+point_count = 2
+
+[node name="Meteor_Spawn" type="Path2D"]
+curve = SubResource("Curve2D_7s10p")
+script = ExtResource("1_vvjjl")
+
+[node name="Meteor_Path" type="PathFollow2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-1221, -865)
+rotation = 1.55428

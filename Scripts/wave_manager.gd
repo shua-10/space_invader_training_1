@@ -15,7 +15,7 @@ signal carrier_picked
 @export var fast_enemy_prob: float
 @export var carrier_enemy_prob: float
 var current_wave: float
-
+var total_limit:int
 
 func _ready() -> void:
 	current_wave = 1
@@ -41,13 +41,15 @@ func enemy_picker():
 func wave_change():
 	print("wave",   current_wave)
 	
+	
 	if current_wave == 1:
 		regular_enemy_prob = 1
 		regular_enemy_limit = 10
-
+		total_limit = regular_enemy_limit
+		
 	if current_wave == 2:
 		regular_enemy_prob = 0.8
 		fast_enemy_prob = 0.2
 		regular_enemy_limit = 5
 		fast_enemy_limit = 3
-	
+		total_limit = regular_enemy_limit + fast_enemy_limit
