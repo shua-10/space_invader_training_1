@@ -18,7 +18,7 @@ var current_wave: float
 var total_limit:int
 
 func _ready() -> void:
-	current_wave = 1
+	current_wave = 0
 	new_wave()
 	wave_change()
 	
@@ -26,7 +26,7 @@ func new_wave():
 	regular_enemy_count = 1
 	fast_enemy_count = 1
 	carrier_enemy_count = 1
-
+	current_wave += 1
 func enemy_picker():
 	var enemy_picker_rng = Global.rng.randf_range(0.1, 1)
 		
@@ -44,7 +44,7 @@ func wave_change():
 	
 	if current_wave == 1:
 		regular_enemy_prob = 1
-		regular_enemy_limit = 10
+		regular_enemy_limit = 3
 		total_limit = regular_enemy_limit
 		
 	if current_wave == 2:

@@ -7,7 +7,7 @@ var enemy_alive = true
 @export var RANGE = 100
 @export var attack_damage = 1
 var enemy = self
-
+signal died
 
 func _physics_process(delta: float) -> void:
 	
@@ -44,4 +44,4 @@ func _on_health_component_death() -> void:
 	explosion.emitting = true
 	get_parent().add_child(explosion)
 	enemy.queue_free()
-	
+	died.emit()

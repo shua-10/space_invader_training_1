@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d0ks1pscuauow"]
+[gd_scene load_steps=16 format=3 uid="uid://d0ks1pscuauow"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_1pewh"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
@@ -27,9 +27,13 @@ distance = 125.018
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tln2b"]
 size = Vector2(133, 3144.25)
 
-[node name="Level 1" type="Node2D" node_paths=PackedStringArray("Wave")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yobp3"]
+size = Vector2(3567, 2240)
+
+[node name="Level 1" type="Node2D" node_paths=PackedStringArray("Wave", "enemy_counter")]
 script = ExtResource("1_ecmsp")
 Wave = NodePath("WaveManager")
+enemy_counter = NodePath("Enemy_counter")
 
 [node name="StarsBackground" parent="." instance=ExtResource("4_r7hcx")]
 position = Vector2(249, -930)
@@ -51,6 +55,7 @@ position = Vector2(224, 50)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(237, -207)
+zoom = Vector2(0.5, 0.5)
 
 [node name="HurtZone" type="Area2D" parent="."]
 position = Vector2(-333, 174)
@@ -86,18 +91,19 @@ collision_layer = 5
 position = Vector2(1418, 5)
 shape = SubResource("WorldBoundaryShape2D_umdmk")
 
-[node name="EnemySpawnPath" parent="." node_paths=PackedStringArray("spawn_timer", "wave_manager") instance=ExtResource("5_4ynun")]
-position = Vector2(235, -976)
+[node name="EnemySpawnPath" parent="." node_paths=PackedStringArray("spawn_timer", "wave_manager", "level") instance=ExtResource("5_4ynun")]
+position = Vector2(279.182, -976)
+scale = Vector2(0.913259, 1)
 spawn_timer = NodePath("../Timers/Enemy_Spawn_Timer")
 timer_min = 1.0
 timer_max = 2.0
 wave_manager = NodePath("../WaveManager")
+level = NodePath("..")
 
 [node name="Timers" type="Node" parent="."]
 
 [node name="Enemy_Spawn_Timer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
-autostart = true
 
 [node name="Left_Meteor_Timer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
@@ -158,18 +164,29 @@ carrier_enemy_count = 1.0
 unique_name_in_owner = true
 wait_time = 5.0
 
-[node name="UpgradeSelector" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_0unsy")]
+[node name="UpgradeSelector" parent="." node_paths=PackedStringArray("player", "Level") instance=ExtResource("7_0unsy")]
 unique_name_in_owner = true
-offset_left = -507.0
-offset_top = -844.0
-offset_right = -507.0
-offset_bottom = -844.0
+visible = false
+offset_left = -446.0
+offset_top = -393.0
+offset_right = -446.0
+offset_bottom = -393.0
 player = NodePath("../player")
 bullet_damage_upgrade = ExtResource("8_v1ak3")
 missle_damage_upgrade = ExtResource("9_m20uq")
+Level = NodePath("..")
+
+[node name="Enemy_counter" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_counter"]
+position = Vector2(394.5, -319)
+shape = SubResource("RectangleShape2D_yobp3")
 
 [connection signal="body_entered" from="HurtZone" to="." method="_on_hurt_zone_body_entered"]
 [connection signal="carrier_spawned" from="EnemySpawnPath" to="." method="_on_enemy_spawn_path_carrier_spawned"]
+[connection signal="enemy_died" from="EnemySpawnPath" to="." method="_on_enemy_spawn_path_enemy_died"]
 [connection signal="enemy_spawned" from="EnemySpawnPath" to="." method="_on_enemy_spawn_path_enemy_spawned"]
 [connection signal="fast_enemy_spawned" from="EnemySpawnPath" to="." method="_on_enemy_spawn_path_fast_enemy_spawned"]
 [connection signal="timeout" from="Timers/Enemy_Spawn_Timer" to="EnemySpawnPath" method="_on_enemy_spawn_timer_timeout"]
@@ -181,3 +198,4 @@ missle_damage_upgrade = ExtResource("9_m20uq")
 [connection signal="enemy_picked" from="WaveManager" to="EnemySpawnPath" method="_on_wave_manager_enemy_picked"]
 [connection signal="fast_enemy_picked" from="WaveManager" to="EnemySpawnPath" method="_on_wave_manager_fast_enemy_picked"]
 [connection signal="timeout" from="Level_change_timer" to="." method="_on_level_change_timer_timeout"]
+[connection signal="visibility_changed" from="UpgradeSelector" to="." method="_on_upgrade_selector_visibility_changed"]

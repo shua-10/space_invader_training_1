@@ -15,37 +15,44 @@ script = ExtResource("1_q6qg0")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 271.0
-offset_bottom = 251.0
+offset_right = 281.0
+offset_bottom = 108.0
 
-[node name="VSplitContainer" type="VSplitContainer" parent="Panel"]
-layout_mode = 2
-offset_right = 270.0
-offset_bottom = 246.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 281.0
+offset_bottom = 106.0
 
-[node name="Label" type="Label" parent="Panel/VSplitContainer"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 size_flags_stretch_ratio = 0.3
 text = "Pick your Upgrade"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VSplitContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
 
-[node name="bullet_damage_button" type="Button" parent="Panel/VSplitContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="missle_damage_button" type="Button" parent="Panel/VSplitContainer/HBoxContainer"]
+[node name="bullet_damage_button" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+action_mode = 0
+text = "Attack
+ +50%"
 
-[node name="burst_override_button" type="Button" parent="Panel/VSplitContainer/HBoxContainer"]
+[node name="missle_damage_button" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+text = "Missles
+ +1"
 
-[connection signal="pressed" from="Panel/VSplitContainer/HBoxContainer/bullet_damage_button" to="." method="_on_bullet_damage_button_pressed"]
-[connection signal="pressed" from="Panel/VSplitContainer/HBoxContainer/missle_damage_button" to="." method="_on_missle_damage_button_pressed"]
-[connection signal="pressed" from="Panel/VSplitContainer/HBoxContainer/burst_override_button" to="." method="_on_burst_override_button_pressed"]
+[node name="burst_override_button" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Burst 
+Override
+ +5sec"
+
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/bullet_damage_button" to="." method="_on_bullet_damage_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/missle_damage_button" to="." method="_on_missle_damage_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/burst_override_button" to="." method="_on_burst_override_button_pressed"]

@@ -4,7 +4,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_23pkm"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -984.586, 27, 0, 0, 0, 0, 1015.94, 20)
+"points": PackedVector2Array(0, 0, 0, 0, -832.384, 362, 0, 0, 0, 0, 965.574, 365)
 }
 point_count = 2
 
@@ -16,5 +16,5 @@ script = ExtResource("1_nv6s5")
 
 [node name="spawnpathfollow" type="PathFollow2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-951.14, -233)
-rotation = -0.00409739
+position = Vector2(-832.384, 362)
+rotation = 0.00166856

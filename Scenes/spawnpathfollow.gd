@@ -10,7 +10,7 @@ func spawn_enemy():
 	%spawnpathfollow.progress_ratio = randf()
 	new_enemy.global_position = %spawnpathfollow.global_position
 	add_child(new_enemy)
-	
+	new_enemy.died.connect(on_enemy_died)
 
 func spawn_fast_enemy():
 	var new_enemy = preload("res://Scenes/fast_enemy.tscn").instantiate()
@@ -28,3 +28,6 @@ func spawn_carrier_enemy():
 	new_enemy.global_position = %spawnpathfollow.global_position
 	add_child(new_enemy)
 	
+
+func on_enemy_died():
+	emit_signal("enemy_died")
