@@ -32,6 +32,7 @@ func _process(delta: float) -> void:
 	
 func level_change():
 	print("method called")
+	get_tree().paused = true
 	var enemy_in_game = enemy_counter.get_overlapping_bodies()
 	for bodies in enemy_in_game:
 		bodies.queue_free()
@@ -65,5 +66,6 @@ func _on_enemy_spawn_path_enemy_died() -> void:
 func _on_upgrade_selector_visibility_changed() -> void:
 	if %UpgradeSelector.visible == false:
 		level_complete = false
+		get_tree().paused = false
 		Wave.new_wave()
 		Wave.wave_change()

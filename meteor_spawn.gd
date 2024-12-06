@@ -17,6 +17,6 @@ func spawn_meteor():
 	%Meteor_Path.progress_ratio = randf()
 	new_meteor.position = %Meteor_Path.global_position
 	new_meteor.vector_initial = vector_dir
-	add_child(new_meteor)
+	get_parent().add_child(new_meteor)
 	meteor_spawned.emit()
 	
