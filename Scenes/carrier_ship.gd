@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name CarrierShip
 
+signal carrier_died
 
 @export var SPEED = 50
 var enemy_alive = true
@@ -52,7 +53,7 @@ func _on_health_component_death() -> void:
 	explosion.emitting = true
 	get_parent().add_child(explosion)
 	enemy.queue_free()
-
-
+	
+	carrier_died.emit()
 func _on_laser_timer_timeout() -> void:
 	shoot_laser()

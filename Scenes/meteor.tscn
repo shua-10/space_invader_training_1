@@ -1,35 +1,38 @@
 [gd_scene load_steps=8 format=3 uid="uid://bfnvpun2ynsqj"]
 
 [ext_resource type="Script" path="res://Scripts/meteor.gd" id="1_h2l1b"]
-[ext_resource type="Texture2D" uid="uid://wjym1cbt680s" path="res://icon.svg" id="2_e7utt"]
+[ext_resource type="Texture2D" uid="uid://dj2tpj1eraq2c" path="res://Assets/asteroid.png" id="2_yn3ay"]
 [ext_resource type="Script" path="res://Components/Component Scripts/attack_component.gd" id="3_uep4s"]
 [ext_resource type="Script" path="res://Components/health_component.gd" id="4_2qguh"]
 [ext_resource type="Script" path="res://Components/hitbox_component.gd" id="5_r1wpj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vc3vc"]
-radius = 64.1327
+radius = 17.6792
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hhtpc"]
-radius = 63.5059
+radius = 23.0217
 
 [node name="meteor" type="CharacterBody2D"]
-position = Vector2(-275, -13)
+position = Vector2(-802, -407)
+scale = Vector2(3, 3)
 collision_layer = 64
 collision_mask = 64
 script = ExtResource("1_h2l1b")
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(322, 193)
-texture = ExtResource("2_e7utt")
+[node name="Asteroid" type="Sprite2D" parent="."]
+position = Vector2(326, 193)
+texture = ExtResource("2_yn3ay")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(324, 191)
+position = Vector2(324.667, 194)
 shape = SubResource("CircleShape2D_vc3vc")
 
 [node name="AttackComponent" type="Node2D" parent="."]
+position = Vector2(323, 192.333)
 script = ExtResource("3_uep4s")
 
 [node name="HealthComponent" type="Node2D" parent="."]
+position = Vector2(323, 192.333)
 script = ExtResource("4_2qguh")
 max_health = 20
 
@@ -40,7 +43,7 @@ script = ExtResource("5_r1wpj")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-position = Vector2(324, 191)
+position = Vector2(323.667, 192)
 shape = SubResource("CircleShape2D_hhtpc")
 
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]

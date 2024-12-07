@@ -2,11 +2,15 @@ extends Area2D
 class_name Bullet
 @export var SPEED = 1800
 @export var attack_damage = 1
+@export var range: Vector2 = Vector2(200, 200)
+
 
 func _physics_process(delta: float) -> void:
 	var direction = Vector2.RIGHT.rotated(rotation)
+	var distance: Vector2
 	position += direction * SPEED * delta
 	
+
 
 
 

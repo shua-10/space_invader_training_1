@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d0ks1pscuauow"]
+[gd_scene load_steps=19 format=3 uid="uid://d0ks1pscuauow"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_1pewh"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cxh6cdgyrnk1g" path="res://upgrade_selector.tscn" id="7_0unsy"]
 [ext_resource type="Resource" uid="uid://b5euut1ohly5p" path="res://Upgrades/bullet_damage_upgrades.tres" id="8_v1ak3"]
 [ext_resource type="Resource" uid="uid://bf82p4xkwt8xl" path="res://Upgrades/missle_damage_upgrades.tres" id="9_m20uq"]
+[ext_resource type="PackedScene" uid="uid://bx2dp1plntqgc" path="res://meteor_spawn.tscn" id="10_pt81u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xoixv"]
 size = Vector2(2080, 135)
@@ -29,6 +30,41 @@ size = Vector2(133, 3144.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yobp3"]
 size = Vector2(3567, 2240)
+
+[sub_resource type="Curve2D" id="Curve2D_mv1mi"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2182, -565, 0, 0, 0, 0, 2165, 770)
+}
+point_count = 2
+
+[sub_resource type="GDScript" id="GDScript_1cieu"]
+script/source = "extends Path2D
+
+
+@export var vector_dir: Vector2
+@export var spawn_timer: Timer
+@export var timer_min: float
+@export var timer_max: float
+signal meteor_spawned
+
+func _ready() -> void:
+	spawn_timer.wait_time = randf_range(timer_min,timer_max)
+	spawn_timer.start()
+func spawn_meteor():
+	var new_meteor = preload(\"res://Scenes/meteor.tscn\").instantiate()
+	
+	
+	%Meteor_Path.progress_ratio = randf()
+	new_meteor.position = %Meteor_Path.global_position
+	new_meteor.vector_initial = vector_dir
+	add_child(new_meteor)
+	meteor_spawned.emit()
+
+
+
+func _on_right_meteor_timer_timeout() -> void:
+	spawn_meteor()
+"
 
 [node name="Level 1" type="Node2D" node_paths=PackedStringArray("Wave", "enemy_counter")]
 script = ExtResource("1_ecmsp")
@@ -55,7 +91,6 @@ position = Vector2(224, 50)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(237, -207)
-zoom = Vector2(0.5, 0.5)
 
 [node name="HurtZone" type="Area2D" parent="."]
 position = Vector2(-333, 174)
@@ -91,19 +126,26 @@ collision_layer = 5
 position = Vector2(1418, 5)
 shape = SubResource("WorldBoundaryShape2D_umdmk")
 
-[node name="EnemySpawnPath" parent="." node_paths=PackedStringArray("spawn_timer", "wave_manager", "level") instance=ExtResource("5_4ynun")]
+[node name="EnemySpawnPath" parent="." node_paths=PackedStringArray("timers", "wave_manager", "level") instance=ExtResource("5_4ynun")]
 position = Vector2(279.182, -976)
 scale = Vector2(0.913259, 1)
-spawn_timer = NodePath("../Timers/Enemy_Spawn_Timer")
-timer_min = 1.0
+timers = [NodePath("../Timers/Enemy_Spawn_Timer"), NodePath("../Timers/Fast_enemy_spawner"), NodePath("../Timers/Carrier_timer")]
+timer_min = 2.0
 timer_max = 2.0
 wave_manager = NodePath("../WaveManager")
 level = NodePath("..")
 
 [node name="Timers" type="Node" parent="."]
 
+[node name="Level_complete_check_timer" type="Timer" parent="Timers"]
+autostart = true
+
 [node name="Enemy_Spawn_Timer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
+
+[node name="Fast_enemy_spawner" type="Timer" parent="Timers"]
+
+[node name="Carrier_timer" type="Timer" parent="Timers"]
 
 [node name="Left_Meteor_Timer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
@@ -184,12 +226,33 @@ collision_mask = 2
 position = Vector2(394.5, -319)
 shape = SubResource("RectangleShape2D_yobp3")
 
+[node name="Meteor_Spawn_Right" parent="." node_paths=PackedStringArray("spawn_timer") instance=ExtResource("10_pt81u")]
+position = Vector2(-850, -327)
+vector_dir = Vector2(250, 100)
+spawn_timer = NodePath("../Timers/Right_Meteor_Timer")
+timer_min = 2.0
+timer_max = 2.0
+
+[node name="Meteor_Spawn_Left" parent="." node_paths=PackedStringArray("spawn_timer") instance=ExtResource("10_pt81u")]
+position = Vector2(-850, -327)
+curve = SubResource("Curve2D_mv1mi")
+script = SubResource("GDScript_1cieu")
+vector_dir = Vector2(-250, 100)
+spawn_timer = NodePath("../Timers/Right_Meteor_Timer")
+timer_min = 2.0
+timer_max = 2.0
+
 [connection signal="body_entered" from="HurtZone" to="." method="_on_hurt_zone_body_entered"]
 [connection signal="carrier_spawned" from="EnemySpawnPath" to="." method="_on_enemy_spawn_path_carrier_spawned"]
 [connection signal="enemy_died" from="EnemySpawnPath" to="." method="_on_enemy_spawn_path_enemy_died"]
 [connection signal="enemy_spawned" from="EnemySpawnPath" to="." method="_on_enemy_spawn_path_enemy_spawned"]
 [connection signal="fast_enemy_spawned" from="EnemySpawnPath" to="." method="_on_enemy_spawn_path_fast_enemy_spawned"]
+[connection signal="timeout" from="Timers/Level_complete_check_timer" to="EnemySpawnPath" method="_on_level_complete_check_timer_timeout"]
 [connection signal="timeout" from="Timers/Enemy_Spawn_Timer" to="EnemySpawnPath" method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="Timers/Fast_enemy_spawner" to="EnemySpawnPath" method="_on_fast_enemy_spawner_timeout"]
+[connection signal="timeout" from="Timers/Carrier_timer" to="EnemySpawnPath" method="_on_carrier_timer_timeout"]
+[connection signal="timeout" from="Timers/Right_Meteor_Timer" to="Meteor_Spawn_Right" method="_on_right_meteor_timer_timeout"]
+[connection signal="timeout" from="Timers/Right_Meteor_Timer" to="Meteor_Spawn_Left" method="_on_right_meteor_timer_timeout"]
 [connection signal="body_entered" from="Despawn_Areas/Despawn_Left" to="." method="_on_despawn_left_body_entered"]
 [connection signal="body_entered" from="Despawn_Areas/Despawn_Up" to="." method="_on_despawn_left_body_entered"]
 [connection signal="body_entered" from="Despawn_Areas/Despawn_Down" to="." method="_on_despawn_left_body_entered"]
