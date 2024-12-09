@@ -3,7 +3,12 @@ extends CharacterBody2D
 
 @export var SPEED = 150
 @export var attack_damage = 5
+@export var asteroid_rotation_min = 0.05
+@export var asteroid_rotation_max = 0.1
+
 var vector_initial: Vector2 = Vector2(250,250)
+@onready var asteroid_sprite = $Asteroid
+
 
 
 func _ready() -> void:
@@ -14,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	if collision_info:
 		velocity = velocity.bounce(collision_info.get_normal())
 	
-
+	asteroid_sprite.rotation += randf_range(asteroid_rotation_min,asteroid_rotation_max)
 
 
 func _on_hit_box_component_area_entered(area: Area2D) -> void:

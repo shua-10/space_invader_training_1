@@ -4,9 +4,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_23pkm"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -832.384, 362, 0, 0, 0, 0, 965.574, 365)
+"points": PackedVector2Array(0, 0, 0, 0, -832.384, 362, 0, 0, 0, 0, -47.0841, 363, 0, 0, 0, 0, 965.574, 365)
 }
-point_count = 2
+point_count = 3
 
 [node name="SpawnPath" type="Path2D"]
 position = Vector2(330, 109)

@@ -36,6 +36,7 @@ func _on_hit_box_component_area_entered(area: Area2D) -> void:
 		attack.attack_damage = attack_damage
 		hitbox.take_damage(attack)
 		
+		
 
 
 func _on_health_component_death() -> void:
@@ -45,3 +46,7 @@ func _on_health_component_death() -> void:
 	get_parent().add_child(explosion)
 	enemy.queue_free()
 	died.emit()
+
+
+func _on_health_component_health_change() -> void:
+	%AnimationPlayer.play("take_damage")

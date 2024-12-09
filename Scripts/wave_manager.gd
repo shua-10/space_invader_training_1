@@ -49,8 +49,8 @@ func wave_change():
 		
 	if current_wave == 2:
 		regular_enemy_prob = 0.8
-		fast_enemy_prob = 0.2
+		fast_enemy_prob = 0.5
 		regular_enemy_limit = 20
-		fast_enemy_limit = 2
-		total_limit = 20
+		fast_enemy_limit = 10
+		total_limit = 35
 	

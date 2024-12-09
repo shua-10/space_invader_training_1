@@ -14,5 +14,5 @@ script = ExtResource("1_vvjjl")
 
 [node name="Meteor_Path" type="PathFollow2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(352, -399)
-rotation = 1.55875
+position = Vector2(38, -565)
+rotation = 1.58357

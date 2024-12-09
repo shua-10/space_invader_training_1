@@ -1,6 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6orhuhnnxuvd"]
+[gd_scene load_steps=20 format=3 uid="uid://c6orhuhnnxuvd"]
 
-[ext_resource type="Texture2D" uid="uid://dc7kj7f4xq7xv" path="res://Assets/enemy ship.png" id="1_le160"]
+[ext_resource type="Texture2D" uid="uid://bq4m2u56qit8v" path="res://Assets/fast_enemy-Sheet.png" id="1_b6t2k"]
 [ext_resource type="PackedScene" uid="uid://b6khf4rcvcuul" path="res://Scenes/health_bar.tscn" id="2_h27av"]
 [ext_resource type="Script" path="res://Components/hitbox_component.gd" id="3_tjetx"]
 [ext_resource type="Script" path="res://Components/health_component.gd" id="4_s5036"]
@@ -74,61 +74,82 @@ func _on_health_component_death() -> void:
 	
 "
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tmfyt"]
-atlas = ExtResource("1_le160")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnea1"]
+atlas = ExtResource("1_b6t2k")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_is0ft"]
-atlas = ExtResource("1_le160")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_24cla"]
+atlas = ExtResource("1_b6t2k")
+region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l0p3a"]
-atlas = ExtResource("1_le160")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qc2un"]
+atlas = ExtResource("1_b6t2k")
+region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8y4o1"]
-atlas = ExtResource("1_le160")
-region = Rect2(96, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_6swxe"]
+atlas = ExtResource("1_b6t2k")
+region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4bbc3"]
-atlas = ExtResource("1_le160")
-region = Rect2(128, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kpr7"]
+atlas = ExtResource("1_b6t2k")
+region = Rect2(256, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qrxf6"]
-atlas = ExtResource("1_le160")
-region = Rect2(160, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_spbt1"]
+atlas = ExtResource("1_b6t2k")
+region = Rect2(320, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_eqs4e"]
-atlas = ExtResource("1_le160")
-region = Rect2(192, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_eajjq"]
+atlas = ExtResource("1_b6t2k")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45e33"]
+atlas = ExtResource("1_b6t2k")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x5bbp"]
+atlas = ExtResource("1_b6t2k")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xusu6"]
+atlas = ExtResource("1_b6t2k")
+region = Rect2(576, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4cy7i"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tmfyt")
+"texture": SubResource("AtlasTexture_pnea1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_is0ft")
+"texture": SubResource("AtlasTexture_24cla")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l0p3a")
+"texture": SubResource("AtlasTexture_qc2un")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8y4o1")
+"texture": SubResource("AtlasTexture_6swxe")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4bbc3")
+"texture": SubResource("AtlasTexture_7kpr7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qrxf6")
+"texture": SubResource("AtlasTexture_spbt1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_eqs4e")
+"texture": SubResource("AtlasTexture_eajjq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45e33")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x5bbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xusu6")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 15.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_phuxj"]
@@ -137,19 +158,27 @@ radius = 34.2345
 [sub_resource type="CircleShape2D" id="CircleShape2D_i1ls2"]
 radius = 33.541
 
+[sub_resource type="Curve" id="Curve_xs7cu"]
+min_value = 1.0
+max_value = 5.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.977528, 5), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="fast_enemy" type="CharacterBody2D" groups=["enemy"]]
 position = Vector2(400, 153)
+scale = Vector2(1.5, 1.5)
 collision_layer = 10
 collision_mask = 2
 script = SubResource("GDScript_fnqhu")
+SPEED_Y = 300
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, 5)
-scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_4cy7i")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.299674
+frame = 2
+frame_progress = 0.838325
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 1)
@@ -191,6 +220,21 @@ collision_mask = 4
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("4_s5036")
+max_health = 1
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -37)
+amount = 20
+lifetime = 0.3
+emission_shape = 1
+emission_sphere_radius = 18.0
+gravity = Vector2(0, -980)
+angle_min = 69.3
+angle_max = 69.3
+scale_amount_min = 0.0
+scale_amount_max = 5.1
+scale_amount_curve = SubResource("Curve_xs7cu")
+color = Color(0.692576, 0.440532, 0.276755, 1)
 
 [connection signal="timeout" from="X_movement_timer" to="." method="_on_x_movement_timer_timeout"]
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]

@@ -43,6 +43,8 @@ script/source = "extends Path2D
 
 @export var vector_dir: Vector2
 @export var spawn_timer: Timer
+@export var min_size: int
+@export var max_size: int
 @export var timer_min: float
 @export var timer_max: float
 signal meteor_spawned
@@ -127,7 +129,7 @@ position = Vector2(1418, 5)
 shape = SubResource("WorldBoundaryShape2D_umdmk")
 
 [node name="EnemySpawnPath" parent="." node_paths=PackedStringArray("timers", "wave_manager", "level") instance=ExtResource("5_4ynun")]
-position = Vector2(279.182, -976)
+position = Vector2(241, -1339)
 scale = Vector2(0.913259, 1)
 timers = [NodePath("../Timers/Enemy_Spawn_Timer"), NodePath("../Timers/Fast_enemy_spawner"), NodePath("../Timers/Carrier_timer")]
 timer_min = 2.0
@@ -239,6 +241,8 @@ curve = SubResource("Curve2D_mv1mi")
 script = SubResource("GDScript_1cieu")
 vector_dir = Vector2(-250, 100)
 spawn_timer = NodePath("../Timers/Right_Meteor_Timer")
+min_size = 1
+max_size = 3
 timer_min = 2.0
 timer_max = 2.0
 
