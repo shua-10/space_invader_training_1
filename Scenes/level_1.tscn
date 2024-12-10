@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_1pewh"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
-[ext_resource type="Texture2D" uid="uid://dka45hm27chmq" path="res://Assets/starbackground.png" id="3_k1kkc"]
+[ext_resource type="Texture2D" uid="uid://dka45hm27chmq" path="res://starbackground.png" id="3_k1kkc"]
 [ext_resource type="PackedScene" uid="uid://ccw7ya3gcmicu" path="res://Scenes/stars_background.tscn" id="4_r7hcx"]
 [ext_resource type="PackedScene" uid="uid://b8j8gku0rklyg" path="res://spawn_path.tscn" id="5_4ynun"]
 [ext_resource type="Script" path="res://Scripts/wave_manager.gd" id="6_jyr2o"]
@@ -74,19 +74,34 @@ Wave = NodePath("WaveManager")
 enemy_counter = NodePath("Enemy_counter")
 
 [node name="StarsBackground" parent="." instance=ExtResource("4_r7hcx")]
-position = Vector2(249, -930)
+position = Vector2(340, -199)
 amount = 4
 lifetime = 3.0
-emission_rect_extents = Vector2(1050, 1)
+emission_rect_extents = Vector2(500, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
 follow_viewport_enabled = true
 
-[node name="Starbackground" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(318.5, 178.5)
-scale = Vector2(1.09844, 1.03611)
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_left = -156.0
+offset_top = -128.0
+offset_right = 906.0
+offset_bottom = 457.0
 texture = ExtResource("3_k1kkc")
+
+[node name="UpgradeSelector" parent="CanvasLayer" node_paths=PackedStringArray("player", "Level") instance=ExtResource("7_0unsy")]
+unique_name_in_owner = true
+visible = false
+offset_left = 180.0
+offset_top = 156.0
+offset_right = 180.0
+offset_bottom = 156.0
+scale = Vector2(1, 1)
+player = NodePath("../../player")
+bullet_damage_upgrade = ExtResource("8_v1ak3")
+missle_damage_upgrade = ExtResource("9_m20uq")
+Level = NodePath("../..")
 
 [node name="HurtZone" type="Area2D" parent="."]
 position = Vector2(-292, 204)
@@ -202,29 +217,16 @@ carrier_enemy_count = 1.0
 unique_name_in_owner = true
 wait_time = 5.0
 
-[node name="UpgradeSelector" parent="." node_paths=PackedStringArray("player", "Level") instance=ExtResource("7_0unsy")]
-unique_name_in_owner = true
-visible = false
-offset_left = 181.0
-offset_top = 156.0
-offset_right = 181.0
-offset_bottom = 156.0
-scale = Vector2(1, 1)
-player = NodePath("../player")
-bullet_damage_upgrade = ExtResource("8_v1ak3")
-missle_damage_upgrade = ExtResource("9_m20uq")
-Level = NodePath("..")
-
 [node name="Enemy_counter" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_counter"]
-position = Vector2(320, 179)
+position = Vector2(-92, -31)
 shape = SubResource("RectangleShape2D_yobp3")
 
 [node name="Meteor_Spawn_Right" parent="." node_paths=PackedStringArray("spawn_timer") instance=ExtResource("10_pt81u")]
-position = Vector2(-365, -546)
+position = Vector2(-354, -482)
 vector_dir = Vector2(150, 50)
 spawn_timer = NodePath("../Timers/Right_Meteor_Timer")
 timer_min = 2.0
@@ -247,6 +249,7 @@ position = Vector2(330, 315)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(323, 174)
 
+[connection signal="visibility_changed" from="CanvasLayer/UpgradeSelector" to="." method="_on_upgrade_selector_visibility_changed"]
 [connection signal="body_entered" from="HurtZone" to="." method="_on_hurt_zone_body_entered"]
 [connection signal="carrier_spawned" from="EnemySpawnPath" to="." method="_on_enemy_spawn_path_carrier_spawned"]
 [connection signal="enemy_died" from="EnemySpawnPath" to="." method="_on_enemy_spawn_path_enemy_died"]
@@ -266,4 +269,3 @@ position = Vector2(323, 174)
 [connection signal="enemy_picked" from="WaveManager" to="EnemySpawnPath" method="_on_wave_manager_enemy_picked"]
 [connection signal="fast_enemy_picked" from="WaveManager" to="EnemySpawnPath" method="_on_wave_manager_fast_enemy_picked"]
 [connection signal="timeout" from="Level_change_timer" to="." method="_on_level_change_timer_timeout"]
-[connection signal="visibility_changed" from="UpgradeSelector" to="." method="_on_upgrade_selector_visibility_changed"]
