@@ -28,7 +28,8 @@ func _physics_process(delta: float) -> void:
 	pass
 
 func _process(delta: float) -> void:
-	print(Wave.total_limit,"   ",enemy_died)
+	pass
+	
 	
 func level_change():
 	print("method called")

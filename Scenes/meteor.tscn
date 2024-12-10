@@ -13,18 +13,18 @@ radius = 17.6792
 radius = 23.0217
 
 [node name="meteor" type="CharacterBody2D"]
-position = Vector2(-802, -407)
-scale = Vector2(3, 3)
+position = Vector2(-2.00006, -2.00003)
+scale = Vector2(0.75, 0.75)
 collision_layer = 64
 collision_mask = 64
 script = ExtResource("1_h2l1b")
 
 [node name="Asteroid" type="Sprite2D" parent="."]
-position = Vector2(326, 193)
+position = Vector2(0.000144958, -2.38087)
 texture = ExtResource("2_yn3ay")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(324.667, 194)
+position = Vector2(-2.38081, -2.38088)
 shape = SubResource("CircleShape2D_vc3vc")
 
 [node name="AttackComponent" type="Node2D" parent="."]
@@ -37,13 +37,14 @@ script = ExtResource("4_2qguh")
 max_health = 20
 
 [node name="HitBoxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+position = Vector2(1, 1)
 collision_layer = 68
 collision_mask = 92
 script = ExtResource("5_r1wpj")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-position = Vector2(323.667, 192)
+position = Vector2(-0.999847, -3.38087)
 shape = SubResource("CircleShape2D_hhtpc")
 
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]

@@ -72,10 +72,24 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_phuxj"]
-radius = 34.2345
+radius = 9.48683
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8dyf"]
-radius = 34.3657
+
+[sub_resource type="Animation" id="Animation_t6qxf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_wbjti"]
 resource_name = "take_damage"
@@ -93,21 +107,6 @@ tracks/0/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="Animation" id="Animation_t6qxf"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/active")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7xyao"]
 _data = {
 "RESET": SubResource("Animation_t6qxf"),
@@ -119,11 +118,11 @@ material = SubResource("ShaderMaterial_2wlse")
 collision_layer = 10
 collision_mask = 2
 script = ExtResource("1_m2lxd")
+SPEED = 50
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
 position = Vector2(-1, 5)
-scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_4cy7i")
 animation = &"idle"
 autoplay = "idle"
@@ -135,10 +134,10 @@ shape = SubResource("CircleShape2D_phuxj")
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_2hyh2")]
 unique_name_in_owner = true
-offset_left = -48.0
-offset_top = -47.0
-offset_right = 49.0
-offset_bottom = -34.0
+offset_left = -12.0
+offset_top = -11.0
+offset_right = 12.0
+offset_bottom = -7.0
 max_value = 3.0
 value = 3.0
 health_component = NodePath("../HealthComponent")

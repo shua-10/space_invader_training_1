@@ -166,11 +166,12 @@ point_count = 2
 
 [node name="fast_enemy" type="CharacterBody2D" groups=["enemy"]]
 position = Vector2(400, 153)
-scale = Vector2(1.5, 1.5)
+scale = Vector2(0.5, 0.5)
 collision_layer = 10
 collision_mask = 2
 script = SubResource("GDScript_fnqhu")
-SPEED_Y = 300
+SPEED_Y = 125
+SPEED_X = 75
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, 5)
@@ -187,9 +188,9 @@ shape = SubResource("CircleShape2D_phuxj")
 [node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_h27av")]
 unique_name_in_owner = true
 offset_left = -48.0
-offset_top = -47.0
+offset_top = -48.0
 offset_right = 49.0
-offset_bottom = -34.0
+offset_bottom = -35.0
 max_value = 3.0
 value = 3.0
 health_component = NodePath("../HealthComponent")

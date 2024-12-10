@@ -7,7 +7,7 @@ var missle_ready = true
 var bullet_upgrades:Array[BulletUpgrades] = []
 
 func _ready() -> void:
-	$Ship/AnimatedSprite2D.play("idle")
+	$AnimatedSprite2D.play("idle")
 
 
 func _physics_process(delta: float) -> void:
@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 		shoot_bullet()
 		%Shoot_Cooldown.start()
 		shoot_ready = false
-		$Ship/AnimatedSprite2D.play("shooting")
+		$AnimatedSprite2D.play("shooting")
 
 	if Input.is_action_pressed("deploy_missle") == true and missle_ready == true:
 		shoot_missle()

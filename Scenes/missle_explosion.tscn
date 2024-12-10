@@ -3,5 +3,5 @@
 [ext_resource type="PackedScene" uid="uid://dkjk0mel62vw8" path="res://Scenes/enemy_explosion.tscn" id="1_ktvym"]
 
 [node name="EnemyExplosion" instance=ExtResource("1_ktvym")]
-amount = 120
-initial_velocity_max = 500.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0

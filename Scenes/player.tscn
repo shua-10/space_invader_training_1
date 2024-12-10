@@ -147,7 +147,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sbkyt"]
-radius = 70.0286
+radius = 16.0
 
 [sub_resource type="GDScript" id="GDScript_2u275"]
 script/source = "extends Node
@@ -158,11 +158,24 @@ class_name Attack
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_idb2b"]
-radius = 68.0
+radius = 16.0
 
 [node name="player" type="CharacterBody2D"]
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_sc038")
+SPEED = 200
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_22822")
+animation = &"idle"
+speed_scale = 2.0
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+position = Vector2(0, 20.6667)
+scale = Vector2(0.666667, 0.666667)
+sprite_frames = SubResource("SpriteFrames_4g2hf")
+autoplay = "default"
+frame_progress = 0.197475
 
 [node name="Shoot_Cooldown" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -170,34 +183,13 @@ wait_time = 0.5
 
 [node name="ShootPoint_Left" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(60, -40)
+position = Vector2(12, -10)
 
 [node name="ShootPoint_Right" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(56, 80)
-
-[node name="Ship" type="Sprite2D" parent="."]
-position = Vector2(-14, 6)
-rotation = 1.5708
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ship"]
-position = Vector2(14, -6)
-scale = Vector2(6, 6)
-sprite_frames = SubResource("SpriteFrames_22822")
-animation = &"shooting"
-frame = 8
-frame_progress = 1.0
-speed_scale = 2.0
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Ship/AnimatedSprite2D"]
-position = Vector2(0, 20.6667)
-scale = Vector2(0.666667, 0.666667)
-sprite_frames = SubResource("SpriteFrames_4g2hf")
-autoplay = "default"
-frame_progress = 0.197475
+position = Vector2(12, 10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-18, 20)
 shape = SubResource("CircleShape2D_sbkyt")
 
 [node name="AttackComponent" type="Node" parent="."]
@@ -205,7 +197,7 @@ script = SubResource("GDScript_2u275")
 
 [node name="MisslePoint" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-194, 20)
+position = Vector2(-28, 0)
 
 [node name="Missle_Cooldown" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -215,6 +207,7 @@ autostart = true
 script = ExtResource("4_lkvgc")
 
 [node name="HitBoxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+position = Vector2(-6, 18)
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("5_62x0m")
@@ -222,7 +215,7 @@ health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 modulate = Color(1, 0.400917, 0.805997, 1)
-position = Vector2(-18, 20)
+position = Vector2(6, -18)
 shape = SubResource("CircleShape2D_idb2b")
 
 [connection signal="timeout" from="Shoot_Cooldown" to="." method="_on_shoot_cooldown_timeout"]

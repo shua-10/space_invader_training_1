@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bx2dp1plntqgc" path="res://meteor_spawn.tscn" id="10_pt81u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xoixv"]
-size = Vector2(2080, 135)
+size = Vector2(2398, 135)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pjy6a"]
 distance = -131.0
@@ -26,16 +26,16 @@ normal = Vector2(-0.999974, 0.00724619)
 distance = 125.018
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tln2b"]
-size = Vector2(133, 3144.25)
+size = Vector2(133, 2700.78)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yobp3"]
-size = Vector2(3567, 2240)
+size = Vector2(2424, 1359)
 
 [sub_resource type="Curve2D" id="Curve2D_mv1mi"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 2182, -565, 0, 0, 0, 0, 2165, 770)
+"points": PackedVector2Array(0, 0, 0, 0, 2096, 367, 0, 0, 0, 0, 2096, 542, 0, 0, 0, 0, 2097, 648, 0, 0, 0, 0, 2096, 684)
 }
-point_count = 2
+point_count = 4
 
 [sub_resource type="GDScript" id="GDScript_1cieu"]
 script/source = "extends Path2D
@@ -57,11 +57,10 @@ func spawn_meteor():
 	
 	
 	%Meteor_Path.progress_ratio = randf()
-	new_meteor.position = %Meteor_Path.global_position
+	new_meteor.global_position = %Meteor_Path.global_position
 	new_meteor.vector_initial = vector_dir
-	add_child(new_meteor)
+	get_parent().add_child(new_meteor)
 	meteor_spawned.emit()
-
 
 
 func _on_right_meteor_timer_timeout() -> void:
@@ -69,6 +68,7 @@ func _on_right_meteor_timer_timeout() -> void:
 "
 
 [node name="Level 1" type="Node2D" node_paths=PackedStringArray("Wave", "enemy_counter")]
+position = Vector2(-1, 0)
 script = ExtResource("1_ecmsp")
 Wave = NodePath("WaveManager")
 enemy_counter = NodePath("Enemy_counter")
@@ -84,52 +84,46 @@ layer = -1
 follow_viewport_enabled = true
 
 [node name="Starbackground" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(266.375, -231.625)
-scale = Vector2(3.23633, 3.87569)
+position = Vector2(318.5, 178.5)
+scale = Vector2(1.09844, 1.03611)
 texture = ExtResource("3_k1kkc")
 
-[node name="player" parent="." instance=ExtResource("1_1pewh")]
-position = Vector2(224, 50)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(237, -207)
-
 [node name="HurtZone" type="Area2D" parent="."]
-position = Vector2(-333, 174)
+position = Vector2(-292, 204)
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone"]
-position = Vector2(592, 358)
+position = Vector2(605, 358)
 shape = SubResource("RectangleShape2D_xoixv")
 
 [node name="Boundaries" type="Node" parent="."]
 
 [node name="Back Block" type="StaticBody2D" parent="Boundaries"]
-position = Vector2(-12, 232)
+position = Vector2(306, 312)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Back Block"]
-position = Vector2(0, 1)
+position = Vector2(41, -86)
 shape = SubResource("WorldBoundaryShape2D_pjy6a")
 
 [node name="Left_Border" type="StaticBody2D" parent="Boundaries"]
-position = Vector2(-37, -613)
+position = Vector2(732, -68)
 collision_layer = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Left_Border"]
-position = Vector2(-711, 268)
+position = Vector2(-732, 267)
 shape = SubResource("WorldBoundaryShape2D_36jsl")
 
 [node name="Right_Border" type="StaticBody2D" parent="Boundaries"]
-position = Vector2(21, -372)
+position = Vector2(-687, 192)
 collision_layer = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Right_Border"]
-position = Vector2(1418, 5)
+position = Vector2(1482, 42)
 shape = SubResource("WorldBoundaryShape2D_umdmk")
 
 [node name="EnemySpawnPath" parent="." node_paths=PackedStringArray("timers", "wave_manager", "level") instance=ExtResource("5_4ynun")]
-position = Vector2(241, -1339)
+position = Vector2(403, -447)
 scale = Vector2(0.913259, 1)
 timers = [NodePath("../Timers/Enemy_Spawn_Timer"), NodePath("../Timers/Fast_enemy_spawner"), NodePath("../Timers/Carrier_timer")]
 timer_min = 2.0
@@ -160,21 +154,21 @@ wait_time = 2.0
 [node name="Despawn_Areas" type="Node" parent="."]
 
 [node name="Despawn_Left" type="Area2D" parent="Despawn_Areas"]
-position = Vector2(-294, -37)
+position = Vector2(290, -89)
 collision_layer = 0
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Despawn_Areas/Despawn_Left"]
-position = Vector2(-975, -266)
+position = Vector2(-723, 273)
 shape = SubResource("RectangleShape2D_tln2b")
 
 [node name="Despawn_Up" type="Area2D" parent="Despawn_Areas"]
-position = Vector2(-294, -37)
+position = Vector2(-290, 291)
 collision_layer = 0
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Despawn_Areas/Despawn_Up"]
-position = Vector2(626.875, -1675)
+position = Vector2(605.219, -588.999)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_tln2b")
 
@@ -184,7 +178,7 @@ collision_layer = 0
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Despawn_Areas/Despawn_Down"]
-position = Vector2(626.875, -1675)
+position = Vector2(607, -1959)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_tln2b")
 
@@ -194,7 +188,7 @@ collision_layer = 0
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Despawn_Areas/Despawn_Right"]
-position = Vector2(-1359.5, -262.5)
+position = Vector2(-2056, 183)
 shape = SubResource("RectangleShape2D_tln2b")
 
 [node name="WaveManager" type="Node" parent="."]
@@ -211,10 +205,11 @@ wait_time = 5.0
 [node name="UpgradeSelector" parent="." node_paths=PackedStringArray("player", "Level") instance=ExtResource("7_0unsy")]
 unique_name_in_owner = true
 visible = false
-offset_left = -446.0
-offset_top = -393.0
-offset_right = -446.0
-offset_bottom = -393.0
+offset_left = 181.0
+offset_top = 156.0
+offset_right = 181.0
+offset_bottom = 156.0
+scale = Vector2(1, 1)
 player = NodePath("../player")
 bullet_damage_upgrade = ExtResource("8_v1ak3")
 missle_damage_upgrade = ExtResource("9_m20uq")
@@ -225,26 +220,32 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_counter"]
-position = Vector2(394.5, -319)
+position = Vector2(320, 179)
 shape = SubResource("RectangleShape2D_yobp3")
 
 [node name="Meteor_Spawn_Right" parent="." node_paths=PackedStringArray("spawn_timer") instance=ExtResource("10_pt81u")]
-position = Vector2(-850, -327)
-vector_dir = Vector2(250, 100)
+position = Vector2(-365, -546)
+vector_dir = Vector2(150, 50)
 spawn_timer = NodePath("../Timers/Right_Meteor_Timer")
 timer_min = 2.0
 timer_max = 2.0
 
 [node name="Meteor_Spawn_Left" parent="." node_paths=PackedStringArray("spawn_timer") instance=ExtResource("10_pt81u")]
-position = Vector2(-850, -327)
+position = Vector2(-1353, -580)
 curve = SubResource("Curve2D_mv1mi")
 script = SubResource("GDScript_1cieu")
-vector_dir = Vector2(-250, 100)
+vector_dir = Vector2(-150, 50)
 spawn_timer = NodePath("../Timers/Right_Meteor_Timer")
 min_size = 1
 max_size = 3
 timer_min = 2.0
 timer_max = 2.0
+
+[node name="player" parent="." instance=ExtResource("1_1pewh")]
+position = Vector2(330, 315)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(323, 174)
 
 [connection signal="body_entered" from="HurtZone" to="." method="_on_hurt_zone_body_entered"]
 [connection signal="carrier_spawned" from="EnemySpawnPath" to="." method="_on_enemy_spawn_path_carrier_spawned"]

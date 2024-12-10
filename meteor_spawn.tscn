@@ -4,15 +4,16 @@
 
 [sub_resource type="Curve2D" id="Curve2D_7s10p"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 38, -565, 0, 0, 0, 0, 21, 766)
+"points": PackedVector2Array(0, 0, 0, 0, 38, 341, 0, 0, 0, 0, 37, 457, 0, 0, 0, 0, 38, 643)
 }
-point_count = 2
+point_count = 3
 
 [node name="Meteor_Spawn" type="Path2D"]
+position = Vector2(-60, -310)
 curve = SubResource("Curve2D_7s10p")
 script = ExtResource("1_vvjjl")
 
 [node name="Meteor_Path" type="PathFollow2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(38, -565)
-rotation = 1.58357
+position = Vector2(38, 341)
+rotation = 1.57942
