@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx1ecpsafry0m"]
+
+[ext_resource type="Texture2D" uid="uid://bfxv5n6en3ueo" path="res://Assets/carrier bullet1.png" id="1_qpxmc"]
+
+[node name="carrier_bullet" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qpxmc")

@@ -15,6 +15,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 	position.y += SPEED * 1 * delta
+	rotation += 0.02
 	
 	var travelled_distance = SPEED * delta
 	
@@ -34,6 +35,7 @@ func shoot_laser():
 	var laser = NEW_LASER.instantiate()
 	
 	laser.global_position = %LaserPoint.global_position
+	
 	
 	add_child(laser)
 	

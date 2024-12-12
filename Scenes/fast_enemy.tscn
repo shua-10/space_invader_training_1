@@ -185,16 +185,6 @@ frame_progress = 0.838325
 position = Vector2(-2, 1)
 shape = SubResource("CircleShape2D_phuxj")
 
-[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_h27av")]
-unique_name_in_owner = true
-offset_left = -48.0
-offset_top = -48.0
-offset_right = 49.0
-offset_bottom = -35.0
-max_value = 3.0
-value = 3.0
-health_component = NodePath("../HealthComponent")
-
 [node name="X_movement_timer" type="Timer" parent="."]
 unique_name_in_owner = true
 autostart = true
@@ -236,6 +226,16 @@ scale_amount_min = 0.0
 scale_amount_max = 5.1
 scale_amount_curve = SubResource("Curve_xs7cu")
 color = Color(0.692576, 0.440532, 0.276755, 1)
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_h27av")]
+unique_name_in_owner = true
+offset_left = -26.0
+offset_top = -42.0
+offset_right = 26.0
+offset_bottom = -35.0
+max_value = 3.0
+value = 3.0
+health_component = NodePath("../HealthComponent")
 
 [connection signal="timeout" from="X_movement_timer" to="." method="_on_x_movement_timer_timeout"]
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]

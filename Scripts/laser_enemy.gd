@@ -4,13 +4,16 @@ extends Area2D
 @export var attack_damage = 1
 var in_damage_zone = false
 var attack_ready = true
+
+func _ready() -> void:
+	$AnimatedSprite2D.play("laser_shoot")
 func _physics_process(delta: float) -> void:
 	if in_damage_zone == true and attack_ready == true:
 		var attack = AttackComponent.new()
 		var attack_rate:float = 1
 		attack.attack_damage = attack_damage + attack_rate * delta
-		print(attack.attack_damage)
-		get_node("/root/Test/player/HitBoxComponent").take_damage(attack)
+		
+		
 		attack_ready = false
 		%damage_time.start()
 

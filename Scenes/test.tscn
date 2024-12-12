@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ct2yapw6f430j"]
+[gd_scene load_steps=8 format=3 uid="uid://ct2yapw6f430j"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_mugei"]
 [ext_resource type="PackedScene" uid="uid://doj3y6efkg167" path="res://Scenes/enemy.tscn" id="2_obf1q"]
 [ext_resource type="Shader" path="res://Scenes/flash.gdshader" id="3_6inwn"]
 [ext_resource type="PackedScene" uid="uid://cfm3erghy3ouy" path="res://upgrade_test.tscn" id="3_b33x1"]
+[ext_resource type="PackedScene" uid="uid://csnb0yr1ed8ub" path="res://Scenes/carrier_ship.tscn" id="5_jsbp3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_002dg"]
 resource_local_to_scene = true
@@ -35,3 +36,6 @@ position = Vector2(425, -426)
 
 [node name="upgrade_test" parent="." instance=ExtResource("3_b33x1")]
 position = Vector2(409, 270)
+
+[node name="carrier_ship" parent="." instance=ExtResource("5_jsbp3")]
+position = Vector2(203, -17)

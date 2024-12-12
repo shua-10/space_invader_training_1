@@ -119,18 +119,20 @@ radius = 7.0
 height = 62.0
 
 [node name="laser_enemy" type="Area2D"]
-scale = Vector2(5, 5)
+scale = Vector2(4, 4)
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("1_dp5v8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 25.8)
 sprite_frames = SubResource("SpriteFrames_agi4a")
 animation = &"laser_shoot"
 frame = 7
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 25.4)
 shape = SubResource("CapsuleShape2D_3fl57")
 
 [node name="AttackComponent" type="Node2D" parent="."]
@@ -142,6 +144,7 @@ collision_mask = 16
 script = ExtResource("3_6t75s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(0, 26)
 shape = SubResource("CapsuleShape2D_jebwv")
 
 [node name="damage_time" type="Timer" parent="."]

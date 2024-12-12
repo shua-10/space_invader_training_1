@@ -1,23 +1,23 @@
 [gd_scene load_steps=8 format=3 uid="uid://csnb0yr1ed8ub"]
 
 [ext_resource type="Script" path="res://Scenes/carrier_ship.gd" id="1_4e48x"]
-[ext_resource type="Texture2D" uid="uid://wjym1cbt680s" path="res://icon.svg" id="1_blfm7"]
+[ext_resource type="Texture2D" uid="uid://blms7233cfnyl" path="res://Assets/carrier ship1.png" id="2_8k632"]
 [ext_resource type="Script" path="res://Components/Component Scripts/attack_component.gd" id="2_w8jip"]
 [ext_resource type="Script" path="res://Components/health_component.gd" id="3_ahd2g"]
 [ext_resource type="Script" path="res://Components/hitbox_component.gd" id="4_1xfcm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nfrb3"]
-radius = 64.4981
+radius = 58.0086
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4aysy"]
-radius = 67.1863
+radius = 60.0083
 
 [node name="carrier_ship" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_4e48x")
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(3, 0)
-texture = ExtResource("1_blfm7")
+texture = ExtResource("2_8k632")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 0)
@@ -41,7 +41,7 @@ shape = SubResource("CircleShape2D_4aysy")
 
 [node name="LaserPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(1, 62)
+position = Vector2(3, 52)
 
 [node name="LaserTimer" type="Timer" parent="."]
 one_shot = true

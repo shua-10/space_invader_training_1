@@ -122,7 +122,7 @@ position = Vector2(41, -86)
 shape = SubResource("WorldBoundaryShape2D_pjy6a")
 
 [node name="Left_Border" type="StaticBody2D" parent="Boundaries"]
-position = Vector2(732, -68)
+position = Vector2(761, -63)
 collision_layer = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Left_Border"]
@@ -130,7 +130,7 @@ position = Vector2(-732, 267)
 shape = SubResource("WorldBoundaryShape2D_36jsl")
 
 [node name="Right_Border" type="StaticBody2D" parent="Boundaries"]
-position = Vector2(-687, 192)
+position = Vector2(-708, 196)
 collision_layer = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Right_Border"]
