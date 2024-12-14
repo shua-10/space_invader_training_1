@@ -149,6 +149,7 @@ level = NodePath("..")
 [node name="Timers" type="Node" parent="."]
 
 [node name="Level_complete_check_timer" type="Timer" parent="Timers"]
+wait_time = 0.1
 autostart = true
 
 [node name="Enemy_Spawn_Timer" type="Timer" parent="Timers"]

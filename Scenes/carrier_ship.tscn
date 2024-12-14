@@ -1,26 +1,73 @@
-[gd_scene load_steps=8 format=3 uid="uid://csnb0yr1ed8ub"]
+[gd_scene load_steps=14 format=3 uid="uid://csnb0yr1ed8ub"]
 
 [ext_resource type="Script" path="res://Scenes/carrier_ship.gd" id="1_4e48x"]
+[ext_resource type="Shader" path="res://Scenes/flash.gdshader" id="1_y5iys"]
 [ext_resource type="Texture2D" uid="uid://blms7233cfnyl" path="res://Assets/carrier ship1.png" id="2_8k632"]
 [ext_resource type="Script" path="res://Components/Component Scripts/attack_component.gd" id="2_w8jip"]
 [ext_resource type="Script" path="res://Components/health_component.gd" id="3_ahd2g"]
 [ext_resource type="Script" path="res://Components/hitbox_component.gd" id="4_1xfcm"]
+[ext_resource type="PackedScene" uid="uid://b6khf4rcvcuul" path="res://Scenes/health_bar.tscn" id="6_2sacr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aty5x"]
+resource_local_to_scene = true
+shader = ExtResource("1_y5iys")
+shader_parameter/active = false
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nfrb3"]
 radius = 58.0086
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4aysy"]
-radius = 60.0083
+radius = 58.0
+
+[sub_resource type="Animation" id="Animation_v0nb8"]
+resource_name = "take_damage"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_k38ob"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ineij"]
+_data = {
+"RESET": SubResource("Animation_k38ob"),
+"take_damage": SubResource("Animation_v0nb8")
+}
 
 [node name="carrier_ship" type="CharacterBody2D" groups=["enemy"]]
+material = SubResource("ShaderMaterial_aty5x")
 script = ExtResource("1_4e48x")
+SPEED = 10
+health = 25
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(3, 0)
+use_parent_material = true
 texture = ExtResource("2_8k632")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 0)
 shape = SubResource("CircleShape2D_nfrb3")
 
 [node name="AttackComponent" type="Node2D" parent="."]
@@ -28,15 +75,15 @@ script = ExtResource("2_w8jip")
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("3_ahd2g")
+max_health = 25
 
 [node name="HitBoxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
-collision_layer = 2
+collision_layer = 6
 collision_mask = 0
 script = ExtResource("4_1xfcm")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-position = Vector2(1, 1)
 shape = SubResource("CircleShape2D_4aysy")
 
 [node name="LaserPoint" type="Marker2D" parent="."]
@@ -47,4 +94,42 @@ position = Vector2(3, 52)
 one_shot = true
 autostart = true
 
+[node name="Shoot_cooldown" type="Timer" parent="."]
+
+[node name="Shoot_rate" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Up_Point" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -58)
+
+[node name="Right_Point" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(58, -3)
+
+[node name="Down_Point" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 58)
+
+[node name="Left_Point" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-59, -2)
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_2sacr")]
+offset_left = -79.0
+offset_top = -69.0
+offset_right = 81.0
+offset_bottom = -62.0
+health_component = NodePath("../HealthComponent")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ineij")
+}
+
+[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
+[connection signal="health_change" from="HealthComponent" to="." method="_on_health_component_health_change"]
 [connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]
+[connection signal="timeout" from="Shoot_cooldown" to="." method="_on_shoot_cooldown_timeout"]
+[connection signal="timeout" from="Shoot_rate" to="." method="_on_shoot_rate_timeout"]

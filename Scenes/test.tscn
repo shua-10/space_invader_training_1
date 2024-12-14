@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://ct2yapw6f430j"]
+[gd_scene load_steps=10 format=3 uid="uid://ct2yapw6f430j"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_mugei"]
 [ext_resource type="PackedScene" uid="uid://doj3y6efkg167" path="res://Scenes/enemy.tscn" id="2_obf1q"]
 [ext_resource type="Shader" path="res://Scenes/flash.gdshader" id="3_6inwn"]
 [ext_resource type="PackedScene" uid="uid://cfm3erghy3ouy" path="res://upgrade_test.tscn" id="3_b33x1"]
 [ext_resource type="PackedScene" uid="uid://csnb0yr1ed8ub" path="res://Scenes/carrier_ship.tscn" id="5_jsbp3"]
+[ext_resource type="PackedScene" uid="uid://dx1ecpsafry0m" path="res://carrier_bullet.tscn" id="6_texas"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_002dg"]
 resource_local_to_scene = true
@@ -13,6 +14,12 @@ shader_parameter/active = false
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1rwhl"]
+resource_local_to_scene = true
+shader = ExtResource("3_6inwn")
+shader_parameter/active = false
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0yg5q"]
 resource_local_to_scene = true
 shader = ExtResource("3_6inwn")
 shader_parameter/active = false
@@ -37,5 +44,9 @@ position = Vector2(425, -426)
 [node name="upgrade_test" parent="." instance=ExtResource("3_b33x1")]
 position = Vector2(409, 270)
 
+[node name="carrier_bullet" parent="." instance=ExtResource("6_texas")]
+position = Vector2(-52, 208)
+
 [node name="carrier_ship" parent="." instance=ExtResource("5_jsbp3")]
-position = Vector2(203, -17)
+material = SubResource("ShaderMaterial_0yg5q")
+position = Vector2(68, 131)

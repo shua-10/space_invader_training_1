@@ -49,17 +49,20 @@ func wave_change():
 		
 	if current_wave == 2:
 		regular_enemy_prob = 0.8
+		regular_enemy_limit = 1
 		fast_enemy_prob = 0.5
-		regular_enemy_limit = 20
-		fast_enemy_limit = 10
-		carrier_enemy_limit = 2
-		carrier_enemy_prob = 1
-		total_limit = 35
+		fast_enemy_limit = 5
+		total_limit = 10
+		
+	
 	
 	if current_wave == 3:
-		regular_enemy_prob = 0.8
+		regular_enemy_prob = 0.5
 		fast_enemy_prob = 0.5
-		regular_enemy_limit = 20
-		fast_enemy_limit = 10
-		total_limit = 55
+		carrier_enemy_limit = 2
+		carrier_enemy_prob = 0.2
+		regular_enemy_limit = 7
+		fast_enemy_limit = 2
+		total_limit = 25
+		
 		

@@ -59,18 +59,18 @@ func _on_enemy_spawn_timer_timeout() -> void:
 		if wave_manager.regular_enemy_limit != enemy_death_count:
 			wave_manager.enemy_picker()
 		elif wave_manager.regular_enemy_limit == enemy_death_count:
-			return
+			pass
 	if level.level_complete == true:
-		return
+		pass
 		
 func _on_fast_enemy_spawner_timeout() -> void:
 	if level.level_complete == false:
 		if wave_manager.fast_enemy_limit != fast_enemy_death_count:
 			wave_manager.enemy_picker()
 		elif wave_manager.fast_enemy_limit == fast_enemy_death_count:
-			return
+			pass
 	if level.level_complete == true:
-		return
+		pass
 
 func _on_carrier_timer_timeout() -> void:
 	if level.level_complete == false:
@@ -92,16 +92,23 @@ func _on_wave_manager_carrier_picked() -> void:
 
 func on_enemy_died():
 	enemy_death_count = enemy_death_count + 1
-
+	print(enemy_death_count)
 func on_fast_enemy_died():
 	fast_enemy_death_count = fast_enemy_death_count + 1
-	
+	print(fast_enemy_death_count)
 func on_carrier_died():
 	carrier_death_count += 1
-
+	print(carrier_death_count)
+	
 func _on_level_complete_check_timer_timeout() -> void:
 	var total_death_count:int = 0
 	total_death_count = enemy_death_count + fast_enemy_death_count + carrier_death_count
+	print(total_death_count)
 	if total_death_count == wave_manager.total_limit:
 		level.level_complete = true
 		level.level_change()
+		total_death_count = 0
+		carrier_death_count = 0
+		enemy_death_count = 0
+		fast_enemy_death_count = 0
+		

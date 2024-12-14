@@ -74,3 +74,8 @@ func _on_missle_cooldown_timeout() -> void:
 
 func _on_health_component_death() -> void:
 	self.queue_free()
+
+
+
+func _on_health_component_health_change() -> void:
+	$AnimationPlayer.play("take_damage")
