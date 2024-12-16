@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://2oimpfhfwi4"]
+[gd_scene load_steps=34 format=3 uid="uid://2oimpfhfwi4"]
 
 [ext_resource type="Shader" path="res://Scenes/flash.gdshader" id="1_ikty7"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_sc038"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dopbl1miegue" path="res://Assets/flame_ship.png" id="3_fhpj5"]
 [ext_resource type="Script" path="res://Components/health_component.gd" id="4_lkvgc"]
 [ext_resource type="Script" path="res://Components/hitbox_component.gd" id="5_62x0m"]
+[ext_resource type="AudioStream" uid="uid://crhvd2ciqv3f1" path="res://Sounds/leisure_video_game_retro_laser_gun_fire_001.mp3" id="7_mv0na"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xjhj2"]
 shader = ExtResource("1_ikty7")
@@ -166,6 +167,21 @@ class_name Attack
 [sub_resource type="CircleShape2D" id="CircleShape2D_idb2b"]
 radius = 16.0
 
+[sub_resource type="Animation" id="Animation_n7sgk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
 [sub_resource type="Animation" id="Animation_el3xl"]
 resource_name = "take_damage"
 length = 0.1
@@ -180,21 +196,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [null, true, false]
-}
-
-[sub_resource type="Animation" id="Animation_n7sgk"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/active")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rwven"]
@@ -268,6 +269,9 @@ shape = SubResource("CircleShape2D_idb2b")
 libraries = {
 "": SubResource("AnimationLibrary_rwven")
 }
+
+[node name="Shooting_Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_mv0na")
 
 [connection signal="timeout" from="Shoot_Cooldown" to="." method="_on_shoot_cooldown_timeout"]
 [connection signal="timeout" from="Missle_Cooldown" to="." method="_on_missle_cooldown_timeout"]

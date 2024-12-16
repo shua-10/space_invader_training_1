@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://ym4b7ittv3ge"]
+
+[ext_resource type="PackedScene" uid="uid://ccw7ya3gcmicu" path="res://Scenes/stars_background.tscn" id="1_syqjy"]
+[ext_resource type="Texture2D" uid="uid://dka45hm27chmq" path="res://starbackground.png" id="2_j16fh"]
+[ext_resource type="PackedScene" uid="uid://cxh6cdgyrnk1g" path="res://upgrade_selector.tscn" id="3_calx7"]
+[ext_resource type="Resource" uid="uid://b5euut1ohly5p" path="res://Upgrades/bullet_damage_upgrades.tres" id="4_y03us"]
+[ext_resource type="Resource" uid="uid://bf82p4xkwt8xl" path="res://Upgrades/missle_damage_upgrades.tres" id="5_l2c8e"]
+
+[node name="Level" type="Node2D"]
+
+[node name="StarsBackground" parent="." instance=ExtResource("1_syqjy")]
+position = Vector2(340, -199)
+amount = 4
+lifetime = 3.0
+emission_rect_extents = Vector2(500, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+follow_viewport_enabled = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_left = -156.0
+offset_top = -128.0
+offset_right = 906.0
+offset_bottom = 457.0
+texture = ExtResource("2_j16fh")
+
+[node name="UpgradeSelector" parent="CanvasLayer" instance=ExtResource("3_calx7")]
+unique_name_in_owner = true
+visible = false
+offset_left = 180.0
+offset_top = 156.0
+offset_right = 180.0
+offset_bottom = 156.0
+scale = Vector2(1, 1)
+bullet_damage_upgrade = ExtResource("4_y03us")
+missle_damage_upgrade = ExtResource("5_l2c8e")

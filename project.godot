@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://Scripts/Global.gd"
-Wave="res://Scripts/wave_manager.gd"
+Game_Data="*res://game_data.gd"
 
 [display]
 

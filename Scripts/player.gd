@@ -50,7 +50,7 @@ func shoot_bullet():
 	bullet_right.global_rotation = %ShootPoint_Right.global_rotation
 	get_parent().add_child(bullet_right)
 	
-	
+	$Shooting_Sound.play()
 	
 	
 
