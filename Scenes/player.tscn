@@ -272,6 +272,8 @@ libraries = {
 
 [node name="Shooting_Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_mv0na")
+volume_db = -20.0
+pitch_scale = 0.69
 
 [connection signal="timeout" from="Shoot_Cooldown" to="." method="_on_shoot_cooldown_timeout"]
 [connection signal="timeout" from="Missle_Cooldown" to="." method="_on_missle_cooldown_timeout"]

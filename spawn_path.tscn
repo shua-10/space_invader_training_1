@@ -9,8 +9,6 @@ _data = {
 point_count = 2
 
 [node name="SpawnPath" type="Path2D"]
-position = Vector2(330, 109)
-scale = Vector2(0.956747, 1)
 curve = SubResource("Curve2D_23pkm")
 script = ExtResource("1_nv6s5")
 

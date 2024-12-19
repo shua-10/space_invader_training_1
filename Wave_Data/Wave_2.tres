@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WaveParameters" load_steps=2 format=3 uid="uid://cm4ef4bre0ib1"]
+
+[ext_resource type="Script" path="res://wave_parameters.gd" id="1_f2xen"]
+
+[resource]
+script = ExtResource("1_f2xen")
+regular_enemy_prob_min = 0.0
+regular_enemy_prob_max = 0.0
+fast_enemy_prob_min = 0.0
+fast_enemy_prob_max = 1.0
+carrier_prob_min = 0.0
+carrier_prob_max = 0.0
+regular_enemy_limit = 0.0
+fast_enemy_limit = 5.0
+carrier_limit = 0.0
+wave_death_limit = 5

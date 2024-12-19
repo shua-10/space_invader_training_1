@@ -100,15 +100,15 @@ func on_carrier_died():
 	carrier_death_count += 1
 	print(carrier_death_count)
 	
-func _on_level_complete_check_timer_timeout() -> void:
-	var total_death_count:int = 0
-	total_death_count = enemy_death_count + fast_enemy_death_count + carrier_death_count
-	print(total_death_count)
-	if total_death_count == wave_manager.total_limit:
-		level.level_complete = true
-		level.level_change()
-		total_death_count = 0
-		carrier_death_count = 0
-		enemy_death_count = 0
-		fast_enemy_death_count = 0
+#func _on_level_complete_check_timer_timeout() -> void:
+	#var total_death_count:int = 0
+	#total_death_count = enemy_death_count + fast_enemy_death_count + carrier_death_count
+	#print(total_death_count)
+	#if total_death_count == wave_manager.total_limit:
+		#level.level_complete = true
+		#level.level_change()
+		#total_death_count = 0
+		#carrier_death_count = 0
+		#enemy_death_count = 0
+		#fast_enemy_death_count = 0
 		

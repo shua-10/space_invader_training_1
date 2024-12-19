@@ -4,65 +4,50 @@ class_name WaveManager
 signal enemy_picked
 signal fast_enemy_picked
 signal carrier_picked
-@export var regular_enemy_limit: float
-@export var fast_enemy_limit: float
-@export var carrier_enemy_limit: float
-@export var regular_enemy_count: float
-@export var fast_enemy_count: float
-@export var carrier_enemy_count: float
+signal level_complete
 
-@export var regular_enemy_prob: float
-@export var fast_enemy_prob: float
-@export var carrier_enemy_prob: float
+@export var wave_data: WaveParameters
+@export var spawn_path: SpawnPath
+
+@export var wave_array:Array[WaveParameters]
 var current_wave: float
-var total_limit:int
+
 
 func _ready() -> void:
 	current_wave = 0
-	new_wave()
-	wave_change()
+	wave_data = wave_array.front()
 	
+func _process(delta: float) -> void:
+	if wave_data.wave_death_limit <= spawn_path.total_death_count:
+		spawn_path.total_death_count = 0
+		spawn_path.current_death_enemy_count = 0
+		spawn_path.current_death_fast_enemy_count = 0
+		spawn_path.current_death_carrier_count = 0
+		spawn_path.current_enemy_count = 0
+		spawn_path.current_fast_enemy_count = 0
+		spawn_path.current_carrier_count =0
+		emit_signal("level_complete")
+		print("level_complete")
 func new_wave():
-	regular_enemy_count = 1
-	fast_enemy_count = 1
-	carrier_enemy_count = 1
-	current_wave += 1
-func enemy_picker():
-	var enemy_picker_rng = Global.rng.randf_range(0.1, 1)
-		
-	if carrier_enemy_prob > enemy_picker_rng:
-		emit_signal("carrier_picked")
-	elif fast_enemy_prob > enemy_picker_rng:
-		emit_signal("fast_enemy_picked")
-	elif regular_enemy_prob > enemy_picker_rng:
-		emit_signal("enemy_picked")
+	enemy_picker()
 	
+func enemy_picker():
+	
+	var enemy_picker_rng: float = Global.rng.randf_range(0, 1)
+	print(spawn_path.total_count,"  ",wave_data.wave_death_limit)
+	print(enemy_picker_rng)
+	if wave_data.carrier_prob_min < enemy_picker_rng and wave_data.carrier_prob_max > enemy_picker_rng:
+		emit_signal("carrier_picked")
+	elif wave_data.fast_enemy_prob_min < enemy_picker_rng and wave_data.fast_enemy_prob_max > enemy_picker_rng:
+		emit_signal("fast_enemy_picked")
+		print("spawned")
+	elif wave_data.regular_enemy_prob_min < enemy_picker_rng and wave_data.regular_enemy_prob_max > enemy_picker_rng:
+		emit_signal("enemy_picked")
+		print("spawned")
 
 func wave_change():
-	print("wave",   current_wave)
-	
-	
-	if current_wave == 1:
-		regular_enemy_prob = 1
-		regular_enemy_limit = 2
-		total_limit = 2
-		
-	if current_wave == 2:
-		regular_enemy_prob = 0.8
-		regular_enemy_limit = 1
-		fast_enemy_prob = 0.5
-		fast_enemy_limit = 5
-		total_limit = 10
-		
-	
-	
-	if current_wave == 3:
-		regular_enemy_prob = 0.5
-		fast_enemy_prob = 0.5
-		carrier_enemy_limit = 2
-		carrier_enemy_prob = 0.2
-		regular_enemy_limit = 7
-		fast_enemy_limit = 2
-		total_limit = 25
-		
-		
+	if wave_array.size()>1:
+		wave_array.remove_at(0)
+		wave_data = wave_array.front()
+	else:
+		return
