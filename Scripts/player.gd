@@ -5,6 +5,8 @@ var shoot_ready = true
 var smooth_mouse_position: Vector2
 var missle_ready = true
 var bullet_upgrades:Array[BulletUpgrades] = []
+var missle_count: int = 0
+
 
 func _ready() -> void:
 	$AnimatedSprite2D.play("idle")
@@ -56,14 +58,20 @@ func shoot_bullet():
 
 
 func shoot_missle():
-	const NEW_MISSLE = preload("res://Scenes/missle.tscn")
-	var missle = NEW_MISSLE.instantiate()
-	
-	missle.global_position = %MisslePoint.global_position
-	missle.global_rotation = %MisslePoint.global_rotation
-	
-	get_parent().add_child(missle)
-	
+	if missle_count > 3:
+		return
+	else:
+		const NEW_MISSLE = preload("res://Scenes/missle.tscn")
+		var missle = NEW_MISSLE.instantiate()
+		
+		missle.global_position = %MisslePoint.global_position
+		missle.global_rotation = %MisslePoint.global_rotation
+		
+		get_parent().add_child(missle)
+		missle_count += 1
+		if missle_count >= 3:
+			pass
+
 func _on_shoot_cooldown_timeout() -> void:
 	shoot_ready = true
 

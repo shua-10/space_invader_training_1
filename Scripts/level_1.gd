@@ -17,10 +17,12 @@ func _on_hurt_zone_body_entered(body: Node2D) -> void:
 
 
 func _ready() -> void:
-	pass
+	%main_menu.visible = true
+	get_tree().paused = true
 
 func _physics_process(delta: float) -> void:
-	pass
+	if Input.is_action_pressed("pause") == true:
+		pause()
 
 func _process(delta: float) -> void:
 	pass
@@ -28,6 +30,9 @@ func _process(delta: float) -> void:
 func level_start():
 	%UpgradeSelector.visible = false
 	get_tree().paused = false
+	%SaverLoader.save_game()
+	%anim.play("saved_game_confirmation")
+	await %anim.animation_finished
 	Wave.new_wave()
 	Wave.wave_change()
 	
@@ -39,6 +44,12 @@ func level_change():
 		bodies.queue_free()
 	%UpgradeSelector.visible = true
 	
+	
+
+func pause():
+	%pause_menu.visible = true
+	get_tree().paused = true
+
 
 func _on_despawn_left_body_entered(body: Node2D) -> void:
 	body.queue_free()

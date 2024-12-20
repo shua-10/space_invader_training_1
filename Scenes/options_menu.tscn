@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5k48sjdssuwx"]
+
+[ext_resource type="Script" path="res://Scenes/options_menu.gd" id="1_vd4ks"]
+
+[node name="options_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vd4ks")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+offset_right = 131.0
+offset_bottom = 111.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 106.0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "Options"
+
+[node name="display_options" type="OptionButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Windowed"
+popup/item_1/text = "Fullscreen"
+popup/item_1/id = 1
+
+[node name="back_button" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[connection signal="item_selected" from="Panel/VBoxContainer/display_options" to="." method="_on_display_options_item_selected"]
+[connection signal="pressed" from="Panel/VBoxContainer/back_button" to="." method="_on_back_button_pressed"]

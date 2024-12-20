@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://doj3y6efkg167"]
+[gd_scene load_steps=24 format=3 uid="uid://doj3y6efkg167"]
 
 [ext_resource type="Shader" path="res://Scenes/flash.gdshader" id="1_3m0lj"]
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_m2lxd"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Components/Component Scripts/attack_component.gd" id="4_y4u6x"]
 [ext_resource type="Script" path="res://Components/health_component.gd" id="5_bhoph"]
 [ext_resource type="Script" path="res://Components/hitbox_component.gd" id="6_plusy"]
+[ext_resource type="PackedScene" uid="uid://8x7pdjqscs2" path="res://Scenes/score_counter.tscn" id="8_ufdih"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2wlse"]
 resource_local_to_scene = true
@@ -90,6 +91,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("score_counter:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("score_counter:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-16, -10)]
+}
 
 [sub_resource type="Animation" id="Animation_wbjti"]
 resource_name = "take_damage"
@@ -107,9 +132,38 @@ tracks/0/keys = {
 "values": [false, true, false]
 }
 
+[sub_resource type="Animation" id="Animation_6jacy"]
+resource_name = "score_count"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("score_counter:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("score_counter:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-16, -10), Vector2(-16, -20)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7xyao"]
 _data = {
 "RESET": SubResource("Animation_t6qxf"),
+"score_count": SubResource("Animation_6jacy"),
 "take_damage": SubResource("Animation_wbjti")
 }
 
@@ -164,6 +218,20 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_7xyao")
 }
+
+[node name="score_counter" parent="." instance=ExtResource("8_ufdih")]
+modulate = Color(1, 1, 1, 0)
+z_index = 10
+offset_left = -16.0
+offset_top = -10.0
+offset_right = 24.0
+offset_bottom = 13.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+text = "+100"
+script = null
 
 [connection signal="area_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_area_entered"]
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]

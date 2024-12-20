@@ -8,6 +8,7 @@ var enemy_alive = true
 @export var attack_damage = 1
 var enemy = self
 signal died
+@export var score: int = 100
 
 func _physics_process(delta: float) -> void:
 	

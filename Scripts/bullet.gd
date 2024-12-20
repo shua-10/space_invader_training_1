@@ -27,3 +27,4 @@ func _on_hit_box_component_area_entered(area: Area2D) -> void:
 		attack.attack_damage = attack_damage
 		hitbox.take_damage(attack)
 		self.queue_free()
+		print(attack.attack_damage)

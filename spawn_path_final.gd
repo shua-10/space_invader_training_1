@@ -73,7 +73,7 @@ func spawn_carrier_enemy():
 
 func calc_death_total():
 	total_death_count = current_death_enemy_count + current_death_fast_enemy_count + current_death_carrier_count
-	print(total_death_count)
+	
 
 func on_enemy_died():
 	Game_Data.enemy_death()

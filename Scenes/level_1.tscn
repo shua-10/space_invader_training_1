@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d0ks1pscuauow"]
+[gd_scene load_steps=29 format=3 uid="uid://d0ks1pscuauow"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_1pewh"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
@@ -6,13 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://ccw7ya3gcmicu" path="res://Scenes/stars_background.tscn" id="4_r7hcx"]
 [ext_resource type="Script" path="res://Scripts/wave_manager.gd" id="6_jyr2o"]
 [ext_resource type="PackedScene" uid="uid://cxh6cdgyrnk1g" path="res://upgrade_selector.tscn" id="7_0unsy"]
+[ext_resource type="PackedScene" uid="uid://b1kedv3v4bqp8" path="res://pause_menu.tscn" id="7_a6mtn"]
+[ext_resource type="PackedScene" uid="uid://b5k48sjdssuwx" path="res://Scenes/options_menu.tscn" id="8_3flag"]
 [ext_resource type="Resource" uid="uid://b5euut1ohly5p" path="res://Upgrades/bullet_damage_upgrades.tres" id="8_v1ak3"]
 [ext_resource type="Script" path="res://wave_parameters.gd" id="8_xihjq"]
+[ext_resource type="PackedScene" uid="uid://bxm7xiad43vfq" path="res://Scenes/main_menu.tscn" id="9_5urxd"]
 [ext_resource type="Resource" uid="uid://bf82p4xkwt8xl" path="res://Upgrades/missle_damage_upgrades.tres" id="9_m20uq"]
 [ext_resource type="Resource" uid="uid://5dg1bkf6rgt2" path="res://Wave_Data/Wave_1.tres" id="9_rujhw"]
 [ext_resource type="Resource" uid="uid://cm4ef4bre0ib1" path="res://Wave_Data/Wave_2.tres" id="10_fv88b"]
 [ext_resource type="PackedScene" uid="uid://bx2dp1plntqgc" path="res://meteor_spawn.tscn" id="10_pt81u"]
 [ext_resource type="PackedScene" uid="uid://casnqcl4rnnti" path="res://spawn_path_final.tscn" id="11_xwx13"]
+[ext_resource type="Script" path="res://saver_loader.gd" id="16_8hhtw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xoixv"]
 size = Vector2(2398, 135)
@@ -70,6 +74,67 @@ func _on_right_meteor_timer_timeout() -> void:
 	spawn_meteor()
 "
 
+[sub_resource type="Animation" id="Animation_y6dqj"]
+resource_name = "saved_game_confirmation"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer2/saved_game_confirmation:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.760784), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer2/saved_game_confirmation:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(174, 234), Vector2(174, 134), Vector2(174, 34)]
+}
+
+[sub_resource type="Animation" id="Animation_ooqe5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer2/saved_game_confirmation:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer2/saved_game_confirmation:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(174, 234)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bb4m1"]
+_data = {
+"RESET": SubResource("Animation_ooqe5"),
+"saved_game_confirmation": SubResource("Animation_y6dqj")
+}
+
 [node name="Level 1" type="Node2D" node_paths=PackedStringArray("Wave", "enemy_counter")]
 position = Vector2(-1, 0)
 script = ExtResource("1_ecmsp")
@@ -81,30 +146,6 @@ position = Vector2(340, -199)
 amount = 4
 lifetime = 3.0
 emission_rect_extents = Vector2(500, 1)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -1
-follow_viewport_enabled = true
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-offset_left = -156.0
-offset_top = -128.0
-offset_right = 906.0
-offset_bottom = 457.0
-texture = ExtResource("3_k1kkc")
-
-[node name="UpgradeSelector" parent="CanvasLayer" node_paths=PackedStringArray("player", "Level") instance=ExtResource("7_0unsy")]
-unique_name_in_owner = true
-visible = false
-offset_left = 180.0
-offset_top = 156.0
-offset_right = 180.0
-offset_bottom = 156.0
-scale = Vector2(1, 1)
-player = NodePath("../../player")
-bullet_damage_upgrade = ExtResource("8_v1ak3")
-missle_damage_upgrade = ExtResource("9_m20uq")
-Level = NodePath("../..")
 
 [node name="HurtZone" type="Area2D" parent="."]
 position = Vector2(-292, 204)
@@ -245,7 +286,79 @@ position = Vector2(323, 174)
 [node name="Spawn_Path" parent="." node_paths=PackedStringArray("wave_manager") instance=ExtResource("11_xwx13")]
 wave_manager = NodePath("../WaveManager")
 
-[connection signal="visibility_changed" from="CanvasLayer/UpgradeSelector" to="." method="_on_upgrade_selector_visibility_changed"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+follow_viewport_enabled = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_left = -156.0
+offset_top = -128.0
+offset_right = 906.0
+offset_bottom = 457.0
+texture = ExtResource("3_k1kkc")
+
+[node name="SaverLoader" type="Node" parent="." node_paths=PackedStringArray("player")]
+unique_name_in_owner = true
+script = ExtResource("16_8hhtw")
+player = NodePath("../player")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_bb4m1")
+}
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="UpgradeSelector" parent="CanvasLayer2" node_paths=PackedStringArray("player", "Level") instance=ExtResource("7_0unsy")]
+unique_name_in_owner = true
+visible = false
+offset_left = 180.0
+offset_top = 156.0
+offset_right = 180.0
+offset_bottom = 156.0
+scale = Vector2(1, 1)
+player = NodePath("../../player")
+bullet_damage_upgrade = ExtResource("8_v1ak3")
+missle_damage_upgrade = ExtResource("9_m20uq")
+Level = NodePath("../..")
+
+[node name="pause_menu" parent="CanvasLayer2" instance=ExtResource("7_a6mtn")]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+offset_left = 224.0
+offset_top = 117.0
+offset_right = 224.0
+offset_bottom = 117.0
+
+[node name="options_menu" parent="CanvasLayer2" instance=ExtResource("8_3flag")]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+offset_left = 260.0
+offset_top = 132.0
+offset_right = 260.0
+offset_bottom = 132.0
+
+[node name="main_menu" parent="CanvasLayer2" instance=ExtResource("9_5urxd")]
+unique_name_in_owner = true
+process_mode = 3
+offset_left = 247.0
+offset_top = 111.0
+offset_right = 247.0
+offset_bottom = 111.0
+
+[node name="saved_game_confirmation" type="Label" parent="CanvasLayer2"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 174.0
+offset_top = 234.0
+offset_right = 472.0
+offset_bottom = 303.0
+theme_override_font_sizes/font_size = 50
+text = "Saved Game"
+
 [connection signal="body_entered" from="HurtZone" to="." method="_on_hurt_zone_body_entered"]
 [connection signal="timeout" from="Timers/Right_Meteor_Timer" to="Meteor_Spawn_Right" method="_on_right_meteor_timer_timeout"]
 [connection signal="timeout" from="Timers/Right_Meteor_Timer" to="Meteor_Spawn_Left" method="_on_right_meteor_timer_timeout"]
@@ -258,3 +371,4 @@ wave_manager = NodePath("../WaveManager")
 [connection signal="fast_enemy_picked" from="WaveManager" to="Spawn_Path" method="_on_wave_manager_fast_enemy_picked"]
 [connection signal="level_complete" from="WaveManager" to="." method="_on_wave_manager_level_complete"]
 [connection signal="timeout" from="Level_change_timer" to="." method="_on_level_change_timer_timeout"]
+[connection signal="visibility_changed" from="CanvasLayer2/UpgradeSelector" to="." method="_on_upgrade_selector_visibility_changed"]
