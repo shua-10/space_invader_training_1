@@ -1,6 +1,7 @@
 extends Node2D
 class_name Level
 
+
 @export var health = 5
 @onready var level_complete = false
 @export var Wave: WaveManager
@@ -19,6 +20,8 @@ func _on_hurt_zone_body_entered(body: Node2D) -> void:
 func _ready() -> void:
 	%main_menu.visible = true
 	get_tree().paused = true
+	
+	
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("pause") == true:
@@ -28,9 +31,17 @@ func _process(delta: float) -> void:
 	pass
 	
 func level_start():
+	var current_wave = Wave.current_wave + 1
+	var format_string: String = "Wave {str}"
+	var current_wave_string: String = format_string.format({"str":current_wave})
+	%wave_intro_numb.text = current_wave_string
+	Game_Data.current_wave = current_wave
 	%UpgradeSelector.visible = false
 	get_tree().paused = false
+	if current_wave >= Game_Data.highest_wave:
+		Game_Data.highest_wave = current_wave
 	%SaverLoader.save_game()
+	
 	%anim.play("saved_game_confirmation")
 	await %anim.animation_finished
 	Wave.new_wave()
@@ -71,3 +82,8 @@ func _on_wave_manager_level_complete() -> void:
 func _on_upgrade_selector_visibility_changed() -> void:
 	if %UpgradeSelector.visible == false:
 		level_start()
+
+
+func _on_player_player_death() -> void:
+	%end_menu.visible = true
+	get_tree().paused = true

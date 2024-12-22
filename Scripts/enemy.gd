@@ -8,7 +8,12 @@ var enemy_alive = true
 @export var attack_damage = 1
 var enemy = self
 signal died
-@export var score: int = 100
+@export var score: int
+
+
+func _ready() -> void:
+
+	%score_counter.text = str(score)
 
 func _physics_process(delta: float) -> void:
 	
@@ -20,7 +25,7 @@ func _physics_process(delta: float) -> void:
 	if travelled_distance > RANGE:
 		queue_free()
 	
-	
+
 
 
 
@@ -45,9 +50,18 @@ func _on_health_component_death() -> void:
 	explosion.global_position = enemy.global_position
 	explosion.emitting = true
 	get_parent().add_child(explosion)
+	$AnimatedSprite2D.visible = false
+	remove_child($HitBoxComponent)
+	%AnimationPlayer.play("score_count")
+	await %AnimationPlayer.animation_finished
 	enemy.queue_free()
 	died.emit()
 
 
 func _on_health_component_health_change() -> void:
 	%AnimationPlayer.play("take_damage")
+
+
+func _on_shield_radius_body_entered(body: Node2D) -> void:
+	if body is Meteor:
+		%AnimationPlayer.play("shield")

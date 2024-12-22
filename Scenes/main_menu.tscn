@@ -18,8 +18,8 @@ offset_bottom = 130.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 147.0
+offset_bottom = 130.0
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -27,16 +27,14 @@ size_flags_horizontal = 4
 text = "WELCOME!!!!
 "
 
-[node name="start_new_button" type="Button" parent="Panel/VBoxContainer"]
-layout_mode = 2
-text = "START NEW GAME"
-
 [node name="load_button" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
-text = "LOAD GAME"
+size_flags_vertical = 3
+text = "START GAME"
 
 [node name="quit_button" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "QUIT"
 
 [node name="Label" type="Label" parent="."]
@@ -48,6 +46,5 @@ offset_right = 193.0
 offset_bottom = 148.0
 text = "Prealpha v0.0000000000000001"
 
-[connection signal="pressed" from="Panel/VBoxContainer/start_new_button" to="." method="_on_start_new_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/load_button" to="." method="_on_load_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]

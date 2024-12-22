@@ -6,6 +6,7 @@ var smooth_mouse_position: Vector2
 var missle_ready = true
 var bullet_upgrades:Array[BulletUpgrades] = []
 var missle_count: int = 0
+signal player_death
 
 
 func _ready() -> void:
@@ -82,6 +83,7 @@ func _on_missle_cooldown_timeout() -> void:
 
 func _on_health_component_death() -> void:
 	self.queue_free()
+	player_death.emit()
 
 
 

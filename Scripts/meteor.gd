@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name Meteor
 
 @export var SPEED = 150
 @export var attack_damage = 5

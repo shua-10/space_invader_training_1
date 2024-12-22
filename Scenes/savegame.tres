@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SavedGame" load_steps=2 format=3 uid="uid://bgde5vsjpddxf"]
+
+[ext_resource type="Script" path="res://saved_game.gd" id="1_5sje2"]
+
+[resource]
+script = ExtResource("1_5sje2")
+high_score = 0
+highest_wave = 5

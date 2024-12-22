@@ -1,9 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://c6orhuhnnxuvd"]
+[gd_scene load_steps=25 format=3 uid="uid://c6orhuhnnxuvd"]
 
 [ext_resource type="Texture2D" uid="uid://bq4m2u56qit8v" path="res://Assets/fast_enemy-Sheet.png" id="1_b6t2k"]
 [ext_resource type="PackedScene" uid="uid://b6khf4rcvcuul" path="res://Scenes/health_bar.tscn" id="2_h27av"]
 [ext_resource type="Script" path="res://Components/hitbox_component.gd" id="3_tjetx"]
 [ext_resource type="Script" path="res://Components/health_component.gd" id="4_s5036"]
+[ext_resource type="AnimationLibrary" uid="uid://cka3edpvstsgo" path="res://enemy_anim.res" id="5_st75q"]
+[ext_resource type="Texture2D" uid="uid://c6mindgrtt07s" path="res://Assets/shield.png" id="6_s7i4i"]
 
 [sub_resource type="GDScript" id="GDScript_fnqhu"]
 script/source = "extends CharacterBody2D
@@ -72,6 +74,11 @@ func _on_health_component_death() -> void:
 	fast_enemy_died.emit()
 	enemy.queue_free()
 	
+
+
+func _on_shield_radius_body_entered(body: Node2D) -> void:
+	if body is Meteor:
+		%AnimationPlayer.play(\"enemy_anim/shield\")
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pnea1"]
@@ -153,7 +160,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_phuxj"]
-radius = 34.2345
+radius = 30.0167
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i1ls2"]
 radius = 33.541
@@ -164,11 +171,34 @@ max_value = 5.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.977528, 5), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4i5s1"]
+radius = 36.2215
+
+[sub_resource type="Animation" id="Animation_uaif6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shield:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qcw0v"]
+_data = {
+"RESET": SubResource("Animation_uaif6")
+}
+
 [node name="fast_enemy" type="CharacterBody2D" groups=["enemy"]]
 position = Vector2(400, 153)
 scale = Vector2(0.5, 0.5)
-collision_layer = 10
-collision_mask = 2
+collision_layer = 74
+collision_mask = 66
 script = SubResource("GDScript_fnqhu")
 SPEED_Y = 125
 SPEED_X = 75
@@ -182,7 +212,6 @@ frame = 2
 frame_progress = 0.838325
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 1)
 shape = SubResource("CircleShape2D_phuxj")
 
 [node name="X_movement_timer" type="Timer" parent="."]
@@ -201,7 +230,6 @@ script = ExtResource("3_tjetx")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-position = Vector2(-1, 1)
 shape = SubResource("CircleShape2D_i1ls2")
 
 [node name="RayCast2D_Left" type="RayCast2D" parent="."]
@@ -237,5 +265,25 @@ max_value = 3.0
 value = 3.0
 health_component = NodePath("../HealthComponent")
 
+[node name="shield_radius" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shield_radius"]
+shape = SubResource("CircleShape2D_4i5s1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_qcw0v"),
+"enemy_anim": ExtResource("5_st75q")
+}
+
+[node name="Shield" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("6_s7i4i")
+
 [connection signal="timeout" from="X_movement_timer" to="." method="_on_x_movement_timer_timeout"]
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
+[connection signal="body_entered" from="shield_radius" to="." method="_on_shield_radius_body_entered"]

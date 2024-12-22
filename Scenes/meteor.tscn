@@ -18,6 +18,7 @@ scale = Vector2(0.75, 0.75)
 collision_layer = 64
 collision_mask = 64
 script = ExtResource("1_h2l1b")
+attack_damage = 0
 
 [node name="Asteroid" type="Sprite2D" parent="."]
 position = Vector2(0.000144958, -2.38087)
@@ -39,7 +40,7 @@ max_health = 20
 [node name="HitBoxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
 position = Vector2(1, 1)
 collision_layer = 68
-collision_mask = 92
+collision_mask = 88
 script = ExtResource("5_r1wpj")
 health_component = NodePath("../HealthComponent")
 

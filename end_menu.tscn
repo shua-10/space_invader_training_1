@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwwtg73qe4f4g"]
+
+[ext_resource type="Script" path="res://end_menu.gd" id="1_jitax"]
+
+[node name="end_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jitax")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 90.0
+offset_bottom = 59.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "YOU DIED!!!"
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "RESTART
+"
+
+[connection signal="pressed" from="Panel/VBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -61,15 +61,15 @@ func spawn_fast_enemy():
 func spawn_carrier_enemy():
 	var new_enemy = preload("res://Scenes/carrier_ship.tscn").instantiate()
 	
-	%spawnpathfollow.progress_ratio = randf()
-	new_enemy.global_position = %spawnpathfollow.global_position
+	%PathFollow2D.progress_ratio = randf()
+	new_enemy.global_position = %PathFollow2D.global_position
 	get_parent().add_child.call_deferred(new_enemy)
 	carrier_spawned.emit()
 	
 	Game_Data.carrier_counter()
 	current_carrier_count += 1
 	
-	connect("carrier_died", on_carrier_died())
+	new_enemy.carrier_died.connect(on_carrier_died)
 
 func calc_death_total():
 	total_death_count = current_death_enemy_count + current_death_fast_enemy_count + current_death_carrier_count
