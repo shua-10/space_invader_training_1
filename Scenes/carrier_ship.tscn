@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://csnb0yr1ed8ub"]
+[gd_scene load_steps=17 format=3 uid="uid://csnb0yr1ed8ub"]
 
 [ext_resource type="Script" path="res://Scenes/carrier_ship.gd" id="1_4e48x"]
 [ext_resource type="Shader" path="res://Scenes/flash.gdshader" id="1_y5iys"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Components/health_component.gd" id="3_ahd2g"]
 [ext_resource type="Script" path="res://Components/hitbox_component.gd" id="4_1xfcm"]
 [ext_resource type="PackedScene" uid="uid://b6khf4rcvcuul" path="res://Scenes/health_bar.tscn" id="6_2sacr"]
+[ext_resource type="Texture2D" uid="uid://c6mindgrtt07s" path="res://Assets/shield.png" id="8_kbsaa"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aty5x"]
 resource_local_to_scene = true
@@ -34,6 +35,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shield:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_v0nb8"]
 resource_name = "take_damage"
@@ -51,14 +64,37 @@ tracks/0/keys = {
 "values": [false, true, false]
 }
 
+[sub_resource type="Animation" id="Animation_27ur1"]
+resource_name = "shield_damage"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shield:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.337255), Color(1, 1, 1, 0.337255), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ineij"]
 _data = {
 "RESET": SubResource("Animation_k38ob"),
+"shield_damage": SubResource("Animation_27ur1"),
 "take_damage": SubResource("Animation_v0nb8")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ir3oa"]
+radius = 68.1175
+
 [node name="carrier_ship" type="CharacterBody2D" groups=["enemy"]]
 material = SubResource("ShaderMaterial_aty5x")
+scale = Vector2(0.5, 0.5)
+collision_layer = 77
+collision_mask = 65
 script = ExtResource("1_4e48x")
 SPEED = 10
 health = 25
@@ -75,10 +111,10 @@ script = ExtResource("2_w8jip")
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("3_ahd2g")
-max_health = 25
+max_health = 10
 
 [node name="HitBoxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
-collision_layer = 6
+collision_layer = 14
 collision_mask = 0
 script = ExtResource("4_1xfcm")
 health_component = NodePath("../HealthComponent")
@@ -128,8 +164,19 @@ libraries = {
 "": SubResource("AnimationLibrary_ineij")
 }
 
+[node name="Shield" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(5.2, 5.2)
+texture = ExtResource("8_kbsaa")
+
+[node name="shield_radius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shield_radius"]
+shape = SubResource("CircleShape2D_ir3oa")
+
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="health_change" from="HealthComponent" to="." method="_on_health_component_health_change"]
 [connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]
 [connection signal="timeout" from="Shoot_cooldown" to="." method="_on_shoot_cooldown_timeout"]
 [connection signal="timeout" from="Shoot_rate" to="." method="_on_shoot_rate_timeout"]
+[connection signal="body_entered" from="shield_radius" to="." method="_on_shield_radius_body_entered"]

@@ -25,7 +25,14 @@ func _process(delta: float) -> void:
 		spawn_path.current_death_carrier_count = 0
 		spawn_path.current_enemy_count = 0
 		spawn_path.current_fast_enemy_count = 0
-		spawn_path.current_carrier_count =0
+		spawn_path.current_carrier_count = 0
+		Game_Data.total_death_count= 0
+		Game_Data.current_death_enemy_count = 0
+		Game_Data.current_death_fast_enemy_count = 0
+		Game_Data.current_death_carrier_count = 0
+		Game_Data.current_enemy_count = 0
+		Game_Data.current_fast_enemy_count = 0
+		Game_Data.current_carrier_count = 0
 		emit_signal("level_complete")
 		print("level_complete")
 

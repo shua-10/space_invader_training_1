@@ -14,7 +14,10 @@ func save_game():
 func load_game():
 	var saved_game:SavedGame = load("user://savegame.tres") as SavedGame
 	
-	Game_Data.highest_wave = saved_game.highest_wave
-	Game_Data.high_score = saved_game.high_score
-	
+	if saved_game != null:
+		
+		Game_Data.highest_wave = saved_game.highest_wave
+		Game_Data.high_score = saved_game.high_score
+	else:
+		return
 	

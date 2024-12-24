@@ -25,6 +25,7 @@ func _physics_process(delta: float) -> void:
 	if travelled_distance > RANGE:
 		queue_free()
 	
+	move_and_collide(velocity)
 
 
 

@@ -89,7 +89,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer2/wave_intro_numb:modulate")
+tracks/0/path = NodePath("Menus/wave_intro_numb:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -101,7 +101,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer2/wave_intro_numb:position")
+tracks/1/path = NodePath("Menus/wave_intro_numb:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -117,7 +117,7 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer2/wave_intro_numb:modulate")
+tracks/0/path = NodePath("Menus/wave_intro_numb:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -129,7 +129,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer2/wave_intro_numb:position")
+tracks/1/path = NodePath("Menus/wave_intro_numb:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -295,54 +295,63 @@ position = Vector2(330, 315)
 position = Vector2(323, 174)
 
 [node name="Spawn_Path" parent="." node_paths=PackedStringArray("wave_manager") instance=ExtResource("11_xwx13")]
+unique_name_in_owner = true
 wave_manager = NodePath("../WaveManager")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Counters" type="CanvasLayer" parent="." node_paths=PackedStringArray("wave_manager")]
 layer = -1
 follow_viewport_enabled = true
 script = ExtResource("10_1xbou")
+wave_manager = NodePath("../WaveManager")
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="TextureRect" type="TextureRect" parent="Counters"]
 offset_left = -156.0
 offset_top = -128.0
 offset_right = 906.0
 offset_bottom = 457.0
 texture = ExtResource("3_k1kkc")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Counters"]
 modulate = Color(1, 1, 1, 0.713726)
-offset_left = 5.0
-offset_top = 301.0
-offset_right = 45.0
+offset_left = 4.0
+offset_top = 274.0
+offset_right = 44.0
 offset_bottom = 351.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Counters/VBoxContainer"]
 layout_mode = 2
 
-[node name="high_score" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+[node name="high_score" type="Label" parent="Counters/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Counters/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "|"
 
-[node name="highest_wave" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+[node name="highest_wave" type="Label" parent="Counters/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Counters/VBoxContainer"]
 layout_mode = 2
 
-[node name="current_score" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+[node name="current_score" type="Label" parent="Counters/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+[node name="Label2" type="Label" parent="Counters/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "|"
 
-[node name="current_wave" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+[node name="current_wave" type="Label" parent="Counters/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Counters/VBoxContainer"]
+layout_mode = 2
+
+[node name="wave_enemies" type="Label" parent="Counters/VBoxContainer/HBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 
@@ -357,10 +366,10 @@ libraries = {
 "": SubResource("AnimationLibrary_bb4m1")
 }
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="Menus" type="CanvasLayer" parent="."]
 layer = 100
 
-[node name="UpgradeSelector" parent="CanvasLayer2" node_paths=PackedStringArray("player", "Level") instance=ExtResource("7_0unsy")]
+[node name="UpgradeSelector" parent="Menus" node_paths=PackedStringArray("player", "Level") instance=ExtResource("7_0unsy")]
 unique_name_in_owner = true
 visible = false
 offset_left = 180.0
@@ -373,7 +382,7 @@ bullet_damage_upgrade = ExtResource("8_v1ak3")
 missle_damage_upgrade = ExtResource("9_m20uq")
 Level = NodePath("../..")
 
-[node name="pause_menu" parent="CanvasLayer2" instance=ExtResource("7_a6mtn")]
+[node name="pause_menu" parent="Menus" instance=ExtResource("7_a6mtn")]
 unique_name_in_owner = true
 process_mode = 3
 visible = false
@@ -382,7 +391,7 @@ offset_top = 117.0
 offset_right = 224.0
 offset_bottom = 117.0
 
-[node name="options_menu" parent="CanvasLayer2" instance=ExtResource("8_3flag")]
+[node name="options_menu" parent="Menus" instance=ExtResource("8_3flag")]
 unique_name_in_owner = true
 process_mode = 3
 visible = false
@@ -391,7 +400,7 @@ offset_top = 132.0
 offset_right = 260.0
 offset_bottom = 132.0
 
-[node name="main_menu" parent="CanvasLayer2" instance=ExtResource("9_5urxd")]
+[node name="main_menu" parent="Menus" instance=ExtResource("9_5urxd")]
 unique_name_in_owner = true
 process_mode = 3
 offset_left = 247.0
@@ -399,7 +408,7 @@ offset_top = 111.0
 offset_right = 247.0
 offset_bottom = 111.0
 
-[node name="wave_intro_numb" type="Label" parent="CanvasLayer2"]
+[node name="wave_intro_numb" type="Label" parent="Menus"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
@@ -415,7 +424,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 
-[node name="end_menu" parent="CanvasLayer2" instance=ExtResource("19_arorf")]
+[node name="end_menu" parent="Menus" instance=ExtResource("19_arorf")]
 unique_name_in_owner = true
 process_mode = 3
 visible = false
@@ -435,7 +444,7 @@ offset_bottom = 152.0
 [connection signal="enemy_picked" from="WaveManager" to="Spawn_Path" method="_on_wave_manager_enemy_picked"]
 [connection signal="fast_enemy_picked" from="WaveManager" to="Spawn_Path" method="_on_wave_manager_fast_enemy_picked"]
 [connection signal="level_complete" from="WaveManager" to="." method="_on_wave_manager_level_complete"]
-[connection signal="wave_new" from="WaveManager" to="CanvasLayer" method="_on_wave_manager_wave_new"]
+[connection signal="wave_new" from="WaveManager" to="Counters" method="_on_wave_manager_wave_new"]
 [connection signal="timeout" from="Level_change_timer" to="." method="_on_level_change_timer_timeout"]
 [connection signal="player_death" from="player" to="." method="_on_player_player_death"]
-[connection signal="visibility_changed" from="CanvasLayer2/UpgradeSelector" to="." method="_on_upgrade_selector_visibility_changed"]
+[connection signal="visibility_changed" from="Menus/UpgradeSelector" to="." method="_on_upgrade_selector_visibility_changed"]

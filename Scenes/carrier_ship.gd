@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	if travelled_distance > RANGE:
 		queue_free()
 	
-	
+	move_and_collide(velocity)
 
 
 
@@ -115,3 +115,8 @@ func _on_shoot_cooldown_timeout() -> void:
 
 func _on_health_component_health_change() -> void:
 	$AnimationPlayer.play("take_damage")
+
+
+func _on_shield_radius_body_entered(body: Node2D) -> void:
+	if body is Meteor:
+		$AnimationPlayer.play("shield_damage")
