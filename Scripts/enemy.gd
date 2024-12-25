@@ -60,7 +60,10 @@ func _on_health_component_death() -> void:
 
 
 func _on_health_component_health_change() -> void:
-	%AnimationPlayer.play("take_damage")
+	if %AnimationPlayer.is_playing():
+		return
+	else:
+		%AnimationPlayer.play("take_damage")
 
 
 func _on_shield_radius_body_entered(body: Node2D) -> void:
