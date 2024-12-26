@@ -6,12 +6,16 @@ var smooth_mouse_position: Vector2
 var missle_ready = true
 var bullet_upgrades:Array[BulletUpgrades] = []
 var missle_count: int = 0
+var health: int
+var max_health: int
 signal player_death
 signal player_health_change
 
 
 func _ready() -> void:
 	$AnimatedSprite2D.play("idle")
+	health = $HealthComponent.health
+	max_health = $HealthComponent.max_health
 
 
 func _physics_process(delta: float) -> void:

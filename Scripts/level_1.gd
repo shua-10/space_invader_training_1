@@ -25,7 +25,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("pause") == true:
-		pause()
+		if %pause_menu.visible == false:
+			pause()
 
 func _process(delta: float) -> void:
 	pass
@@ -61,6 +62,9 @@ func pause():
 	%pause_menu.visible = true
 	get_tree().paused = true
 
+func unpause():
+	%pause_menu.visible = false
+	get_tree().paused = false
 
 func _on_despawn_left_body_entered(body: Node2D) -> void:
 	body.queue_free()

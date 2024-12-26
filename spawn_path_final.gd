@@ -43,7 +43,6 @@ func spawn_enemy():
 	
 	Game_Data.enemy_counter()
 	current_enemy_count += 1
-	print(current_enemy_count, Game_Data.regular_enemy_spawned)
 	new_enemy.died.connect(on_enemy_died)
 
 func spawn_fast_enemy():
@@ -78,7 +77,7 @@ func calc_death_total():
 func on_enemy_died():
 	Game_Data.enemy_death()
 	current_death_enemy_count += 1
-	print("Death Count",current_death_enemy_count,"  ","Death Limit", wave_manager.wave_data.wave_death_limit)
+
 	
 func on_fast_enemy_died():
 	Game_Data.fast_enemy_death()

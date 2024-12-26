@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://d0ks1pscuauow"]
+[gd_scene load_steps=94 format=3 uid="uid://d0ks1pscuauow"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_1pewh"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
@@ -27,8 +27,10 @@
 [ext_resource type="Resource" uid="uid://ddg3t7a78r3j3" path="res://Wave_Data/Wave_10.tres" id="14_r61vd"]
 [ext_resource type="Script" path="res://saver_loader.gd" id="16_8hhtw"]
 [ext_resource type="PackedScene" uid="uid://bwwtg73qe4f4g" path="res://end_menu.tscn" id="19_arorf"]
+[ext_resource type="Script" path="res://Scenes/health_bar.gd" id="27_4nh1p"]
 [ext_resource type="Script" path="res://Scenes/texture_rect.gd" id="28_ui0br"]
 [ext_resource type="Texture2D" uid="uid://4rw6lhlyj5wi" path="res://Assets/1648159457.png" id="29_tcld8"]
+[ext_resource type="Script" path="res://Scenes/camera_2d.gd" id="30_ery1d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xoixv"]
 size = Vector2(2398, 135)
@@ -783,32 +785,59 @@ offset_top = 152.0
 offset_right = 285.0
 offset_bottom = 152.0
 
+[node name="player_ui" type="CanvasLayer" parent="Menus"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/player_ui"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -163.0
+offset_top = -61.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="player_health" type="Label" parent="Menus/player_ui/VBoxContainer"]
+layout_mode = 2
+text = "Ship Health"
+
+[node name="HealthBar" type="ProgressBar" parent="Menus/player_ui/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0.438044, 0.895908, 0, 1)
+layout_mode = 2
+size_flags_vertical = 2
+value = 10.93
+show_percentage = false
+script = ExtResource("27_4nh1p")
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+unique_name_in_owner = true
 follow_viewport_enabled = true
-scroll_ignore_camera_zoom = true
 script = ExtResource("28_ui0br")
 SPEED = 40
-
-[node name="SubViewport" type="SubViewport" parent="ParallaxBackground"]
-unique_name_in_owner = true
-size = Vector2i(630, 320)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(0, -360)
 motion_mirroring = Vector2(0, 360)
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-offset_right = 640.0
+offset_left = -61.0
+offset_right = 689.0
 offset_bottom = 360.0
 texture = ExtResource("3_k1kkc")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(0, -359)
-motion_mirroring = Vector2(0, 360)
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(0, 1800)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 position = Vector2(584, 72)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_0i2xf")
 autoplay = "default"
 frame_progress = 0.850303
@@ -830,6 +859,11 @@ autoplay = "default"
 frame_progress = 0.725893
 speed_scale = 0.5
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(321, 180)
+enabled = false
+script = ExtResource("30_ery1d")
+
 [connection signal="body_entered" from="HurtZone" to="." method="_on_hurt_zone_body_entered"]
 [connection signal="timeout" from="Timers/Right_Meteor_Timer" to="Meteor_Spawn_Right" method="_on_right_meteor_timer_timeout"]
 [connection signal="timeout" from="Timers/Right_Meteor_Timer" to="Meteor_Spawn_Left" method="_on_right_meteor_timer_timeout"]
@@ -844,5 +878,6 @@ speed_scale = 0.5
 [connection signal="wave_new" from="WaveManager" to="Counters" method="_on_wave_manager_wave_new"]
 [connection signal="timeout" from="Level_change_timer" to="." method="_on_level_change_timer_timeout"]
 [connection signal="player_death" from="player" to="." method="_on_player_player_death"]
-[connection signal="player_health_change" from="player" to="ParallaxBackground" method="_on_player_player_health_change"]
+[connection signal="player_health_change" from="player" to="Menus/player_ui/VBoxContainer/HealthBar" method="_on_player_player_health_change"]
+[connection signal="player_health_change" from="player" to="Camera2D" method="_on_player_player_health_change"]
 [connection signal="visibility_changed" from="Menus/UpgradeSelector" to="." method="_on_upgrade_selector_visibility_changed"]

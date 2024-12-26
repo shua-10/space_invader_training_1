@@ -19,8 +19,7 @@ func _process(delta: float) -> void:
 	var str_wave_enemies: String = format_str_wave_enemies.format({"str1": Game_Data.total_death_count, "str2": wave_manager.wave_data.wave_death_limit})
 	%high_score.text = str_highscore
 	%highest_wave.text = str_highwave
-	print(str_highwave)
-	print(Game_Data.highest_wave)
+	
 	
 	%current_score.text = str_currentscore
 	%current_wave.text = str_currentwave
