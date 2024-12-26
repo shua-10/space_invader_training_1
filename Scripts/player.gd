@@ -7,6 +7,7 @@ var missle_ready = true
 var bullet_upgrades:Array[BulletUpgrades] = []
 var missle_count: int = 0
 signal player_death
+signal player_health_change
 
 
 func _ready() -> void:
@@ -89,3 +90,4 @@ func _on_health_component_death() -> void:
 
 func _on_health_component_health_change() -> void:
 	$AnimationPlayer.play("take_damage")
+	emit_signal("player_health_change")

@@ -4,3 +4,8 @@ extends ParallaxBackground
 
 func _process(delta: float) -> void:
 	scroll_offset.y += SPEED * delta
+
+
+func _on_player_player_health_change() -> void:
+	pass
+	
