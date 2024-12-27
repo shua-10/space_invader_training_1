@@ -1,0 +1,48 @@
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://dgcr3k2qsh8qn"]
+
+[ext_resource type="Texture2D" uid="uid://cbyhqx6q4jdye" path="res://Assets/SpaceShooterAssets/button_space.png" id="1_3ellu"]
+[ext_resource type="Texture2D" uid="uid://bd73c1rp26cmn" path="res://Assets/SpaceShooterAssets/button_hovered_space.png" id="1_gyooq"]
+[ext_resource type="Texture2D" uid="uid://sryq03xcppwk" path="res://Assets/SpaceShooterAssets/space_panel_container.png" id="2_vmk4q"]
+[ext_resource type="Texture2D" uid="uid://bnoh3q2aagtfe" path="res://Assets/SpaceShooterAssets/button_pressed_space.png" id="2_x7u87"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r2ttu"]
+texture = ExtResource("1_gyooq")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jnavc"]
+texture = ExtResource("1_3ellu")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0qtxw"]
+texture = ExtResource("2_x7u87")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tsnny"]
+texture = ExtResource("2_vmk4q")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ygrfe"]
+texture = ExtResource("1_3ellu")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 4.0
+
+[resource]
+Button/styles/hover = SubResource("StyleBoxTexture_r2ttu")
+Button/styles/normal = SubResource("StyleBoxTexture_jnavc")
+Button/styles/pressed = SubResource("StyleBoxTexture_0qtxw")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_tsnny")
+PopupMenu/styles/panel = SubResource("StyleBoxTexture_ygrfe")

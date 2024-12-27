@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxm7xiad43vfq"]
+[gd_scene load_steps=3 format=3 uid="uid://bxm7xiad43vfq"]
 
 [ext_resource type="Script" path="res://Scenes/main_menu.gd" id="1_64rxw"]
+[ext_resource type="Theme" uid="uid://dgcr3k2qsh8qn" path="res://space_theme_UI.tres" id="2_jfqwe"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -11,28 +12,50 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_64rxw")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 0
-offset_right = 148.0
-offset_bottom = 130.0
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -71.5
+offset_right = 85.0
+offset_bottom = 71.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_jfqwe")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-layout_mode = 0
-offset_right = 147.0
-offset_bottom = 130.0
+[node name="Panel" type="Panel" parent="PanelContainer"]
+layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.5
+offset_top = -65.0
+offset_right = 73.5
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "WELCOME!!!!
 "
 
-[node name="load_button" type="Button" parent="Panel/VBoxContainer"]
+[node name="load_button" type="Button" parent="PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "START GAME"
 
-[node name="quit_button" type="Button" parent="Panel/VBoxContainer"]
+[node name="quit_button" type="Button" parent="PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "QUIT"
@@ -46,5 +69,5 @@ offset_right = 193.0
 offset_bottom = 148.0
 text = "Prealpha v0.0000000000000001"
 
-[connection signal="pressed" from="Panel/VBoxContainer/load_button" to="." method="_on_load_button_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Panel/VBoxContainer/load_button" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Panel/VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]

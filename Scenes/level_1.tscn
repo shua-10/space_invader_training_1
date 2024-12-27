@@ -747,18 +747,20 @@ offset_bottom = 117.0
 unique_name_in_owner = true
 process_mode = 3
 visible = false
-offset_left = 260.0
-offset_top = 132.0
-offset_right = 260.0
-offset_bottom = 132.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 
 [node name="main_menu" parent="Menus" instance=ExtResource("9_5urxd")]
 unique_name_in_owner = true
 process_mode = 3
-offset_left = 247.0
-offset_top = 111.0
-offset_right = 247.0
-offset_bottom = 111.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 
 [node name="wave_intro_numb" type="Label" parent="Menus"]
 unique_name_in_owner = true

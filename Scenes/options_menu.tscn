@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5k48sjdssuwx"]
+[gd_scene load_steps=3 format=3 uid="uid://b5k48sjdssuwx"]
 
 [ext_resource type="Script" path="res://Scenes/options_menu.gd" id="1_vd4ks"]
+[ext_resource type="Theme" uid="uid://dgcr3k2qsh8qn" path="res://space_theme_UI.tres" id="2_g4nu5"]
 
 [node name="options_menu" type="Control"]
 layout_mode = 3
@@ -11,50 +12,76 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vd4ks")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
-offset_right = 159.0
-offset_bottom = 157.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.0
+offset_top = -113.0
+offset_right = 106.0
+offset_bottom = 98.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_g4nu5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-layout_mode = 0
-offset_right = 157.0
-offset_bottom = 128.0
+[node name="Panel" type="Panel" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.5
+offset_top = -77.5
+offset_right = 61.5
+offset_bottom = 77.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "Options"
 
-[node name="display_options" type="OptionButton" parent="Panel/VBoxContainer"]
+[node name="display_options" type="OptionButton" parent="PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
+alignment = 1
 selected = 0
 item_count = 2
 popup/item_0/text = "Windowed"
 popup/item_1/text = "Fullscreen"
 popup/item_1/id = 1
 
-[node name="Label2" type="Label" parent="Panel/VBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
-text = "Resolution"
-
-[node name="OptionButton" type="OptionButton" parent="Panel/VBoxContainer"]
-layout_mode = 2
+alignment = 1
 selected = 0
-item_count = 4
-popup/item_0/text = "640 x 360"
-popup/item_1/text = "1280 x 720"
-popup/item_1/id = 1
-popup/item_2/text = "1980 x 1080"
-popup/item_2/id = 2
-popup/item_3/text = "2560 x 1440"
-popup/item_3/id = 3
+item_count = 5
+popup/item_0/text = "Resolution"
+popup/item_0/id = 4
+popup/item_0/disabled = true
+popup/item_0/separator = true
+popup/item_1/text = "640 x 360"
+popup/item_2/text = "1280 x 720"
+popup/item_2/id = 1
+popup/item_3/text = "1980 x 1080"
+popup/item_3/id = 2
+popup/item_4/text = "2560 x 1440"
+popup/item_4/id = 3
 
-[node name="back_button" type="Button" parent="Panel/VBoxContainer"]
+[node name="back_button" type="Button" parent="PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
 text = "Back"
 
-[connection signal="item_selected" from="Panel/VBoxContainer/display_options" to="." method="_on_display_options_item_selected"]
-[connection signal="item_selected" from="Panel/VBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
-[connection signal="pressed" from="Panel/VBoxContainer/back_button" to="." method="_on_back_button_pressed"]
+[connection signal="item_selected" from="PanelContainer/Panel/VBoxContainer/display_options" to="." method="_on_display_options_item_selected"]
+[connection signal="item_selected" from="PanelContainer/Panel/VBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="PanelContainer/Panel/VBoxContainer/back_button" to="." method="_on_back_button_pressed"]
