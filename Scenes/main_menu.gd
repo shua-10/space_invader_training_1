@@ -2,8 +2,6 @@ extends Control
 
 
 
-
-
 func _on_start_new_button_pressed() -> void:
 	visible = false
 	get_tree().paused = false

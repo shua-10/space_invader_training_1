@@ -53,6 +53,7 @@ func _on_health_component_death() -> void:
 	get_parent().add_child(explosion)
 	$AnimatedSprite2D.visible = false
 	remove_child($HitBoxComponent)
+	remove_child($CollisionShape2D)
 	%AnimationPlayer.play("score_count")
 	await %AnimationPlayer.animation_finished
 	enemy.queue_free()
@@ -69,3 +70,5 @@ func _on_health_component_health_change() -> void:
 func _on_shield_radius_body_entered(body: Node2D) -> void:
 	if body is Meteor:
 		%AnimationPlayer.play("shield")
+	if body is Player:
+		pass

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1kedv3v4bqp8"]
+[gd_scene load_steps=3 format=3 uid="uid://b1kedv3v4bqp8"]
 
 [ext_resource type="Script" path="res://pause_menu.gd" id="1_6dgjy"]
+[ext_resource type="Theme" uid="uid://dgcr3k2qsh8qn" path="res://space_theme_UI.tres" id="2_iwcri"]
 
 [node name="pause_menu" type="Control"]
 layout_mode = 3
@@ -11,35 +12,57 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6dgjy")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 0
-offset_right = 203.0
-offset_bottom = 146.0
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = -75.0
+offset_right = 104.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_iwcri")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-layout_mode = 0
-offset_right = 202.0
-offset_bottom = 144.0
+[node name="Panel" type="Panel" parent="PanelContainer"]
+layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -72.0
+offset_right = 101.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "PAUSED"
 
-[node name="resume_button" type="Button" parent="Panel/VBoxContainer"]
+[node name="resume_button" type="Button" parent="PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
 text = "RESUME"
 
-[node name="options_button" type="Button" parent="Panel/VBoxContainer"]
+[node name="options_button" type="Button" parent="PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
 text = "OPTIONS"
 
-[node name="quit_button" type="Button" parent="Panel/VBoxContainer"]
+[node name="quit_button" type="Button" parent="PanelContainer/Panel/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
 text = "EXIT"
 
-[connection signal="pressed" from="Panel/VBoxContainer/resume_button" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/options_button" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Panel/VBoxContainer/resume_button" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Panel/VBoxContainer/options_button" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Panel/VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]

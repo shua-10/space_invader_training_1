@@ -7,9 +7,11 @@ class_name Level
 @export var Wave: WaveManager
 @export var enemy_counter: Area2D
 
+signal base_hurt
 
 func _on_hurt_zone_body_entered(body: Node2D) -> void:
 	health -= 1
+	emit_signal("base_hurt")
 	print (health)
 	body.queue_free()
 	if health == 0:
@@ -20,7 +22,7 @@ func _on_hurt_zone_body_entered(body: Node2D) -> void:
 func _ready() -> void:
 	%main_menu.visible = true
 	get_tree().paused = true
-	
+	%anim.play("main_menu_start")
 	
 
 func _physics_process(delta: float) -> void:

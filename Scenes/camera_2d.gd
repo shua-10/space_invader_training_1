@@ -27,9 +27,8 @@ func camera_shake():
 
 	await timer.timeout
 	enabled = false
-	#background.set_scroll_base_offset(background.offset_before_shake)
-	print(background.base_offset_before_shake,"     ",background.scroll_base_offset,"   ",
-	background.offset_before_shake,"   ", background.scroll_offset)
+
+	
 func randomOffset() -> Vector2:
 	return Vector2(Global.rng.randf_range(-shake_strength,shake_strength),
 	Global.rng.randf_range(-shake_strength,shake_strength))

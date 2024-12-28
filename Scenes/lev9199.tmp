@@ -203,6 +203,7 @@ _data = {
 
 [sub_resource type="GDScript" id="GDScript_sjoh1"]
 script/source = "extends ProgressBar
+class_name LevelHealthBar
 
 @export var level: Level
 
@@ -832,7 +833,7 @@ script = ExtResource("27_4nh1p")
 layout_mode = 2
 text = "Base Health"
 
-[node name="HealthBar2" type="ProgressBar" parent="player_ui/PanelContainer/Panel/VBoxContainer" node_paths=PackedStringArray("level")]
+[node name="HealthBar2" type="ProgressBar" parent="player_ui/PanelContainer/Panel/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color(0.438044, 0.895908, 0, 1)
 layout_mode = 2
@@ -841,7 +842,6 @@ max_value = 5.0
 value = 5.0
 show_percentage = false
 script = SubResource("GDScript_sjoh1")
-level = NodePath("../../../../..")
 
 [node name="Menus" type="CanvasLayer" parent="."]
 layer = 100
