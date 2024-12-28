@@ -277,7 +277,16 @@ stream = ExtResource("7_mv0na")
 volume_db = -20.0
 pitch_scale = 0.69
 
+[node name="Rapid_fire_duration" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+
+[node name="rapid_fire_cooldown" type="Timer" parent="."]
+unique_name_in_owner = true
+
 [connection signal="timeout" from="Shoot_Cooldown" to="." method="_on_shoot_cooldown_timeout"]
 [connection signal="timeout" from="Missle_Cooldown" to="." method="_on_missle_cooldown_timeout"]
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="health_change" from="HealthComponent" to="." method="_on_health_component_health_change"]
+[connection signal="timeout" from="Rapid_fire_duration" to="." method="_on_rapid_fire_duration_timeout"]
+[connection signal="timeout" from="rapid_fire_cooldown" to="." method="_on_rapid_fire_cooldown_timeout"]

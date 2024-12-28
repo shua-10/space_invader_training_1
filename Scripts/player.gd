@@ -1,9 +1,16 @@
 extends CharacterBody2D
 class_name Player
+
+
 @export var SPEED = 600
+@export var normal_shoot_rate: float = 0.5
+@export var rapid_shoot_rate: float = 0.1
+@export var missle_limit: int = 3
+
 var shoot_ready = true
 var smooth_mouse_position: Vector2
 var missle_ready = true
+var rapid_fire_ready = true
 var bullet_upgrades:Array[BulletUpgrades] = []
 var missle_count: int = 0
 var health: int
@@ -40,6 +47,11 @@ func _process(delta: float) -> void:
 		%Missle_Cooldown.start()
 		missle_ready = false
 
+	if Input.is_action_pressed("rapid_fire") == true and rapid_fire_ready == true:
+		%Shoot_Cooldown.wait_time = rapid_shoot_rate
+		%Rapid_fire_duration.start()
+
+
 func shoot_bullet():
 	const NEW_BULLET = preload("res://Scenes/bullet.tscn")
 	var bullet_left = NEW_BULLET.instantiate()
@@ -64,7 +76,7 @@ func shoot_bullet():
 
 
 func shoot_missle():
-	if missle_count > 3:
+	if missle_count > missle_limit:
 		return
 	else:
 		const NEW_MISSLE = preload("res://Scenes/missle.tscn")
@@ -75,8 +87,8 @@ func shoot_missle():
 		
 		get_parent().add_child(missle)
 		missle_count += 1
-		if missle_count >= 3:
-			pass
+		if missle_count >= missle_limit:
+			return
 
 func _on_shoot_cooldown_timeout() -> void:
 	shoot_ready = true
@@ -95,3 +107,13 @@ func _on_health_component_death() -> void:
 func _on_health_component_health_change() -> void:
 	$AnimationPlayer.play("take_damage")
 	emit_signal("player_health_change")
+
+
+func _on_rapid_fire_duration_timeout() -> void:
+	%Shoot_Cooldown.wait_time = normal_shoot_rate
+	%rapid_fire_cooldown.start()
+	rapid_fire_ready = false
+
+
+func _on_rapid_fire_cooldown_timeout() -> void:
+	rapid_fire_ready = true
