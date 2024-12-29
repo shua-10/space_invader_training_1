@@ -23,7 +23,8 @@ func camera_shake():
 	var timer = get_tree().create_timer(0.3)
 	enabled = true
 	shake_strength = randomStrength
-	background.set_scroll_base_offset(background.offset_before_shake + background.base_offset_before_shake)
+	background.set_scroll_base_offset(
+	background.offset_before_shake + background.base_offset_before_shake)
 
 	await timer.timeout
 	enabled = false

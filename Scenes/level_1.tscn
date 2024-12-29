@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://d0ks1pscuauow"]
+[gd_scene load_steps=96 format=3 uid="uid://d0ks1pscuauow"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_1pewh"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
@@ -26,6 +26,7 @@
 [ext_resource type="Resource" uid="uid://ddg3t7a78r3j3" path="res://Wave_Data/Wave_10.tres" id="14_r61vd"]
 [ext_resource type="Script" path="res://saver_loader.gd" id="16_8hhtw"]
 [ext_resource type="PackedScene" uid="uid://bwwtg73qe4f4g" path="res://end_menu.tscn" id="19_arorf"]
+[ext_resource type="Theme" uid="uid://dgcr3k2qsh8qn" path="res://space_theme_UI.tres" id="20_ly35w"]
 [ext_resource type="Script" path="res://Scenes/health_bar.gd" id="27_4nh1p"]
 [ext_resource type="Script" path="res://Scenes/texture_rect.gd" id="28_ui0br"]
 [ext_resource type="Texture2D" uid="uid://4rw6lhlyj5wi" path="res://Assets/1648159457.png" id="29_tcld8"]
@@ -797,10 +798,11 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -182.0
-offset_top = -72.0
+offset_left = -191.0
+offset_top = -106.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("20_ly35w")
 
 [node name="Panel" type="Panel" parent="player_ui/PanelContainer"]
 layout_mode = 2
@@ -812,9 +814,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -81.5
-offset_top = -30.0
-offset_right = 81.5
+offset_left = -80.0
+offset_top = -46.0
+offset_right = 83.0
 offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
