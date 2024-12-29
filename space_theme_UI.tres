@@ -1,7 +1,8 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://dgcr3k2qsh8qn"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://dgcr3k2qsh8qn"]
 
 [ext_resource type="Texture2D" uid="uid://cbyhqx6q4jdye" path="res://Assets/SpaceShooterAssets/button_space.png" id="1_3ellu"]
 [ext_resource type="Texture2D" uid="uid://bd73c1rp26cmn" path="res://Assets/SpaceShooterAssets/button_hovered_space.png" id="1_gyooq"]
+[ext_resource type="FontFile" uid="uid://dsebwlufcluh4" path="res://Assets/ThaleahFat.ttf" id="1_lwkgp"]
 [ext_resource type="Texture2D" uid="uid://sryq03xcppwk" path="res://Assets/SpaceShooterAssets/space_panel_container.png" id="2_vmk4q"]
 [ext_resource type="Texture2D" uid="uid://bnoh3q2aagtfe" path="res://Assets/SpaceShooterAssets/button_pressed_space.png" id="2_x7u87"]
 
@@ -41,6 +42,9 @@ texture_margin_right = 1.0
 texture_margin_bottom = 4.0
 
 [resource]
+default_font = ExtResource("1_lwkgp")
+default_font_size = 29
+Button/fonts/font = ExtResource("1_lwkgp")
 Button/styles/hover = SubResource("StyleBoxTexture_r2ttu")
 Button/styles/normal = SubResource("StyleBoxTexture_jnavc")
 Button/styles/pressed = SubResource("StyleBoxTexture_0qtxw")
