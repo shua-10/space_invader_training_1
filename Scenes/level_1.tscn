@@ -594,7 +594,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone"]
-position = Vector2(605, 358)
+position = Vector2(639, 237)
 shape = SubResource("RectangleShape2D_xoixv")
 
 [node name="Boundaries" type="Node" parent="."]
@@ -915,10 +915,11 @@ theme_override_font_sizes/font_size = 50
 unique_name_in_owner = true
 process_mode = 3
 visible = false
-offset_left = 285.0
-offset_top = 152.0
-offset_right = 285.0
-offset_bottom = 152.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 unique_name_in_owner = true
@@ -942,7 +943,7 @@ motion_scale = Vector2(0.3, 0.3)
 motion_mirroring = Vector2(0, 1800)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(584, 72)
+position = Vector2(570, 279)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_0i2xf")
 autoplay = "default"
@@ -950,7 +951,7 @@ frame_progress = 0.850303
 speed_scale = 0.5
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(102, 78)
+position = Vector2(38, 381)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_0i2xf")
 autoplay = "default"
@@ -958,7 +959,7 @@ frame_progress = 0.574158
 speed_scale = 0.5
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(234, 158)
+position = Vector2(243, 422)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_0i2xf")
 autoplay = "default"
