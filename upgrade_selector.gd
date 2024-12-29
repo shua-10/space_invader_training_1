@@ -3,9 +3,11 @@ class_name UpgradeController
 
 @export var player:Player
 @export var bullet_damage_upgrade: Resource
-@export var missle_damage_upgrade: Resource
-@export var burst_override_upgrade: Resource
-@export var Level: Node2D
+
+@export var level: Level
+
+signal health_restored
+
 
 func _ready() -> void:
 	pass
@@ -13,14 +15,20 @@ func _ready() -> void:
 func _on_bullet_damage_button_pressed() -> void:
 	player.bullet_upgrades.append(bullet_damage_upgrade)
 	visible = false
-	print("pressed")
 
-func _on_missle_damage_button_pressed() -> void:
-	player.bullet_upgrades.append(missle_damage_upgrade)
+
+func _on_health_restore_button_pressed() -> void:
+	var player_children = player.get_children()
+	for child in player_children:
+		if child is HealthComponent:
+			child.health = child.max_health
+	
+	level.health = level.max_health
 	visible = false
 	
-	
-func _on_burst_override_button_pressed() -> void:
-	player.bullet_upgrades.append(burst_override_upgrade)
+	emit_signal("health_restored")
+
+
+func _on_reload_missle_button_pressed() -> void:
+	player.missle_count = 0
 	visible = false
-	

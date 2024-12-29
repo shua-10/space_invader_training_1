@@ -1,7 +1,7 @@
 extends Node2D
 class_name Level
 
-
+@export var max_health = 5
 @export var health = 5
 @onready var level_complete = false
 @export var Wave: WaveManager

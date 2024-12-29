@@ -77,14 +77,18 @@ func calc_death_total():
 func on_enemy_died():
 	Game_Data.enemy_death()
 	current_death_enemy_count += 1
+	
 
 	
 func on_fast_enemy_died():
 	Game_Data.fast_enemy_death()
 	current_death_fast_enemy_count += 1
+	
+	
 func on_carrier_died():
 	Game_Data.carrier_death()
 	current_death_carrier_count += 1
+	
 
 
 func _on_wave_manager_enemy_picked() -> void:

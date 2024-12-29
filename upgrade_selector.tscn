@@ -63,19 +63,18 @@ action_mode = 0
 text = "Attack
  +50%"
 
-[node name="missle_damage_button" type="Button" parent="PanelContainer/Panel/VBoxContainer/HBoxContainer"]
+[node name="health_restore_button" type="Button" parent="PanelContainer/Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Missles
- +1"
+text = "Restore
+all health"
 
-[node name="burst_override_button" type="Button" parent="PanelContainer/Panel/VBoxContainer/HBoxContainer"]
+[node name="reload_missle_button" type="Button" parent="PanelContainer/Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Burst 
-Override
- +5sec"
+text = "Reload
+missles"
 
 [connection signal="pressed" from="PanelContainer/Panel/VBoxContainer/HBoxContainer/bullet_damage_button" to="." method="_on_bullet_damage_button_pressed"]
-[connection signal="pressed" from="PanelContainer/Panel/VBoxContainer/HBoxContainer/missle_damage_button" to="." method="_on_missle_damage_button_pressed"]
-[connection signal="pressed" from="PanelContainer/Panel/VBoxContainer/HBoxContainer/burst_override_button" to="." method="_on_burst_override_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Panel/VBoxContainer/HBoxContainer/health_restore_button" to="." method="_on_health_restore_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Panel/VBoxContainer/HBoxContainer/reload_missle_button" to="." method="_on_reload_missle_button_pressed"]

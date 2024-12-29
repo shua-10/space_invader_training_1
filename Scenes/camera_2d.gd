@@ -1,5 +1,5 @@
 extends Camera2D
-
+class_name LevelCamera
 
 @export var randomStrength: float = 10.0
 @export var shakeFade: float = 5.0

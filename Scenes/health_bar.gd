@@ -6,6 +6,11 @@ class_name PlayerHealthBar
 func _ready() -> void:
 	max_value = player.max_health
 
+func health_check():
+	var player_children = player.get_children()
+	for child in player_children:
+		if child is HealthComponent:
+			value = child.health
 
 
 func _on_player_player_health_change() -> void:
@@ -13,3 +18,7 @@ func _on_player_player_health_change() -> void:
 	for child in player_children:
 		if child is HealthComponent:
 			value = child.health
+
+
+func _on_upgrade_selector_health_restored() -> void:
+	health_check()

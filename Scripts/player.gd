@@ -76,7 +76,7 @@ func shoot_bullet():
 
 
 func shoot_missle():
-	if missle_count > missle_limit:
+	if missle_count >= missle_limit:
 		return
 	else:
 		const NEW_MISSLE = preload("res://Scenes/missle.tscn")
@@ -112,8 +112,10 @@ func _on_health_component_health_change() -> void:
 func _on_rapid_fire_duration_timeout() -> void:
 	%Shoot_Cooldown.wait_time = normal_shoot_rate
 	%rapid_fire_cooldown.start()
+	%Rapid_fire_duration.stop()
 	rapid_fire_ready = false
 
 
 func _on_rapid_fire_cooldown_timeout() -> void:
 	rapid_fire_ready = true
+	%rapid_fire_cooldown.stop()
