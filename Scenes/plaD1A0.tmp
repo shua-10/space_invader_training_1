@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://2oimpfhfwi4"]
+[gd_scene load_steps=35 format=3 uid="uid://2oimpfhfwi4"]
 
 [ext_resource type="Shader" path="res://Scenes/flash.gdshader" id="1_ikty7"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_sc038"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Components/health_component.gd" id="4_lkvgc"]
 [ext_resource type="Script" path="res://Components/hitbox_component.gd" id="5_62x0m"]
 [ext_resource type="AudioStream" uid="uid://crhvd2ciqv3f1" path="res://Sounds/leisure_video_game_retro_laser_gun_fire_001.mp3" id="7_mv0na"]
+[ext_resource type="Script" path="res://Scenes/label.gd" id="8_ce2b4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xjhj2"]
 shader = ExtResource("1_ikty7")
@@ -284,6 +285,13 @@ wait_time = 3.0
 [node name="rapid_fire_cooldown" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 5.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = 14.0
+offset_top = 16.0
+offset_right = 54.0
+offset_bottom = 39.0
+script = ExtResource("8_ce2b4")
 
 [connection signal="timeout" from="Shoot_Cooldown" to="." method="_on_shoot_cooldown_timeout"]
 [connection signal="timeout" from="Missle_Cooldown" to="." method="_on_missle_cooldown_timeout"]

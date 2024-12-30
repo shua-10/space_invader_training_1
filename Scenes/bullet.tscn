@@ -17,6 +17,7 @@ collision_layer = 10
 collision_mask = 2
 script = ExtResource("1_i0tp0")
 SPEED = 1000
+attack_damage = 0.5
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(4.76837e-07, 2.38419e-07)

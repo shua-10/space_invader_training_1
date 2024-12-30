@@ -15,8 +15,8 @@ func _on_hurt_zone_body_entered(body: Node2D) -> void:
 	print (health)
 	body.queue_free()
 	if health == 0:
-		print("game over")
-		Global.game_over = true
+		%end_menu.visible = true
+		get_tree().paused = true
 
 
 func _ready() -> void:

@@ -1,7 +1,7 @@
 extends Area2D
 class_name Bullet
 @export var SPEED = 1800
-@export var attack_damage = 1
+@export var attack_damage:float = 1
 @export var range_bullet = Vector2(2500,2500)
 
 

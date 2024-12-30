@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://doj3y6efkg167"]
+[gd_scene load_steps=28 format=3 uid="uid://doj3y6efkg167"]
 
 [ext_resource type="Shader" path="res://Scenes/flash.gdshader" id="1_3m0lj"]
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_m2lxd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Components/hitbox_component.gd" id="6_plusy"]
 [ext_resource type="AnimationLibrary" uid="uid://cka3edpvstsgo" path="res://enemy_anim.res" id="8_f3jyx"]
 [ext_resource type="Texture2D" uid="uid://c6mindgrtt07s" path="res://Assets/shield.png" id="8_xpa3v"]
+[ext_resource type="Theme" uid="uid://dgcr3k2qsh8qn" path="res://space_theme_UI.tres" id="9_hdret"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2wlse"]
 resource_local_to_scene = true
@@ -264,6 +265,7 @@ offset_top = -12.0
 offset_right = 15.0
 offset_bottom = 16.0
 size_flags_horizontal = 4
+theme = ExtResource("9_hdret")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 9

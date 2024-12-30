@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://csnb0yr1ed8ub"]
+[gd_scene load_steps=19 format=3 uid="uid://csnb0yr1ed8ub"]
 
 [ext_resource type="Script" path="res://Scenes/carrier_ship.gd" id="1_4e48x"]
 [ext_resource type="Shader" path="res://Scenes/flash.gdshader" id="1_y5iys"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Components/hitbox_component.gd" id="4_1xfcm"]
 [ext_resource type="PackedScene" uid="uid://b6khf4rcvcuul" path="res://Scenes/health_bar.tscn" id="6_2sacr"]
 [ext_resource type="Texture2D" uid="uid://c6mindgrtt07s" path="res://Assets/shield.png" id="8_kbsaa"]
+[ext_resource type="Theme" uid="uid://dgcr3k2qsh8qn" path="res://space_theme_UI.tres" id="9_x3shp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aty5x"]
 resource_local_to_scene = true
@@ -80,9 +81,38 @@ tracks/0/keys = {
 "values": [false, true, false]
 }
 
+[sub_resource type="Animation" id="Animation_ykrom"]
+resource_name = "score_counter"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("score_counter:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("score_counter:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-16, -12), Vector2(-16, -27)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ineij"]
 _data = {
 "RESET": SubResource("Animation_k38ob"),
+"score_counter": SubResource("Animation_ykrom"),
 "shield_damage": SubResource("Animation_27ur1"),
 "take_damage": SubResource("Animation_v0nb8")
 }
@@ -173,6 +203,21 @@ texture = ExtResource("8_kbsaa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shield_radius"]
 shape = SubResource("CircleShape2D_ir3oa")
+
+[node name="score_counter" type="Label" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+z_index = 5
+offset_left = -16.0
+offset_top = -12.0
+offset_right = 15.0
+offset_bottom = 16.0
+size_flags_horizontal = 4
+theme = ExtResource("9_x3shp")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_constants/shadow_outline_size = 7
 
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="health_change" from="HealthComponent" to="." method="_on_health_component_health_change"]

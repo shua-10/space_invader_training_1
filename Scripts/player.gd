@@ -6,11 +6,15 @@ class_name Player
 @export var normal_shoot_rate: float = 0.5
 @export var rapid_shoot_rate: float = 0.1
 @export var missle_limit: int = 3
-
+var missle_current_count: int
+	
 @onready var animated_sprite_2d: AnimatedSprite2D = $"CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer/Q Button/AnimatedSprite2D"
 @onready var no_sign: TextureRect = $CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2/BlasterBolt/NoSign
+@onready var no_sign_missle: TextureRect = $CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2/Missle/NoSignMissle
+@onready var missle_display_count: Label = $CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2/Missle/Missle_display_count
+@onready var animated_sprite_2d_2: AnimatedSprite2D = $"CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer/E Button/AnimatedSprite2D2"
 
-
+var rapid_inprogress = false
 var shoot_ready = true
 var smooth_mouse_position: Vector2
 var missle_ready = true
@@ -46,15 +50,34 @@ func _process(delta: float) -> void:
 		shoot_ready = false
 		$AnimatedSprite2D.play("shooting")
 
-	if Input.is_action_pressed("deploy_missle") == true and missle_ready == true:
+	if Input.is_action_just_pressed("deploy_missle") == true and missle_ready == true:
 		shoot_missle()
-		%Missle_Cooldown.start()
 		missle_ready = false
+		%Missle_Cooldown.start()
+		no_sign_missle.visible = true
+		animated_sprite_2d_2.visible = true
+		animated_sprite_2d_2.play("cooldown",2/%Missle_Cooldown.time_left)
+		await animated_sprite_2d_2.animation_finished
+		animated_sprite_2d_2.visible = false
+		no_sign_missle.visible = false
+		
+		
+	var format_str_missle_count:String = "{str}x"
+	var str_missle_count:String = format_str_missle_count.format({"str":missle_current_count})
+	missle_calc()
+	missle_display_count.text = str_missle_count
+	if missle_current_count == 0:
+		no_sign_missle.visible = true
+	elif missle_current_count != 0:
+		no_sign_missle.visible = false
 
-	if Input.is_action_pressed("rapid_fire") == true and rapid_fire_ready == true:
+
+	if Input.is_action_just_pressed("rapid_fire") == true and rapid_fire_ready == true:
 		%Shoot_Cooldown.wait_time = rapid_shoot_rate
 		%Rapid_fire_duration.start()
-
+		no_sign.visible = true
+		rapid_fire_ready = false
+		
 
 func shoot_bullet():
 	const NEW_BULLET = preload("res://Scenes/bullet.tscn")
@@ -93,6 +116,8 @@ func shoot_missle():
 		missle_count += 1
 		if missle_count >= missle_limit:
 			return
+func missle_calc():
+	missle_current_count = missle_limit - missle_count
 
 func _on_shoot_cooldown_timeout() -> void:
 	shoot_ready = true
@@ -116,14 +141,14 @@ func _on_health_component_health_change() -> void:
 func _on_rapid_fire_duration_timeout() -> void:
 	%Shoot_Cooldown.wait_time = normal_shoot_rate
 	%rapid_fire_cooldown.start()
-	no_sign.visible = true
 	animated_sprite_2d.visible = true
 	animated_sprite_2d.play("cooldown", 2/%rapid_fire_cooldown.time_left)
 	%Rapid_fire_duration.stop()
 	await animated_sprite_2d.animation_finished
 	animated_sprite_2d.visible = false
 	no_sign.visible = false
-	rapid_fire_ready = false
+	
+	
 
 
 func _on_rapid_fire_cooldown_timeout() -> void:

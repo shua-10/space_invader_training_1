@@ -8,9 +8,13 @@ var enemy_alive = true
 @export var health = 3
 @export var RANGE = 100
 @export var attack_damage = 1
+@export var score = Game_Data.carrier_score
 var enemy = self
 var shot_cooldown_active:bool = false
 var shot_count:int = 0
+
+func _ready() -> void:
+	%score_counter.text = str(score)
 
 func _physics_process(delta: float) -> void:
 	
@@ -91,8 +95,12 @@ func _on_health_component_death() -> void:
 	explosion.global_position = enemy.global_position
 	explosion.emitting = true
 	get_parent().add_child(explosion)
+	$Icon.visible = false
+	remove_child($HitBoxComponent)
+	remove_child($CollisionShape2D)
+	$AnimationPlayer.play("score_counter")
+	await $AnimationPlayer.animation_finished
 	enemy.queue_free()
-	
 	carrier_died.emit()
 	
 	
