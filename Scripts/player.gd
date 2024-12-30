@@ -7,6 +7,10 @@ class_name Player
 @export var rapid_shoot_rate: float = 0.1
 @export var missle_limit: int = 3
 
+@onready var animated_sprite_2d: AnimatedSprite2D = $"CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer/Q Button/AnimatedSprite2D"
+@onready var no_sign: TextureRect = $CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2/BlasterBolt/NoSign
+
+
 var shoot_ready = true
 var smooth_mouse_position: Vector2
 var missle_ready = true
@@ -112,7 +116,13 @@ func _on_health_component_health_change() -> void:
 func _on_rapid_fire_duration_timeout() -> void:
 	%Shoot_Cooldown.wait_time = normal_shoot_rate
 	%rapid_fire_cooldown.start()
+	no_sign.visible = true
+	animated_sprite_2d.visible = true
+	animated_sprite_2d.play("cooldown", 2/%rapid_fire_cooldown.time_left)
 	%Rapid_fire_duration.stop()
+	await animated_sprite_2d.animation_finished
+	animated_sprite_2d.visible = false
+	no_sign.visible = false
 	rapid_fire_ready = false
 
 

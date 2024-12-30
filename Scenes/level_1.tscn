@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://d0ks1pscuauow"]
+[gd_scene load_steps=111 format=3 uid="uid://d0ks1pscuauow"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_1pewh"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
@@ -25,8 +25,13 @@
 [ext_resource type="Resource" uid="uid://dbqks0q6jhi2t" path="res://Wave_Data/Wave_9.tres" id="13_pk4d1"]
 [ext_resource type="Resource" uid="uid://ddg3t7a78r3j3" path="res://Wave_Data/Wave_10.tres" id="14_r61vd"]
 [ext_resource type="Script" path="res://saver_loader.gd" id="16_8hhtw"]
+[ext_resource type="Texture2D" uid="uid://c5gc5db1icwnj" path="res://Assets/Q Keyboard.png" id="17_aowg8"]
+[ext_resource type="Texture2D" uid="uid://cr2q818hiqcu8" path="res://Assets/E Keyboard.png" id="18_f0b17"]
+[ext_resource type="Texture2D" uid="uid://cpf0xlcsh42jj" path="res://Assets/Preview Flairs & Overlays.png" id="18_qvtcf"]
+[ext_resource type="Texture2D" uid="uid://ccsobkngcvc3" path="res://Assets/blasterbullet.png" id="19_4xrsp"]
 [ext_resource type="PackedScene" uid="uid://bwwtg73qe4f4g" path="res://end_menu.tscn" id="19_arorf"]
 [ext_resource type="Theme" uid="uid://dgcr3k2qsh8qn" path="res://space_theme_UI.tres" id="20_ly35w"]
+[ext_resource type="Texture2D" uid="uid://cn20noyj81l02" path="res://Assets/nosign.png" id="21_floga"]
 [ext_resource type="Script" path="res://Scenes/health_bar.gd" id="27_4nh1p"]
 [ext_resource type="Script" path="res://Scenes/texture_rect.gd" id="28_ui0br"]
 [ext_resource type="Texture2D" uid="uid://4rw6lhlyj5wi" path="res://Assets/1648159457.png" id="29_tcld8"]
@@ -87,6 +92,77 @@ func spawn_meteor():
 func _on_right_meteor_timer_timeout() -> void:
 	spawn_meteor()
 "
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wg6ud"]
+atlas = ExtResource("18_qvtcf")
+region = Rect2(118, 236, 38, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7jlm"]
+atlas = ExtResource("18_qvtcf")
+region = Rect2(156, 236, 38, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8hgu"]
+atlas = ExtResource("18_qvtcf")
+region = Rect2(194, 236, 38, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wn0k"]
+atlas = ExtResource("18_qvtcf")
+region = Rect2(232, 236, 38, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ci8q7"]
+atlas = ExtResource("18_qvtcf")
+region = Rect2(270, 236, 38, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mx50s"]
+atlas = ExtResource("18_qvtcf")
+region = Rect2(308, 236, 38, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7pup"]
+atlas = ExtResource("18_qvtcf")
+region = Rect2(346, 236, 38, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3giaq"]
+atlas = ExtResource("18_qvtcf")
+region = Rect2(384, 236, 38, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7k6s"]
+atlas = ExtResource("18_qvtcf")
+region = Rect2(422, 236, 38, 39)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lyrdn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wg6ud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7jlm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8hgu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wn0k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ci8q7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mx50s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7pup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3giaq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7k6s")
+}],
+"loop": false,
+"name": &"cooldown",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_ooqe5"]
 length = 0.001
@@ -723,6 +799,105 @@ timer_max = 2.0
 [node name="player" parent="." instance=ExtResource("1_1pewh")]
 unique_name_in_owner = true
 position = Vector2(330, 415)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="player"]
+
+[node name="PanelContainer" type="PanelContainer" parent="player/CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -70.0
+offset_right = 17.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="player/CanvasLayer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="player/CanvasLayer/PanelContainer/Panel"]
+layout_mode = 0
+offset_right = 68.0
+offset_bottom = 68.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="player/CanvasLayer/PanelContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Q Button" type="TextureRect" parent="player/CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("17_aowg8")
+stretch_mode = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player/CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer/Q Button"]
+visible = false
+modulate = Color(1, 1, 1, 0.658824)
+position = Vector2(16, 16)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_lyrdn")
+animation = &"cooldown"
+
+[node name="E Button" type="TextureRect" parent="player/CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("18_f0b17")
+stretch_mode = 4
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="player/CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer/E Button"]
+visible = false
+modulate = Color(1, 1, 1, 0.658824)
+position = Vector2(15, 15)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_lyrdn")
+animation = &"cooldown"
+frame = 8
+frame_progress = 1.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="player/CanvasLayer/PanelContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="BlasterBolt" type="TextureRect" parent="player/CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("19_4xrsp")
+stretch_mode = 4
+
+[node name="NoSign" type="TextureRect" parent="player/CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2/BlasterBolt"]
+visible = false
+modulate = Color(1, 1, 1, 0.494118)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_floga")
+
+[node name="Missle" type="TextureRect" parent="player/CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+stretch_mode = 4
+
+[node name="NoSign2" type="TextureRect" parent="player/CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2/Missle"]
+modulate = Color(1, 1, 1, 0.494118)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_floga")
 
 [node name="Spawn_Path" parent="." node_paths=PackedStringArray("wave_manager") instance=ExtResource("11_xwx13")]
 unique_name_in_owner = true
