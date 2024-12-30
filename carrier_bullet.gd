@@ -9,11 +9,7 @@ var direction = Vector2.RIGHT.rotated(rotation)
 func _physics_process(delta: float) -> void:
 	position += direction * SPEED * delta
 	
-	if abs(position) > range_bullet:
-		queue_free()
 	
-
-
 
 func _on_hit_box_component_area_entered(area: Area2D) -> void:
 	if area is HitBoxComponent:
