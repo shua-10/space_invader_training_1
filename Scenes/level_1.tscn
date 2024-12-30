@@ -1762,10 +1762,10 @@ text = "Ship Health"
 
 [node name="HealthBar" type="ProgressBar" parent="player_ui/PanelContainer/Panel/VBoxContainer"]
 unique_name_in_owner = true
-modulate = Color(0.438044, 0.895908, 0, 1)
+modulate = Color(0.243137, 0.745098, 0, 1)
 layout_mode = 2
 size_flags_vertical = 2
-value = 10.93
+value = 5.0
 show_percentage = false
 script = ExtResource("27_4nh1p")
 
@@ -1775,7 +1775,7 @@ text = "Base Health"
 
 [node name="HealthBar2" type="ProgressBar" parent="player_ui/PanelContainer/Panel/VBoxContainer" node_paths=PackedStringArray("level")]
 unique_name_in_owner = true
-modulate = Color(0.438044, 0.895908, 0, 1)
+modulate = Color(0.243137, 0.894118, 0, 1)
 layout_mode = 2
 size_flags_vertical = 2
 max_value = 5.0

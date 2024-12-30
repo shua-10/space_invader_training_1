@@ -13,6 +13,9 @@ var missle_current_count: int
 @onready var no_sign_missle: TextureRect = $CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2/Missle/NoSignMissle
 @onready var missle_display_count: Label = $CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2/Missle/Missle_display_count
 @onready var animated_sprite_2d_2: AnimatedSprite2D = $"CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer/E Button/AnimatedSprite2D2"
+@onready var anim_norm: AnimationPlayer = $anim_norm
+@onready var anim_effects: AnimationPlayer = $anim_effects
+
 
 var rapid_inprogress = false
 var shoot_ready = true
@@ -119,6 +122,13 @@ func shoot_missle():
 func missle_calc():
 	missle_current_count = missle_limit - missle_count
 
+
+func no_damage():
+	$HitBoxComponent.set_collision_layer_value(5,false)
+	anim_effects.play("invinsible_flash")
+	await anim_effects.animation_finished
+	$HitBoxComponent.set_collision_layer_value(5,true)
+
 func _on_shoot_cooldown_timeout() -> void:
 	shoot_ready = true
 
@@ -134,7 +144,8 @@ func _on_health_component_death() -> void:
 
 
 func _on_health_component_health_change() -> void:
-	$AnimationPlayer.play("take_damage")
+	anim_effects.play("take_damage")
+	no_damage()
 	emit_signal("player_health_change")
 
 

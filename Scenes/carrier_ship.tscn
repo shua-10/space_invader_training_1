@@ -123,7 +123,7 @@ radius = 68.1175
 [node name="carrier_ship" type="CharacterBody2D" groups=["enemy"]]
 material = SubResource("ShaderMaterial_aty5x")
 scale = Vector2(0.5, 0.5)
-collision_layer = 77
+collision_layer = 79
 collision_mask = 65
 script = ExtResource("1_4e48x")
 SPEED = 10

@@ -6,6 +6,12 @@ class_name PlayerHealthBar
 func _ready() -> void:
 	max_value = player.max_health
 
+#func _process(delta: float) -> void:
+	#if value > max_value * 0.30:
+		#modulate.r = 248
+		#modulate.g = 21
+		#modulate.b = 0
+
 func health_check():
 	var player_children = player.get_children()
 	for child in player_children:

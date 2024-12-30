@@ -1,8 +1,8 @@
 extends Camera2D
 class_name LevelCamera
 
-@export var randomStrength: float = 10.0
-@export var shakeFade: float = 5.0
+@export var randomStrength: float = 5.0
+@export var shakeFade: float = 1.0
 
 @onready var background = %ParallaxBackground
 
@@ -20,14 +20,14 @@ func _process(delta: float) -> void:
 			
 
 func camera_shake():
-	var timer = get_tree().create_timer(0.3)
+	var timer = get_tree().create_timer(0.5)
 	enabled = true
 	shake_strength = randomStrength
 	background.set_scroll_base_offset(
 	background.offset_before_shake + background.base_offset_before_shake)
-
 	await timer.timeout
 	enabled = false
+	
 
 	
 func randomOffset() -> Vector2:

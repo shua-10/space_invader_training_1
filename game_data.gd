@@ -27,6 +27,7 @@ var enemy_score: int = 100
 var fast_enemy_score: int = 50
 var carrier_score: int = 500
 
+var current_window_mode: int
 
 func _process(delta: float) -> void:
 	if current_score >= high_score:
