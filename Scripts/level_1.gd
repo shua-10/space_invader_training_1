@@ -6,6 +6,9 @@ class_name Level
 @onready var level_complete = false
 @export var Wave: WaveManager
 @export var enemy_counter: Area2D
+@onready var player: Player = %player
+@onready var camera_2d: LevelCamera = $Camera2D
+
 
 signal base_hurt
 
@@ -15,15 +18,35 @@ func _on_hurt_zone_body_entered(body: Node2D) -> void:
 	print (health)
 	body.queue_free()
 	if health == 0:
-		%end_menu.visible = true
-		get_tree().paused = true
+		game_over()
 
-
+func game_over():
+	var explosion = preload("res://Scenes/enemy_explosion.tscn")
+	var new_explosion = explosion.instantiate()
+	var tween = get_tree().create_tween()
+	
+	new_explosion.global_position = player.global_position
+	new_explosion.emitting = true
+	player.set_physics_process(false)
+	player.set_process(false)
+	Engine.time_scale = 0.7
+	camera_2d.enabled = true
+	camera_2d.global_position = player.global_position
+	tween.tween_property(camera_2d,"zoom",Vector2(2,2),1.0)
+	await tween.finished
+	add_child(new_explosion)
+	Sfx.play_explosion()
+	player.queue_free()
+	var timer = get_tree().create_timer(1)
+	await timer.timeout
+	%end_menu.visible = true
+	get_tree().paused = true
+	
 func _ready() -> void:
 	%main_menu.visible = true
 	get_tree().paused = true
 	%anim.play("main_menu_start")
-	
+	player.connect("player_death", game_over)
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("pause") == true:
@@ -91,5 +114,4 @@ func _on_upgrade_selector_visibility_changed() -> void:
 
 
 func _on_player_player_death() -> void:
-	%end_menu.visible = true
-	get_tree().paused = true
+	game_over()

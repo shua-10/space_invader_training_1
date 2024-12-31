@@ -21,8 +21,8 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -106.0
 offset_top = -113.0
-offset_right = 86.0
-offset_bottom = 61.0
+offset_right = 102.0
+offset_bottom = 85.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_g4nu5")
@@ -79,10 +79,15 @@ popup/item_3/id = 2
 popup/item_4/text = "2560 x 1440"
 popup/item_4/id = 3
 
+[node name="show_stats" type="Button" parent="PanelContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "show stats"
+
 [node name="back_button" type="Button" parent="PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
 text = "Back"
 
 [connection signal="item_selected" from="PanelContainer/Panel/VBoxContainer/display_options" to="." method="_on_display_options_item_selected"]
 [connection signal="item_selected" from="PanelContainer/Panel/VBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="PanelContainer/Panel/VBoxContainer/show_stats" to="." method="_on_show_stats_pressed"]
 [connection signal="pressed" from="PanelContainer/Panel/VBoxContainer/back_button" to="." method="_on_back_button_pressed"]

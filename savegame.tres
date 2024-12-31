@@ -1,9 +1,12 @@
-[gd_resource type="Resource" script_class="SavedGame" load_steps=4 format=3 uid="uid://cv3shejuouf2v"]
+[gd_resource type="Resource" script_class="SavedGame" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Upgrades/bullet_upgrades.gd" id="1_k8tf6"]
-[ext_resource type="Resource" uid="uid://b5euut1ohly5p" path="res://Upgrades/bullet_damage_upgrades.tres" id="2_lwcfy"]
-[ext_resource type="Script" path="res://saved_game.gd" id="3_0ghb7"]
+[ext_resource type="Script" path="res://saved_game.gd" id="1_rvm6i"]
 
 [resource]
-script = ExtResource("3_0ghb7")
-bullet_upgrades = Array[ExtResource("1_k8tf6")]([ExtResource("2_lwcfy")])
+script = ExtResource("1_rvm6i")
+high_score = 4200
+highest_wave = 3
+regular_enemy_killed = 77
+fast_enemy_killed = 10
+carrier_enemy_killed = 15
+current_window_mode = 0

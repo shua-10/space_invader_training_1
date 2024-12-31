@@ -5,6 +5,7 @@ class_name LevelCamera
 @export var shakeFade: float = 1.0
 
 @onready var background = %ParallaxBackground
+@onready var player: Player = %player
 
 var shake_strength: float = 0.0
 
@@ -26,7 +27,10 @@ func camera_shake():
 	background.set_scroll_base_offset(
 	background.offset_before_shake + background.base_offset_before_shake)
 	await timer.timeout
-	enabled = false
+	if player.player_dying == true:
+		return
+	else:
+		enabled = false
 	
 
 	
@@ -35,5 +39,8 @@ func randomOffset() -> Vector2:
 	Global.rng.randf_range(-shake_strength,shake_strength))
 
 func _on_player_player_health_change() -> void:
-	background.offset_save()
-	camera_shake()
+	if player.player_dying != true:
+		background.offset_save()
+		camera_shake()
+	else:
+		return

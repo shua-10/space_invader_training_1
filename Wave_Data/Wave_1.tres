@@ -5,12 +5,12 @@
 [resource]
 script = ExtResource("1_tpjj6")
 regular_enemy_prob_min = 0.0
-regular_enemy_prob_max = 0.0
-fast_enemy_prob_min = 0.0
-fast_enemy_prob_max = 0.0
-carrier_prob_min = 0.0
-carrier_prob_max = 0.0
-regular_enemy_limit = 0.0
-fast_enemy_limit = 0.0
-carrier_limit = 0.0
-wave_death_limit = 10
+regular_enemy_prob_max = 0.3
+fast_enemy_prob_min = 0.301
+fast_enemy_prob_max = 0.7
+carrier_prob_min = 0.701
+carrier_prob_max = 1.0
+regular_enemy_limit = 5.0
+fast_enemy_limit = 5.0
+carrier_limit = 5.0
+wave_death_limit = 15

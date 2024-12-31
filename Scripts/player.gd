@@ -26,6 +26,8 @@ var bullet_upgrades:Array[BulletUpgrades] = []
 var missle_count: int = 0
 var health: int
 var max_health: int
+var player_dying: bool = false
+
 signal player_death
 signal player_health_change
 
@@ -34,7 +36,7 @@ func _ready() -> void:
 	$AnimatedSprite2D.play("idle")
 	health = $HealthComponent.health
 	max_health = $HealthComponent.max_health
-
+	Sfx.play_engine()
 
 func _physics_process(delta: float) -> void:
 	
@@ -138,7 +140,7 @@ func _on_missle_cooldown_timeout() -> void:
 
 
 func _on_health_component_death() -> void:
-	self.queue_free()
+	player_dying = true
 	player_death.emit()
 
 

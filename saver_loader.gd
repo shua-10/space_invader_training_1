@@ -1,8 +1,8 @@
 extends Node
-
+class_name SaverLoader
 
 @export var player: Player
-
+var new_game = false
 
 func save_game():
 	var saved_game:SavedGame = SavedGame.new()
@@ -19,7 +19,7 @@ func load_game():
 	var saved_game:SavedGame = load("user://savegame.tres") as SavedGame
 	
 	if saved_game != null:
-		
+		new_game = true
 		Game_Data.highest_wave = saved_game.highest_wave
 		Game_Data.high_score = saved_game.high_score
 		Game_Data.regular_enemy_killed = saved_game.regular_enemy_killed

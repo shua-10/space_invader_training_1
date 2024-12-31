@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://doj3y6efkg167"]
+[gd_scene load_steps=30 format=3 uid="uid://doj3y6efkg167"]
 
 [ext_resource type="Shader" path="res://Scenes/flash.gdshader" id="1_3m0lj"]
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_m2lxd"]
@@ -201,6 +201,27 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_bsqw1"]
 radius = 17.0294
 
+[sub_resource type="Animation" id="Animation_7guxe"]
+resource_name = "shield"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shield:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
+"transitions": PackedFloat32Array(1, 1.23114, 1.23114, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.435294), Color(1, 1, 1, 0.435294), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a1t1j"]
+_data = {
+"shield": SubResource("Animation_7guxe")
+}
+
 [node name="enemy" type="CharacterBody2D" groups=["enemy"]]
 material = SubResource("ShaderMaterial_2wlse")
 collision_layer = 74
@@ -283,6 +304,11 @@ collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shield_radius"]
 shape = SubResource("CircleShape2D_bsqw1")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_a1t1j")
+}
 
 [connection signal="area_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_area_entered"]
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]

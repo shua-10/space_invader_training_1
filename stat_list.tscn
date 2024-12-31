@@ -1,0 +1,97 @@
+[gd_scene load_steps=3 format=3 uid="uid://gwiodg1v57nk"]
+
+[ext_resource type="Script" path="res://stat_list.gd" id="1_5u023"]
+[ext_resource type="Theme" uid="uid://dgcr3k2qsh8qn" path="res://space_theme_UI.tres" id="2_20ro2"]
+
+[node name="Stat_List" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5u023")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -198.0
+offset_top = -121.0
+offset_right = 198.0
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_20ro2")
+
+[node name="Panel" type="Panel" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/Panel"]
+layout_mode = 2
+offset_right = 391.0
+offset_bottom = 232.0
+
+[node name="all_time_stats" type="Label" parent="PanelContainer/Panel/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "All Time stats"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/Panel/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Panel/VBoxContainer3"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Panel/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+
+[node name="reg_enemey_killed" type="Label" parent="PanelContainer/Panel/VBoxContainer3/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Regular Enemy Killed :"
+
+[node name="fast_enemy_killed" type="Label" parent="PanelContainer/Panel/VBoxContainer3/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Fast Enemy Killed: "
+
+[node name="carrier_enemy_killed" type="Label" parent="PanelContainer/Panel/VBoxContainer3/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Carrier enemy Killed:"
+
+[node name="high score" type="Label" parent="PanelContainer/Panel/VBoxContainer3/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Highscore :"
+
+[node name="highest wave" type="Label" parent="PanelContainer/Panel/VBoxContainer3/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Highest wave :"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/Panel/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+
+[node name="reg_killed_numb" type="Label" parent="PanelContainer/Panel/VBoxContainer3/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="fast_killed_numb" type="Label" parent="PanelContainer/Panel/VBoxContainer3/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="carrier_killed_numb" type="Label" parent="PanelContainer/Panel/VBoxContainer3/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="high score_numb" type="Label" parent="PanelContainer/Panel/VBoxContainer3/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="highest wave_numb" type="Label" parent="PanelContainer/Panel/VBoxContainer3/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="back_button" type="Button" parent="PanelContainer/Panel/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back"
+
+[connection signal="pressed" from="PanelContainer/Panel/VBoxContainer3/back_button" to="." method="_on_back_button_pressed"]

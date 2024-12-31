@@ -5,12 +5,15 @@ class_name PlayerHealthBar
 
 func _ready() -> void:
 	max_value = player.max_health
+	print(max_value, value)
+func _process(delta: float) -> void:
+	if value >= max_value * 0.50:
+		modulate = ref.green_health_bar
+	if value < max_value * 0.50:
+		modulate = ref.yellow_health_bar
+	if value < max_value * 0.30:
+		modulate = ref.red_health_bar
 
-#func _process(delta: float) -> void:
-	#if value > max_value * 0.30:
-		#modulate.r = 248
-		#modulate.g = 21
-		#modulate.b = 0
 
 func health_check():
 	var player_children = player.get_children()

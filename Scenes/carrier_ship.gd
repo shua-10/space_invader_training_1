@@ -95,6 +95,7 @@ func _on_health_component_death() -> void:
 	explosion.global_position = enemy.global_position
 	explosion.emitting = true
 	get_parent().add_child(explosion)
+	Sfx.play_explosion()
 	$Icon.visible = false
 	remove_child($HitBoxComponent)
 	remove_child($CollisionShape2D)
@@ -127,4 +128,4 @@ func _on_health_component_health_change() -> void:
 
 func _on_shield_radius_body_entered(body: Node2D) -> void:
 	if body is Meteor:
-		$AnimationPlayer.play("shield_damage")
+		$AnimationPlayer2.play("shield_damage")

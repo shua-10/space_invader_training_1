@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://csnb0yr1ed8ub"]
+[gd_scene load_steps=21 format=3 uid="uid://csnb0yr1ed8ub"]
 
 [ext_resource type="Script" path="res://Scenes/carrier_ship.gd" id="1_4e48x"]
 [ext_resource type="Shader" path="res://Scenes/flash.gdshader" id="1_y5iys"]
@@ -21,6 +21,27 @@ radius = 58.0086
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4aysy"]
 radius = 58.0
+
+[sub_resource type="Animation" id="Animation_nmdfl"]
+resource_name = "shield_damage"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Shield:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.337255), Color(1, 1, 1, 0.337255), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_51me3"]
+_data = {
+"shield_damage": SubResource("Animation_nmdfl")
+}
 
 [sub_resource type="Animation" id="Animation_k38ob"]
 length = 0.001
@@ -134,6 +155,7 @@ use_parent_material = true
 texture = ExtResource("2_8k632")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_nfrb3")
 
 [node name="AttackComponent" type="Node2D" parent="."]
@@ -144,12 +166,13 @@ script = ExtResource("3_ahd2g")
 max_health = 10
 
 [node name="HitBoxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
-collision_layer = 14
+collision_layer = 6
 collision_mask = 0
 script = ExtResource("4_1xfcm")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+visible = false
 shape = SubResource("CircleShape2D_4aysy")
 
 [node name="LaserPoint" type="Marker2D" parent="."]
@@ -189,6 +212,12 @@ offset_right = 81.0
 offset_bottom = -62.0
 health_component = NodePath("../HealthComponent")
 
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationPlayer")
+libraries = {
+"": SubResource("AnimationLibrary_51me3")
+}
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_ineij")
@@ -200,6 +229,8 @@ scale = Vector2(5.2, 5.2)
 texture = ExtResource("8_kbsaa")
 
 [node name="shield_radius" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shield_radius"]
 shape = SubResource("CircleShape2D_ir3oa")

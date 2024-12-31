@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 Global="*res://Scripts/Global.gd"
 Game_Data="*res://game_data.gd"
+ref="*res://ref.tscn"
+Sfx="*res://sfx.tscn"
 
 [display]
 

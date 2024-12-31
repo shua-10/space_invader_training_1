@@ -1,4 +1,4 @@
-[gd_scene load_steps=217 format=3 uid="uid://d0ks1pscuauow"]
+[gd_scene load_steps=219 format=3 uid="uid://d0ks1pscuauow"]
 
 [ext_resource type="PackedScene" uid="uid://2oimpfhfwi4" path="res://Scenes/player.tscn" id="1_1pewh"]
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_ecmsp"]
@@ -39,6 +39,7 @@
 [ext_resource type="Script" path="res://Scenes/camera_2d.gd" id="30_ery1d"]
 [ext_resource type="Texture2D" uid="uid://bio77pyxgbsvm" path="res://Assets/335624353.png" id="37_n8qqc"]
 [ext_resource type="Texture2D" uid="uid://brs1dc0lx8211" path="res://Assets/4009998457 (1).png" id="38_tl1x1"]
+[ext_resource type="PackedScene" uid="uid://gwiodg1v57nk" path="res://stat_list.tscn" id="40_7op8i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xoixv"]
 size = Vector2(2398, 135)
@@ -223,6 +224,9 @@ tracks/3/keys = {
 "values": [Vector2(330, 415)]
 }
 
+[sub_resource type="Animation" id="Animation_6opwr"]
+resource_name = "game_over"
+
 [sub_resource type="Animation" id="Animation_0mrpc"]
 resource_name = "main_menu_start"
 tracks/0/type = "value"
@@ -281,6 +285,7 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bb4m1"]
 _data = {
 "RESET": SubResource("Animation_ooqe5"),
+"game_over": SubResource("Animation_6opwr"),
 "main_menu_start": SubResource("Animation_0mrpc"),
 "saved_game_confirmation": SubResource("Animation_y6dqj")
 }
@@ -291,6 +296,13 @@ script/source = "extends ProgressBar
 @export var level: Level
 
 
+func _process(delta: float) -> void:
+	if value >= max_value * 0.50:
+		modulate = ref.green_health_bar
+	if value < max_value * 0.50:
+		modulate = ref.yellow_health_bar
+	if value < max_value * 0.30:
+		modulate = ref.red_health_bar
 
 func _on_level_1_base_hurt() -> void:
 	value = level.health
@@ -1762,7 +1774,6 @@ text = "Ship Health"
 
 [node name="HealthBar" type="ProgressBar" parent="player_ui/PanelContainer/Panel/VBoxContainer"]
 unique_name_in_owner = true
-modulate = Color(0.243137, 0.745098, 0, 1)
 layout_mode = 2
 size_flags_vertical = 2
 value = 5.0
@@ -1787,6 +1798,16 @@ level = NodePath("../../../../..")
 [node name="Menus" type="CanvasLayer" parent="."]
 layer = 100
 
+[node name="Stat_List" parent="Menus" instance=ExtResource("40_7op8i")]
+process_mode = 3
+visible = false
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
 [node name="UpgradeSelector" parent="Menus" node_paths=PackedStringArray("player", "level") instance=ExtResource("7_0unsy")]
 unique_name_in_owner = true
 visible = false
@@ -1807,7 +1828,7 @@ visible = false
 offset_left = -1.0
 offset_right = -1.0
 
-[node name="options_menu" parent="Menus" instance=ExtResource("8_3flag")]
+[node name="options_menu" parent="Menus" node_paths=PackedStringArray("show_stats_menu") instance=ExtResource("8_3flag")]
 unique_name_in_owner = true
 process_mode = 3
 visible = false
@@ -1818,6 +1839,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 size_flags_horizontal = 4
 size_flags_vertical = 4
+show_stats_menu = NodePath("../Stat_List")
 
 [node name="main_menu" parent="Menus" instance=ExtResource("9_5urxd")]
 unique_name_in_owner = true
