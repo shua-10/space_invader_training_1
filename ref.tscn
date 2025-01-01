@@ -4,6 +4,6 @@
 
 [node name="Ref" type="Node2D"]
 script = ExtResource("1_15v1l")
-green_health_bar = Color(0, 0.603922, 0.0235294, 1)
+green_health_bar = Color(0.0333333, 1, 0, 1)
 yellow_health_bar = Color(0.87451, 0.690196, 0, 1)
 red_health_bar = Color(0.992157, 0, 0, 1)

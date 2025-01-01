@@ -58,4 +58,4 @@ func carrier_death():
 	current_death_carrier_count += 1
 
 func total_death_calc():
-	total_death_count = current_death_enemy_count + current_death_fast_enemy_count + current_carrier_count
+	total_death_count = current_death_enemy_count + current_death_fast_enemy_count + current_death_carrier_count

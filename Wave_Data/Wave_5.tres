@@ -5,12 +5,12 @@
 [resource]
 script = ExtResource("1_p8cao")
 regular_enemy_prob_min = 0.0
-regular_enemy_prob_max = 0.0
-fast_enemy_prob_min = 0.0
-fast_enemy_prob_max = 0.0
-carrier_prob_min = 0.0
-carrier_prob_max = 0.0
-regular_enemy_limit = 0.0
-fast_enemy_limit = 0.0
-carrier_limit = 0.0
-wave_death_limit = 0
+regular_enemy_prob_max = 0.4
+fast_enemy_prob_min = 0.401
+fast_enemy_prob_max = 0.9
+carrier_prob_min = 0.901
+carrier_prob_max = 1.0
+regular_enemy_limit = 25.0
+fast_enemy_limit = 15.0
+carrier_limit = 1.0
+wave_death_limit = 40

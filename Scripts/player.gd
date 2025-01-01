@@ -27,6 +27,8 @@ var missle_count: int = 0
 var health: int
 var max_health: int
 var player_dying: bool = false
+var player_attack_damage: float
+
 
 signal player_death
 signal player_health_change
@@ -36,7 +38,7 @@ func _ready() -> void:
 	$AnimatedSprite2D.play("idle")
 	health = $HealthComponent.health
 	max_health = $HealthComponent.max_health
-	Sfx.play_engine()
+
 
 func _physics_process(delta: float) -> void:
 	
@@ -101,6 +103,9 @@ func shoot_bullet():
 	bullet_right.global_position = %ShootPoint_Right.global_position
 	bullet_right.global_rotation = %ShootPoint_Right.global_rotation
 	get_parent().add_child(bullet_right)
+	
+	player_attack_damage = bullet_left.attack_damage
+	
 	
 	$Shooting_Sound.play()
 	

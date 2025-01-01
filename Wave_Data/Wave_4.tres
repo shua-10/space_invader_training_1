@@ -5,12 +5,12 @@
 [resource]
 script = ExtResource("1_57c0w")
 regular_enemy_prob_min = 0.0
-regular_enemy_prob_max = 0.0
-fast_enemy_prob_min = 0.0
-fast_enemy_prob_max = 0.0
+regular_enemy_prob_max = 0.5
+fast_enemy_prob_min = 0.501
+fast_enemy_prob_max = 1.0
 carrier_prob_min = 0.0
 carrier_prob_max = 0.0
-regular_enemy_limit = 0.0
-fast_enemy_limit = 0.0
+regular_enemy_limit = 20.0
+fast_enemy_limit = 10.0
 carrier_limit = 0.0
-wave_death_limit = 0
+wave_death_limit = 30
