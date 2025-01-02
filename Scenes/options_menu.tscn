@@ -80,6 +80,13 @@ popup/item_3/id = 2
 popup/item_4/text = "2560 x 1440"
 popup/item_4/id = 3
 
+[node name="HSlider" type="HSlider" parent="PanelContainer/Panel/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+min_value = -20.0
+max_value = 10.0
+value = -15.0
+
 [node name="show_stats" type="Button" parent="PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
 text = "show stats"
@@ -90,5 +97,6 @@ text = "Back"
 
 [connection signal="item_selected" from="PanelContainer/Panel/VBoxContainer/display_options" to="." method="_on_display_options_item_selected"]
 [connection signal="item_selected" from="PanelContainer/Panel/VBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="value_changed" from="PanelContainer/Panel/VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="PanelContainer/Panel/VBoxContainer/show_stats" to="." method="_on_show_stats_pressed"]
 [connection signal="pressed" from="PanelContainer/Panel/VBoxContainer/back_button" to="." method="_on_back_button_pressed"]

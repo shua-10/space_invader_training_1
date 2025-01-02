@@ -1799,6 +1799,16 @@ show_percentage = false
 script = SubResource("GDScript_sjoh1")
 level = NodePath("../../../../..")
 
+[node name="defend_base_label" type="Label" parent="player_ui"]
+modulate = Color(1, 1, 1, 0.556863)
+offset_left = 113.0
+offset_top = 260.0
+offset_right = 428.0
+offset_bottom = 309.0
+theme = ExtResource("20_ly35w")
+theme_override_font_sizes/font_size = 35
+text = "DEFEND THE BASE!"
+
 [node name="Menus" type="CanvasLayer" parent="."]
 layer = 100
 
