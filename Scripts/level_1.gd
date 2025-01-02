@@ -47,6 +47,7 @@ func _ready() -> void:
 	get_tree().paused = true
 	%anim.play("main_menu_start")
 	player.connect("player_death", game_over)
+	Sfx.play_menu_main_screen()
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("pause") == true:

@@ -4,7 +4,8 @@ class_name SFX
 @export var explosion_sound: AudioStreamPlayer2D
 @export var button_press: AudioStreamPlayer2D
 @export var player_engine: AudioStreamPlayer2D
-@export var menu_switching: AudioStreamPlayer2D
+@export var menu_main_screen: AudioStreamPlayer2D
+@export var game_music: AudioStreamPlayer2D
 
 
 func play_explosion():
@@ -18,6 +19,8 @@ func play_button_press():
 	button_press.pitch_scale = randf_range(0.85, 1.15)
 	button_press.play()
 
-func play_menu_switch():
-	menu_switching.pitch_scale = randf_range(0.85, 1.15)
-	menu_switching.play()
+func play_menu_main_screen():
+	menu_main_screen.play()
+
+func play_game_music():
+	game_music.play()

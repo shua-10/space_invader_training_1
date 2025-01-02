@@ -7,6 +7,8 @@ signal carrier_picked
 signal level_complete
 signal wave_new
 
+var carrier_ready: bool = true
+
 @export var wave_data: WaveParameters
 @export var spawn_path: SpawnPath
 
@@ -45,10 +47,12 @@ func enemy_picker():
 	
 	var enemy_picker_rng: float = Global.rng.randf_range(0, 1)
 	if wave_data.carrier_prob_min < enemy_picker_rng and wave_data.carrier_prob_max > enemy_picker_rng:
-		if spawn_path.current_carrier_count >= wave_data.carrier_limit:
+		if spawn_path.current_carrier_count >= wave_data.carrier_limit and carrier_ready == false:
 			emit_signal("enemy_picked")
-		else:
+		elif spawn_path.current_carrier_count < wave_data.carrier_limit and carrier_ready == true:
 			emit_signal("carrier_picked")
+			%carrier_spawn_timer.start()
+			carrier_ready = false
 	elif wave_data.fast_enemy_prob_min < enemy_picker_rng and wave_data.fast_enemy_prob_max > enemy_picker_rng:
 		if spawn_path.current_fast_enemy_count >= wave_data.fast_enemy_limit:
 			emit_signal("enemy_picked")
@@ -65,3 +69,7 @@ func wave_change():
 		wave_data = wave_array.front()
 	else:
 		return
+
+
+func _on_carrier_spawn_timer_timeout() -> void:
+	carrier_ready = true

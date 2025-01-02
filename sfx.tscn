@@ -1,18 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqb5dqhxkdovh"]
+[gd_scene load_steps=7 format=3 uid="uid://dqb5dqhxkdovh"]
 
 [ext_resource type="Script" path="res://sfx.gd" id="1_uu3er"]
 [ext_resource type="AudioStream" uid="uid://d2pr8tap88ic3" path="res://Sounds/zapsplat_multimedia_game_sound_arcade_8bit_boom_explosion_001_112210.mp3" id="2_6upwj"]
 [ext_resource type="AudioStream" uid="uid://bo07pkaddq1td" path="res://Sounds/zapsplat_multimedia_game_sound_retro_arcade_beep_003_92242.mp3" id="3_i8i1i"]
 [ext_resource type="AudioStream" uid="uid://ca61qro15cc4w" path="res://Sounds/zapsplat_science_fiction_spacecraft_engines_drone_10569.mp3" id="4_qm8xp"]
-[ext_resource type="AudioStream" uid="uid://ctkvxvofnhv4v" path="res://Sounds/zapsplat_multimedia_game_sound_digital_retro_arcade_blip_001_98413.mp3" id="5_nd5ei"]
+[ext_resource type="AudioStream" uid="uid://cg85v4d3dk752" path="res://Sounds/music_zapsplat_astro_race.mp3" id="5_ngv4k"]
+[ext_resource type="AudioStream" uid="uid://31j7k0blvg3l" path="res://Sounds/music_zapsplat_game_music_action_agressive_pounding_tense_electro_synth_028.mp3" id="6_xyfwa"]
 
-[node name="SFX" type="Node2D" node_paths=PackedStringArray("explosion_sound", "button_press", "player_engine", "menu_switching")]
+[node name="SFX" type="Node2D" node_paths=PackedStringArray("explosion_sound", "button_press", "player_engine", "menu_main_screen", "game_music")]
 process_mode = 3
 script = ExtResource("1_uu3er")
 explosion_sound = NodePath("Explosion_sound")
 button_press = NodePath("Button_Pressing")
 player_engine = NodePath("Player_engine")
-menu_switching = NodePath("menu_switching")
+menu_main_screen = NodePath("menu_main_screen")
+game_music = NodePath("game_music")
 
 [node name="Explosion_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_6upwj")
@@ -26,5 +28,10 @@ volume_db = -25.0
 stream = ExtResource("4_qm8xp")
 volume_db = -15.0
 
-[node name="menu_switching" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_nd5ei")
+[node name="menu_main_screen" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_ngv4k")
+volume_db = -10.0
+
+[node name="game_music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_xyfwa")
+volume_db = -10.0

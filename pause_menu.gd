@@ -17,4 +17,5 @@ func _on_options_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	Sfx.play_button_press()
+	Sfx.game_music.stop()
 	get_tree().reload_current_scene()

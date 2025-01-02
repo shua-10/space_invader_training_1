@@ -1496,6 +1496,10 @@ collision_mask = 64
 position = Vector2(-2056, 183)
 shape = SubResource("RectangleShape2D_tln2b")
 
+[node name="carrier_spawn_timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+
 [node name="WaveManager" type="Node" parent="." node_paths=PackedStringArray("spawn_path")]
 script = ExtResource("6_jyr2o")
 spawn_path = NodePath("../Spawn_Path")
@@ -1932,6 +1936,7 @@ script = ExtResource("30_ery1d")
 [connection signal="body_entered" from="Despawn_Areas/Despawn_Up" to="." method="_on_despawn_left_body_entered"]
 [connection signal="body_entered" from="Despawn_Areas/Despawn_Down" to="." method="_on_despawn_left_body_entered"]
 [connection signal="body_entered" from="Despawn_Areas/Despawn_Right" to="." method="_on_despawn_right_body_entered"]
+[connection signal="timeout" from="carrier_spawn_timer" to="WaveManager" method="_on_carrier_spawn_timer_timeout"]
 [connection signal="carrier_picked" from="WaveManager" to="Spawn_Path" method="_on_wave_manager_carrier_picked"]
 [connection signal="enemy_picked" from="WaveManager" to="Spawn_Path" method="_on_wave_manager_enemy_picked"]
 [connection signal="fast_enemy_picked" from="WaveManager" to="Spawn_Path" method="_on_wave_manager_fast_enemy_picked"]
